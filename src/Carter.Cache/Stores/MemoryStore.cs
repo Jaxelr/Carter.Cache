@@ -18,7 +18,7 @@ namespace Carter.Cache.Stores
             sizeLimit = options.SizeLimit ?? 0;
         }
 
-        public DefaultMemoryStore(int maxSize) : this(new MemoryCacheOptions() { SizeLimit = maxSize })
+        public DefaultMemoryStore(long maxSize) : this(new MemoryCacheOptions() { SizeLimit = maxSize })
         {
         }
 
