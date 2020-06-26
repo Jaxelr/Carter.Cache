@@ -1,12 +1,17 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using System;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Carter.Cache
 {
     public static class CarterCachingExtensions
     {
-        public static IServiceCollection AddCarterCaching(this IServiceCollection services, CachingOptions options) =>
+        public static void AddCarterCaching(this IServiceCollection services, Action<CachingOptions> options = null)
+        {
+            options ??= _ => { };
+
             services.AddSingleton(typeof(CachingOptions), options);
+        }
 
         public static void UseCarterCaching(this IApplicationBuilder builder)
         {
