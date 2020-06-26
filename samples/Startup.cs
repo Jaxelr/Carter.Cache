@@ -48,10 +48,7 @@ namespace Sample.Carter.Cache.Application
                 opt.AddConfiguration(Configuration.GetSection("Logging"));
             });
 
-            services.AddCarterCaching(new CachingOptions(settings.Cache.CacheMaxSize)
-            {
-                Expiry = TimeSpan.FromSeconds(settings.Cache.CacheTimespan)
-            });
+            services.AddCarterCaching(options => options.Expiry = TimeSpan.FromSeconds(settings.Cache.CacheTimespan));
 
             services.AddCarter(options => options.OpenApi = GetOpenApiOptions(settings));
 
