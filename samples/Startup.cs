@@ -51,7 +51,6 @@ namespace Sample.Carter.Cache.Application
             services.AddCarterCaching(options => options.Expiry = TimeSpan.FromSeconds(settings.Cache.CacheTimespan));
 
             services.AddCarter(options => options.OpenApi = GetOpenApiOptions(settings));
-
         }
 
         public void Configure(IApplicationBuilder app, AppSettings appSettings)
