@@ -20,21 +20,15 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\src\Carter.Cache\Carter.Cache.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Update="appsettings.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="web.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Entities\Models\" />
-    <Folder Include="Entities\Operations\" />
-    <Folder Include="Validation\" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\src\Carter.Cache\Carter.Cache.csproj" />
   </ItemGroup>
 </Project>

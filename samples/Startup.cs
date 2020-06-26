@@ -1,7 +1,5 @@
 using System;
 using System.Collections.Generic;
-using Sample.Carter.Cache.Application.Entities;
-using Sample.Carter.Cache.Application.Repository;
 using Carter;
 using Carter.Cache;
 using Microsoft.AspNetCore.Builder;
@@ -9,6 +7,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Sample.Carter.Cache.Application.Entities;
+using Sample.Carter.Cache.Application.Repository;
 
 namespace Sample.Carter.Cache.Application
 {
@@ -40,10 +40,6 @@ namespace Sample.Carter.Cache.Application
 
             services.AddSingleton<IHelloRepository>(new HelloRepository());
 
-            services.AddCarterCaching(new CachingOptions() { Expiry = TimeSpan.FromSeconds(settings.Cache.CacheTimespan) });
-
-            services.AddCarter(options => options.OpenApi = GetOpenApiOptions(settings));
-
             services.AddLogging(opt =>
             {
                 opt.ClearProviders();
@@ -51,6 +47,14 @@ namespace Sample.Carter.Cache.Application
                 opt.AddDebug();
                 opt.AddConfiguration(Configuration.GetSection("Logging"));
             });
+
+            services.AddCarterCaching(new CachingOptions(settings.Cache.CacheMaxSize)
+            {
+                Expiry = TimeSpan.FromSeconds(settings.Cache.CacheTimespan)
+            });
+
+            services.AddCarter(options => options.OpenApi = GetOpenApiOptions(settings));
+
         }
 
         public void Configure(IApplicationBuilder app, AppSettings appSettings)
