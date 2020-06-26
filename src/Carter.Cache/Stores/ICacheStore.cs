@@ -4,7 +4,7 @@ namespace Carter.Cache.Stores
 {
     public interface ICacheStore
     {
-        CachedResponse Get(string key);
+        bool TryGetValue(string key, out CachedResponse cachedResponse);
 
         void Set(string key, CachedResponse response, TimeSpan expiration);
 

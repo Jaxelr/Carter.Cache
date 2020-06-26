@@ -24,11 +24,17 @@ namespace Carter.Cache.Stores
 
         public DefaultMemoryStore(MemoryCache cache) => (this.cache, size) = (cache, 0);
 
-        public CachedResponse Get(string key)
+        public bool TryGetValue(string key, out CachedResponse response)
         {
-            cache.TryGetValue(key, out CachedResponse value);
+            response = null;
 
-            return value;
+            if (cache.TryGetValue(key, out CachedResponse value))
+            {
+                response = value;
+                return true;
+            }
+
+            return false;
         }
 
         public void Remove(string key) => cache.Remove(key);
