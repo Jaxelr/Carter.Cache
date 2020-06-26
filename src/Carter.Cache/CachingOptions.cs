@@ -8,10 +8,21 @@ namespace Carter.Cache
     {
         public ICacheKey Key { get; set; }
         public ICacheStore Store { get; set; }
-
         public TimeSpan Expiry { get; set; }
 
         public CachingOptions() : this(new DefaultKeyGenerator(), new DefaultMemoryStore())
+        {
+        }
+
+        public CachingOptions(long maxSize) : this(new DefaultKeyGenerator(), new DefaultMemoryStore(maxSize))
+        {
+        }
+
+        public CachingOptions(ICacheKey key) : this(key, new DefaultMemoryStore())
+        {
+        }
+
+        public CachingOptions(ICacheStore store) : this(new DefaultKeyGenerator(), store)
         {
         }
 
