@@ -8,9 +8,11 @@ namespace Carter.Cache
     {
         public static void AddCarterCaching(this IServiceCollection services, Action<CachingOptions> options = null)
         {
-            options ??= _ => { };
+            var cachingOptions = new CachingOptions();
 
-            services.AddSingleton(typeof(CachingOptions), options);
+            options(cachingOptions);
+
+            services.AddSingleton(typeof(CachingOptions), cachingOptions);
         }
 
         public static void UseCarterCaching(this IApplicationBuilder builder)

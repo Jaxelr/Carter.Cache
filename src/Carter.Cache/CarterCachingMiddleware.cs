@@ -14,15 +14,11 @@ namespace Carter.Cache
 
         public async Task Invoke(HttpContext context)
         {
-            bool cacheHit = await CheckCache(context, options).ConfigureAwait(false);
+            bool cacheHit = await CheckCache(context, options);
 
-            if (cacheHit)
+            if (!cacheHit)
             {
-                await next(context).ConfigureAwait(false);
-            }
-            else
-            {
-                await SetCache(context, next, options).ConfigureAwait(false);
+                await SetCache(context, next, options);
             }
         }
 
@@ -38,7 +34,7 @@ namespace Carter.Cache
                 using var memoryStream = new MemoryStream();
                 response.Body = memoryStream;
 
-                await next(context).ConfigureAwait(false);
+                await next(context);
 
                 byte[] bytes = memoryStream.ToArray();
 
@@ -46,8 +42,7 @@ namespace Carter.Cache
                 {
                     memoryStream.Seek(0, SeekOrigin.Begin);
 
-                    await memoryStream.CopyToAsync(originalStream)
-                        .ConfigureAwait(false);
+                    await memoryStream.CopyToAsync(originalStream);
                 }
 
                 options.Store.Set(key, new CachedResponse(response, bytes), options.Expiry);
@@ -69,7 +64,7 @@ namespace Carter.Cache
 
             if (options.Store.TryGetValue(key, out CachedResponse cachedResponse))
             {
-                await cachedResponse.MapToContext(context).ConfigureAwait(false);
+                await cachedResponse.MapToContext(context);
                 return true;
             }
 

@@ -10,6 +10,7 @@ namespace Carter.Cache
         public byte[] Body { get; set; }
         public long? ContentLength { get; set; }
         public int StatusCode { get; set; }
+        public string ContentType { get; set; }
 
         public CachedResponse(HttpResponse response, byte[] body)
         {
@@ -17,14 +18,15 @@ namespace Carter.Cache
 
             foreach (string key in response.Headers.Keys)
             {
-                if (!Headers.ContainsKey(key))
+                //TODO: Hmm...this is weird, must validate
+                if (!Headers.ContainsKey(key) && key != "Transfer-Encoding")
                 {
                     Headers[key] = response.Headers[key];
                 }
             }
 
             Body = body;
-            ContentLength = body.Length;
+            ContentType = response.ContentType;
             StatusCode = response.StatusCode;
         }
 
@@ -38,10 +40,10 @@ namespace Carter.Cache
                 }
             }
 
+            context.Response.ContentType = ContentType;
             context.Response.StatusCode = StatusCode;
-            context.Response.ContentLength = ContentLength;
-            await context.Response.Body.WriteAsync(Body, 0, Body.Length)
-                .ConfigureAwait(false);
+
+            await context.Response.Body.WriteAsync(Body, 0, Body.Length);
         }
     }
 }
