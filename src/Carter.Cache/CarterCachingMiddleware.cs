@@ -35,18 +35,19 @@ namespace Carter.Cache
 
             try
             {
-                using var ms = new MemoryStream();
-                response.Body = ms;
+                using var memoryStream = new MemoryStream();
+                response.Body = memoryStream;
 
                 await next(context).ConfigureAwait(false);
 
-                byte[] bytes = ms.ToArray();
+                byte[] bytes = memoryStream.ToArray();
 
-                if (ms.Length > 0)
+                if (memoryStream.Length > 0)
                 {
-                    ms.Seek(0, SeekOrigin.Begin);
+                    memoryStream.Seek(0, SeekOrigin.Begin);
 
-                    await ms.CopyToAsync(originalStream).ConfigureAwait(false);
+                    await memoryStream.CopyToAsync(originalStream)
+                        .ConfigureAwait(false);
                 }
 
                 options.Store.Set(key, new CachedResponse(response, bytes), options.Expiry);
@@ -66,9 +67,7 @@ namespace Carter.Cache
                 return false;
             }
 
-            var cachedResponse = options.Store.Get(key);
-
-            if (cachedResponse != null)
+            if (options.Store.TryGetValue(key, out CachedResponse cachedResponse))
             {
                 await cachedResponse.MapToContext(context).ConfigureAwait(false);
                 return true;
