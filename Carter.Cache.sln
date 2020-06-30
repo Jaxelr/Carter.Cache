@@ -20,6 +20,20 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{3006
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sample.Carter.Cache.Application", "samples\Sample.Carter.Cache.Application.csproj", "{02A8D615-F747-4E2B-B80C-9078E664B01C}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{22BF799C-B98C-40FC-A701-92B892E0A332}"
+	ProjectSection(SolutionItems) = preProject
+		.github\Contributing.md = .github\Contributing.md
+		.github\Pull_request_template.md = .github\Pull_request_template.md
+		.github\stale.yml = .github\stale.yml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "issue_template", "issue_template", "{1AE46B00-A4AA-4240-BDEC-019B2E074D17}"
+	ProjectSection(SolutionItems) = preProject
+		.github\issue_template\Bug_report.md = .github\issue_template\Bug_report.md
+		.github\issue_template\Feature_request.md = .github\issue_template\Feature_request.md
+		.github\issue_template\Support.md = .github\issue_template\Support.md
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -41,6 +55,8 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{E5F9029A-8C6A-49D1-803D-050387ACAF13} = {069F24F1-932B-4285-A211-77DE71A28988}
 		{02A8D615-F747-4E2B-B80C-9078E664B01C} = {3006122C-A413-40BE-BA08-49CE24392313}
+		{22BF799C-B98C-40FC-A701-92B892E0A332} = {A32770F0-77A8-4500-846D-346ED62732CE}
+		{1AE46B00-A4AA-4240-BDEC-019B2E074D17} = {22BF799C-B98C-40FC-A701-92B892E0A332}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4C7DAAE6-F427-4044-AAA7-E955004D1833}
