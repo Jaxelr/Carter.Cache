@@ -10,11 +10,14 @@ namespace Carter.Cache
 
         private readonly CachingOptions options;
 
-        public CarterCachingMiddleware(RequestDelegate next, CachingOptions options) => (this.next, this.options) = (next, options);
+        private readonly ICarterCachingService service;
+
+        public CarterCachingMiddleware(RequestDelegate next, ICarterCachingService service, CachingOptions options) =>
+            (this.next, this.service, this.options) = (next, service, options);
 
         public async Task Invoke(HttpContext context)
         {
-            bool cacheHit = await CheckCache(context, options);
+            bool cacheHit = await service.CheckCache(context, options);
 
             if (!cacheHit)
             {
@@ -24,8 +27,6 @@ namespace Carter.Cache
 
         private async Task SetCache(HttpContext context, RequestDelegate next, CachingOptions options)
         {
-            string key = options.Key.Get(context.Request);
-
             HttpResponse response = context.Response;
             Stream originalStream = response.Body;
 
@@ -45,30 +46,12 @@ namespace Carter.Cache
                     await memoryStream.CopyToAsync(originalStream);
                 }
 
-                options.Store.Set(key, new CachedResponse(response, bytes), options.Expiry);
+                await service.SetCache(context, new CachedResponse(response, bytes), options);
             }
             finally
             {
                 response.Body = originalStream;
             }
-        }
-
-        private async Task<bool> CheckCache(HttpContext context, CachingOptions options)
-        {
-            string key = options.Key.Get(context.Request);
-
-            if (string.IsNullOrWhiteSpace(key))
-            {
-                return false;
-            }
-
-            if (options.Store.TryGetValue(key, out CachedResponse cachedResponse))
-            {
-                await cachedResponse.MapToContext(context);
-                return true;
-            }
-
-            return false;
         }
     }
 }
