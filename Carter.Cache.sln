@@ -34,6 +34,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "issue_template", "issue_tem
 		.github\issue_template\Support.md = .github\issue_template\Support.md
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Carter.Cache.Tests", "tests\Carter.Cache.Tests\Carter.Cache.Tests.csproj", "{5CEE5B34-8FEE-44AD-A562-D8171365CCF7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -48,6 +50,10 @@ Global
 		{02A8D615-F747-4E2B-B80C-9078E664B01C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{02A8D615-F747-4E2B-B80C-9078E664B01C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{02A8D615-F747-4E2B-B80C-9078E664B01C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5CEE5B34-8FEE-44AD-A562-D8171365CCF7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5CEE5B34-8FEE-44AD-A562-D8171365CCF7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5CEE5B34-8FEE-44AD-A562-D8171365CCF7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5CEE5B34-8FEE-44AD-A562-D8171365CCF7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -57,6 +63,7 @@ Global
 		{02A8D615-F747-4E2B-B80C-9078E664B01C} = {3006122C-A413-40BE-BA08-49CE24392313}
 		{22BF799C-B98C-40FC-A701-92B892E0A332} = {A32770F0-77A8-4500-846D-346ED62732CE}
 		{1AE46B00-A4AA-4240-BDEC-019B2E074D17} = {22BF799C-B98C-40FC-A701-92B892E0A332}
+		{5CEE5B34-8FEE-44AD-A562-D8171365CCF7} = {E65CADC8-48D7-49F0-BE62-CBA6C70079D8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4C7DAAE6-F427-4044-AAA7-E955004D1833}
