@@ -13,6 +13,7 @@ namespace Carter.Cache
             options(cachingOptions);
 
             services.AddSingleton(typeof(CachingOptions), cachingOptions);
+            services.AddSingleton<ICarterCachingService, CarterCachingService>();
         }
 
         public static void UseCarterCaching(this IApplicationBuilder builder)
