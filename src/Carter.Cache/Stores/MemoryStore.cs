@@ -7,7 +7,7 @@ namespace Carter.Cache.Stores
     {
         private readonly IMemoryCache cache;
         private readonly long sizeLimit;
-        private long size = 0;
+        private long size;
 
         public DefaultMemoryStore() : this(new MemoryCache(new MemoryCacheOptions()))
         {

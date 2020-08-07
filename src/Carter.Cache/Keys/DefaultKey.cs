@@ -21,7 +21,7 @@ namespace Carter.Cache.Keys
             }
 
             if (request.HasFormContentType)
-            { 
+            {
                 foreach (var formKey in request.Form)
                 {
                     parameters[formKey.Key] = formKey.Value;
