@@ -15,16 +15,6 @@ namespace Carter.Cache
         public CachedResponse(HttpResponse response, byte[] body)
         {
             Headers = new Dictionary<string, string>();
-
-            foreach (string key in response.Headers.Keys)
-            {
-                //TODO: Hmm...this is weird, must validate
-                if (!Headers.ContainsKey(key) && key != "Transfer-Encoding")
-                {
-                    Headers[key] = response.Headers[key];
-                }
-            }
-
             Body = body;
             ContentType = response.ContentType;
             StatusCode = response.StatusCode;
