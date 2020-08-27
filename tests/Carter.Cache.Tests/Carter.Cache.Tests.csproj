@@ -18,4 +18,8 @@
     <Folder Include="Unit\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Carter.Cache\Carter.Cache.csproj" />
+  </ItemGroup>
+
 </Project>
