@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 
@@ -11,6 +12,7 @@ namespace Carter.Cache
         public long? ContentLength { get; set; }
         public int StatusCode { get; set; }
         public string ContentType { get; set; }
+        public TimeSpan Expiry { get; set; }
 
         public CachedResponse(HttpResponse response, byte[] body)
         {
@@ -18,6 +20,13 @@ namespace Carter.Cache
             Body = body;
             ContentType = response.ContentType;
             StatusCode = response.StatusCode;
+
+            if (response.Headers.Keys.Contains("X-Carter-Cache-Expiration") && int.TryParse(response.Headers["X-Carter-Cache-Expiration"], out int value))
+            {
+                Expiry = TimeSpan.FromSeconds(value);
+
+                Headers.Add("X-Carter-Cache-Expiration", response.Headers["X-Carter-Cache-Expiration"]);
+            }
         }
 
         public async Task MapToContext(HttpContext context)
