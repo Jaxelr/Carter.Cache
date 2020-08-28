@@ -27,7 +27,7 @@ namespace Carter.Cache
         {
             string key = options.Key.Get(context.Request);
 
-            options.Store.Set(key, response, options.Expiry);
+            options.Store.Set(key, response, response.Expiry);
 
             await Task.CompletedTask;
         }
