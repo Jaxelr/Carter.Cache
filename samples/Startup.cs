@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Carter;
 using Carter.Cache;
@@ -48,7 +47,7 @@ namespace Sample.Carter.Cache.Application
                 opt.AddConfiguration(Configuration.GetSection("Logging"));
             });
 
-            services.AddCarterCaching(options => options.Expiry = TimeSpan.FromSeconds(settings.Cache.CacheTimespan));
+            services.AddCarterCaching();
 
             services.AddCarter(options => options.OpenApi = GetOpenApiOptions(settings));
         }
@@ -63,10 +62,7 @@ namespace Sample.Carter.Cache.Application
                 opt.SwaggerEndpoint(appSettings.RouteDefinition.SwaggerEndpoint, ServiceName);
             });
 
-            if (settings.Cache.CacheEnabled)
-            {
-                app.UseCarterCaching();
-            }
+            app.UseCarterCaching();
 
             app.UseEndpoints(builder => builder.MapCarter());
         }

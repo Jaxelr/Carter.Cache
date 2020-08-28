@@ -1,5 +1,6 @@
 ﻿using System;
 using Carter;
+using Carter.Cache;
 using Carter.Request;
 using Carter.Response;
 using Sample.Carter.Cache.Application.Entities;
@@ -15,6 +16,8 @@ namespace Sample.Carter.Cache.Application.Modules
             {
                 try
                 {
+                    ctx.Cacheable(10);
+
                     string name = ctx.Request.RouteValues.As<string>("name");
 
                     string response = repository.SayHello(name);
