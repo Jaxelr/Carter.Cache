@@ -8,25 +8,31 @@ namespace Carter.Cache
     public class CachedResponse
     {
         public Dictionary<string, string> Headers { get; set; }
+        public CachingProperty Property { get; set; }
         public byte[] Body { get; set; }
         public long? ContentLength { get; set; }
         public int StatusCode { get; set; }
         public string ContentType { get; set; }
         public TimeSpan Expiry { get; set; }
 
-        public CachedResponse(HttpResponse response, byte[] body)
+        public CachedResponse(HttpContext context, byte[] body)
         {
+            var property = context.Features.Get<CachingProperty>();
+
+            if (property is null) //No caching properties assigned, return with no mapping made.
+            {
+                return;
+            }
+
+            var response = context.Response;
+
             Headers = new Dictionary<string, string>();
             Body = body;
             ContentType = response.ContentType;
             StatusCode = response.StatusCode;
+            Expiry = property.Expiration;
 
-            if (response.Headers.Keys.Contains("X-Carter-Cache-Expiration") && int.TryParse(response.Headers["X-Carter-Cache-Expiration"], out int value))
-            {
-                Expiry = TimeSpan.FromSeconds(value);
-
-                Headers.Add("X-Carter-Cache-Expiration", response.Headers["X-Carter-Cache-Expiration"]);
-            }
+            Headers.Add(property.CustomHeader, property.Expiration.ToString());
         }
 
         public async Task MapToContext(HttpContext context)

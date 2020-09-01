@@ -5,7 +5,7 @@ namespace Carter.Cache
 {
     public class CarterCachingService : ICarterCachingService
     {
-        public async Task<bool> CheckCache(HttpContext context, CachingOptions options)
+        public async Task<bool> CheckCache(HttpContext context, CachingOption options)
         {
             string key = options.Key.Get(context.Request);
 
@@ -23,7 +23,7 @@ namespace Carter.Cache
             return false;
         }
 
-        public async Task SetCache(HttpContext context, CachedResponse response, CachingOptions options)
+        public async Task SetCache(HttpContext context, CachedResponse response, CachingOption options)
         {
             string key = options.Key.Get(context.Request);
 
