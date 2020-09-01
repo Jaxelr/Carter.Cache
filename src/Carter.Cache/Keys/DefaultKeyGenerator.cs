@@ -39,7 +39,7 @@ namespace Carter.Cache.Keys
                 HostName = request.Host.Host,
                 Path = request.Path,
                 Port = request.Host.Port,
-                Query = string.Concat((parameters.Count > 0 ? "?" : string.Empty), string.Join("&", parameters.Select(a => string.Join("=", a.Key, a.Value)))),
+                Query = string.Concat(parameters.Count > 0 ? "?" : string.Empty, string.Join("&", parameters.Select(a => string.Join("=", a.Key, a.Value)))),
                 Scheme = request.Scheme
             };
 

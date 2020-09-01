@@ -12,7 +12,7 @@ namespace Sample.Carter.Cache.Application.Modules
             new RouteMetaDataResponse
             {
                 Code = 200,
-                Description = $"A message with hello world",
+                Description = "A message with hello world",
                 Response = typeof(string)
             }
         };
