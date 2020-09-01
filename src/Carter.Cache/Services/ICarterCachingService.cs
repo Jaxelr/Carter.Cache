@@ -5,8 +5,8 @@ namespace Carter.Cache
 {
     public interface ICarterCachingService
     {
-        Task<bool> CheckCache(HttpContext context, CachingOptions options);
+        Task<bool> CheckCache(HttpContext context, CachingOption options);
 
-        Task SetCache(HttpContext context, CachedResponse response, CachingOptions options);
+        Task SetCache(HttpContext context, CachedResponse response, CachingOption options);
     }
 }

@@ -8,11 +8,11 @@ namespace Carter.Cache
     {
         private readonly RequestDelegate next;
 
-        private readonly CachingOptions options;
+        private readonly CachingOption options;
 
         private readonly ICarterCachingService service;
 
-        public CarterCachingMiddleware(RequestDelegate next, ICarterCachingService service, CachingOptions options) =>
+        public CarterCachingMiddleware(RequestDelegate next, ICarterCachingService service, CachingOption options) =>
             (this.next, this.service, this.options) = (next, service, options);
 
         public async Task Invoke(HttpContext context)
@@ -25,10 +25,10 @@ namespace Carter.Cache
             }
         }
 
-        private async Task SetCache(HttpContext context, RequestDelegate next, CachingOptions options)
+        private async Task SetCache(HttpContext context, RequestDelegate next, CachingOption options)
         {
-            HttpResponse response = context.Response;
-            Stream originalStream = response.Body;
+            var response = context.Response;
+            var originalStream = response.Body;
 
             try
             {
@@ -46,7 +46,7 @@ namespace Carter.Cache
                     await memoryStream.CopyToAsync(originalStream);
                 }
 
-                await service.SetCache(context, new CachedResponse(response, bytes), options);
+                await service.SetCache(context, new CachedResponse(context, bytes), options);
             }
             finally
             {

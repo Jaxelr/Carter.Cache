@@ -5,24 +5,21 @@ namespace Carter.Cache
 {
     public static class ServiceCollectionExtensions
     {
-        public static void AddCarterCaching(this IServiceCollection services, Action<CachingOptions> options = null)
+        public static void AddCarterCaching(this IServiceCollection services, Action<CachingOption> options = null)
         {
-            var cachingOptions = new CachingOptions();
+            var cachingOptions = new CachingOption();
 
             options(cachingOptions);
 
             services.AddCarterCaching(cachingOptions);
         }
 
-        public static void AddCarterCaching(this IServiceCollection services, CachingOptions cachingOptions)
+        public static void AddCarterCaching(this IServiceCollection services, CachingOption cachingOptions)
         {
             services.AddSingleton(cachingOptions);
             services.AddSingleton<ICarterCachingService, CarterCachingService>();
         }
 
-        public static void AddCarterCaching(this IServiceCollection services)
-        {
-            services.AddCarterCaching(new CachingOptions());
-        }
+        public static void AddCarterCaching(this IServiceCollection services) => services.AddCarterCaching(new CachingOption());
     }
 }

@@ -5,28 +5,33 @@ namespace Carter.Cache
 {
     public static class ContextExtensions
     {
-        public static void Cacheable(this HttpContext context, int seconds)
+        public static void AsCacheable(this HttpContext context, int seconds, string customHeader = null)
         {
             var span = TimeSpan.FromSeconds(seconds);
 
-            context.AddResponseExpirationHeader(span);
+            context.AddResponseExpirationHeader(span, customHeader);
         }
 
-        public static void Cacheable(this HttpContext context, TimeSpan span)
-        {
-            context.AddResponseExpirationHeader(span);
-        }
+        public static void AsCacheable(this HttpContext context, TimeSpan span, string customHeader = null) => context.AddResponseExpirationHeader(span, customHeader);
 
-        public static void Cacheable(this HttpContext context, DateTime absoluteExpiration)
+        public static void AsCacheable(this HttpContext context, DateTime absoluteExpiration, string customHeader = null)
         {
             var span = absoluteExpiration - DateTime.UtcNow;
 
-            context.AddResponseExpirationHeader(span);
+            context.AddResponseExpirationHeader(span, customHeader);
         }
 
-        private static void AddResponseExpirationHeader(this HttpContext context, TimeSpan span)
+        private static void AddResponseExpirationHeader(this HttpContext context, TimeSpan span, string customHeader = null)
         {
-            context.Response.Headers.Add("X-Carter-Cache-Expiration", span.Seconds.ToString());
+            var property = context.Features.Get<CachingProperty>() ?? new CachingProperty();
+
+            if (customHeader != null)
+            {
+                property.CustomHeader = customHeader;
+            }
+
+            property.Expiration = span;
+            context.Features.Set(property);
         }
     }
 }

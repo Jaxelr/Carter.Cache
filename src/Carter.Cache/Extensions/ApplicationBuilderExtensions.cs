@@ -7,7 +7,7 @@ namespace Carter.Cache
     {
         public static void UseCarterCaching(this IApplicationBuilder builder)
         {
-            var options = builder.ApplicationServices.GetService<CachingOptions>();
+            var options = builder.ApplicationServices.GetService<CachingOption>();
 
             builder.UseMiddleware<CarterCachingMiddleware>(options);
         }
