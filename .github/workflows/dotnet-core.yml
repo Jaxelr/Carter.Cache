@@ -23,3 +23,9 @@ jobs:
       run: dotnet build --configuration Release --no-restore
     - name: Test
       run: dotnet test --no-restore --verbosity normal
+    - name: Publish Feedz
+      uses: brandedoutcast/publish-nuget@v2.5.5
+      with:
+          NUGET_KEY: ${{secrets.FEEDZ_KEY}}
+          NUGET_SOURCE: https://f.feedz.io/jaxelr/carter-cache/nuget/index.json
+          INCLUDE_SYMBOLS: 1
