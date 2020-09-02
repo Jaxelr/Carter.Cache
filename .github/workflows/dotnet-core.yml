@@ -26,6 +26,7 @@ jobs:
     - name: Publish Feedz
       uses: brandedoutcast/publish-nuget@v2.5.5
       with:
+          PROJECT_FILE_PATH: src/Carter.Cache/Carter.Cache.csproj
           NUGET_KEY: ${{secrets.FEEDZ_KEY}}
           NUGET_SOURCE: https://f.feedz.io/jaxelr/carter-cache/nuget/index.json
           INCLUDE_SYMBOLS: 1
