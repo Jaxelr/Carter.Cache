@@ -23,10 +23,16 @@ jobs:
       run: dotnet build --configuration Release --no-restore
     - name: Test
       run: dotnet test --no-restore --verbosity normal
+    - name: Pack
+      run: dotnet pack src/Carter.Cache/Carter.Cache.csproj -o $NUPKGS --include-symbols
     - name: Publish Feedz
-      uses: brandedoutcast/publish-nuget@v2.5.5
-      with:
-          PROJECT_FILE_PATH: src/Carter.Cache/Carter.Cache.csproj
-          NUGET_KEY: ${{secrets.FEEDZ_KEY}}
-          NUGET_SOURCE: https://f.feedz.io/jaxelr/carter-cache
-          INCLUDE_SYMBOLS: 1
+      run: |
+          for f in $NUPKGS/*.nupkg
+          do
+            dotnet nuget push $f --source $FEEDZ_FEED 
+          done
+env:
+  DOTNET_CLI_TELEMETRY_OPTOUT: 1
+  DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 1
+  FEEDZ_FEED: https://f.feedz.io/jaxelr/carter-cache/nuget/index.json
+  NUPKGS: ./.nupkgs
