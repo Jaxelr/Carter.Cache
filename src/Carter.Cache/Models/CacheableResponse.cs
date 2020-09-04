@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Net.Http.Headers;
 
 namespace Carter.Cache
 {
@@ -15,22 +16,27 @@ namespace Carter.Cache
         public string ContentType { get; set; }
         public TimeSpan Expiry { get; set; }
 
-        public CachedResponse(HttpContext context, byte[] body)
+        public CachedResponse(HttpContext ctx, byte[] body)
         {
-            var property = context.Features.Get<CachingProperty>();
+            var property = ctx.Features.Get<CachingProperty>();
 
             if (property is null) //No caching properties assigned, return with no mapping made.
             {
                 return;
             }
 
-            var response = context.Response;
+            var response = ctx.Response;
 
             Headers = new Dictionary<string, string>();
             Body = body;
             ContentType = response.ContentType;
             StatusCode = response.StatusCode;
             Expiry = property.Expiration;
+
+            if (ctx.Response.Headers.ContainsKey(HeaderNames.ETag))
+            {
+                Headers.Add(HeaderNames.ETag, ctx.Response.Headers[HeaderNames.ETag]);
+            }
 
             Headers.Add(property.CustomHeader, property.Expiration.ToString());
         }

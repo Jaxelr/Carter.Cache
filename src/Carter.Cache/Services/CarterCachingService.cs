@@ -5,9 +5,9 @@ namespace Carter.Cache
 {
     public class CarterCachingService : ICarterCachingService
     {
-        public async Task<bool> CheckCache(HttpContext context, CachingOption options)
+        public async Task<bool> CheckCache(HttpContext ctx, CachingOption options)
         {
-            string key = options.Key.Get(context.Request);
+            string key = options.Key.Get(ctx.Request);
 
             if (string.IsNullOrWhiteSpace(key))
             {
@@ -16,7 +16,7 @@ namespace Carter.Cache
 
             if (options.Store.TryGetValue(key, out CachedResponse cachedResponse))
             {
-                await cachedResponse.MapToContext(context);
+                await cachedResponse.MapToContext(ctx);
                 return true;
             }
 

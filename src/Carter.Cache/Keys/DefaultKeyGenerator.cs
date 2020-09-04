@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Net.Http.Headers;
 
 namespace Carter.Cache.Keys
 {
@@ -28,9 +29,9 @@ namespace Carter.Cache.Keys
                 }
             }
 
-            if (request.Headers.ContainsKey("Accept"))
+            if (request.Headers.ContainsKey(HeaderNames.Accept))
             {
-                parameters.Add("Accept", request.Headers["Accept"]);
+                parameters.Add(HeaderNames.Accept, request.Headers[HeaderNames.Accept]);
             }
 
             var url = new Url
