@@ -49,11 +49,6 @@ namespace Carter.Cache
 
                 byte[] bytes = memoryStream.ToArray();
 
-                if (options.ValidResponse(ctx))
-                {
-                    AddEtag(ctx, bytes);
-                }
-
                 if (memoryStream.Length > 0)
                 {
                     memoryStream.Seek(0, SeekOrigin.Begin);
@@ -69,17 +64,6 @@ namespace Carter.Cache
             finally
             {
                 response.Body = originalStream;
-            }
-        }
-
-        private void AddEtag(HttpContext ctx, byte[] bytes)
-        {
-            var defaultOption = CachingOption.DefaultValidResponse;
-            if (defaultOption(ctx) && !ctx.Response.Headers.ContainsKey(HeaderNames.ETag))
-            {
-                using var md5 = MD5.Create();
-                byte[] buffer = md5.ComputeHash(bytes);
-                ctx.Response.Headers.Add(HeaderNames.ETag, $"\"{WebEncoders.Base64UrlEncode(buffer)}\"");
             }
         }
     }
