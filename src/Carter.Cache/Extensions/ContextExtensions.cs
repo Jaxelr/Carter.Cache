@@ -21,7 +21,7 @@ namespace Carter.Cache
             ctx.AddResponseExpirationHeader(span, customHeader);
         }
 
-        private static void AddResponseExpirationHeader(this HttpContext ctx, TimeSpan span, string customHeader = null)
+        internal static void AddResponseExpirationHeader(this HttpContext ctx, TimeSpan span, string customHeader = null)
         {
             var property = ctx.Features.Get<CachingProperty>() ?? new CachingProperty();
 
