@@ -10,6 +10,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".SolutionItems", ".Solution
 		.editorconfig = .editorconfig
 		.gitignore = .gitignore
 		LICENSE = LICENSE
+		README.md = README.md
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{069F24F1-932B-4285-A211-77DE71A28988}"
@@ -34,7 +35,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "issue_template", "issue_tem
 		.github\issue_template\Support.md = .github\issue_template\Support.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Carter.Cache.Tests", "tests\Carter.Cache.Tests\Carter.Cache.Tests.csproj", "{5CEE5B34-8FEE-44AD-A562-D8171365CCF7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Carter.Cache.Tests", "tests\Carter.Cache.Tests\Carter.Cache.Tests.csproj", "{5CEE5B34-8FEE-44AD-A562-D8171365CCF7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
