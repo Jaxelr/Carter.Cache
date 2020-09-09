@@ -47,7 +47,7 @@ namespace Sample.Carter.Cache.Application
                 opt.AddConfiguration(Configuration.GetSection("Logging"));
             });
 
-            services.AddCarterCaching();
+            services.AddCarterCaching(new CachingOption(2048));
 
             services.AddCarter(options => options.OpenApi = GetOpenApiOptions(settings));
         }

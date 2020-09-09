@@ -29,42 +29,38 @@ namespace Sample.Carter.Cache.Application.Modules
                     }
 
                     ctx.Response.StatusCode = 200;
-                    await ctx.Response.Negotiate(response)
-                        .ConfigureAwait(false);
+                    await ctx.Response.Negotiate(response);
                 }
                 catch (Exception ex)
                 {
                     ctx.Response.StatusCode = 500;
-                    await ctx.Response.Negotiate(new FailedResponse(ex))
-                        .ConfigureAwait(false);
+                    await ctx.Response.Negotiate(new FailedResponse(ex));
                 }
             });
 
-            Get<GetHello>("/Hello2/{name}", async (ctx) =>
+            Get<GetHello>("/Hello2/{name}", async (req, res) =>
             {
                 try
                 {
-                    ctx.AsCacheable(15);
+                    req.HttpContext.AsCacheable(15);
 
-                    string name = ctx.Request.RouteValues.As<string>("name");
+                    string name = req.RouteValues.As<string>("name");
 
                     string response = repository.SayHello(name);
 
                     if (response == null)
                     {
-                        ctx.Response.StatusCode = 204;
+                        res.StatusCode = 204;
                         return;
                     }
 
-                    ctx.Response.StatusCode = 200;
-                    await ctx.Response.Negotiate(response)
-                        .ConfigureAwait(false);
+                    res.StatusCode = 200;
+                    await res.Negotiate(response);
                 }
                 catch (Exception ex)
                 {
-                    ctx.Response.StatusCode = 500;
-                    await ctx.Response.Negotiate(new FailedResponse(ex))
-                        .ConfigureAwait(false);
+                    res.StatusCode = 500;
+                    await res.Negotiate(new FailedResponse(ex));
                 }
             });
         }
