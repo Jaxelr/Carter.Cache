@@ -24,6 +24,12 @@ namespace Carter.Cache.Stores
 
         public DefaultMemoryStore(MemoryCache cache) => (this.cache, size) = (cache, 0);
 
+        /// <summary>
+        /// Tries to get the value from the store and returns it, if so.
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="response"></param>
+        /// <returns>True if the value exists, false if it doesnt</returns>
         public bool TryGetValue(string key, out CachedResponse response)
         {
             response = null;
@@ -37,8 +43,18 @@ namespace Carter.Cache.Stores
             return false;
         }
 
+        /// <summary>
+        /// Remove the element with the key provided.
+        /// </summary>
+        /// <param name="key"></param>
         public void Remove(string key) => cache.Remove(key);
 
+        /// <summary>
+        /// Upsert the CachedResponse object and ties it to the key provided for the durantion of the expiration provided.
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="response"></param>
+        /// <param name="expiration"></param>
         public void Set(string key, CachedResponse response, TimeSpan expiration)
         {
             if (string.IsNullOrEmpty(key))
