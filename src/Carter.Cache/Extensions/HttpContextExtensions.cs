@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace Carter.Cache
 {
-    public static class ContextExtensions
+    public static class HttpContextExtensions
     {
         public static void AsCacheable(this HttpContext ctx, int seconds, string customHeader = null)
         {
