@@ -39,7 +39,8 @@ using Carter.Cache;
 
     public void ConfigureServices(IServiceCollection services)
         {
-            services.AddCarterCaching(new CachingOption(2048)); //Recommended to always provide a caching mas size limit
+            //It is recommended to always provide a caching max size limit
+            services.AddCarterCaching(new CachingOption(2048)); 
             services.AddCarter();
         }
 ```
@@ -63,7 +64,7 @@ using Carter.Cache;
         {
             Get("/", (req, res) =>
             {
-                req.AsCacheable(10);
+                req.AsCacheable(10); //In Seconds
 
                 res.StatusCode = 200;
                 return res.WriteAsync("Hello world");
