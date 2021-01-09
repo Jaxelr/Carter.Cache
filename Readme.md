@@ -6,7 +6,7 @@ An extensable library to cache your [Carter][carter] modules.
 
 | Github  | Branch |
 | :---:     | :---: |
-| ![.NET Core](https://github.com/Jaxelr/Carter.Cache/workflows/.NET%20Core/badge.svg?branch=master) | master |
+| ![.NET](https://github.com/Jaxelr/Carter.Cache/workflows/.NET/badge.svg?branch=master) | master |
 
 ## Packages
 
