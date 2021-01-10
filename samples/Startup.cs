@@ -52,7 +52,7 @@ namespace Sample.Carter.Cache.Application
             services.AddCarter(options => options.OpenApi = GetOpenApiOptions(settings));
         }
 
-        public void Configure(IApplicationBuilder app, AppSettings appSettings)
+        public static void Configure(IApplicationBuilder app, AppSettings appSettings)
         {
             app.UseRouting();
 
@@ -67,7 +67,7 @@ namespace Sample.Carter.Cache.Application
             app.UseEndpoints(builder => builder.MapCarter());
         }
 
-        private OpenApiOptions GetOpenApiOptions(AppSettings settings) =>
+        private static OpenApiOptions GetOpenApiOptions(AppSettings settings) =>
         new OpenApiOptions()
         {
             DocumentTitle = ServiceName,
