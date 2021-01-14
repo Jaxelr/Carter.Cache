@@ -9,7 +9,7 @@ assignees: ''
 
 # Describe the feature
 
-<!-- A description of what the bug is. -->
+<!-- A description of what the feature requested -->
 
 ## Is this feature related to a problem, describe
 
