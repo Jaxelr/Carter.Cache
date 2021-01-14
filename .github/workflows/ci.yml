@@ -22,7 +22,12 @@ jobs:
     - name: Build
       run: dotnet build --configuration Release --no-restore
     - name: Test
-      run: dotnet test --no-restore --verbosity normal
+      run: dotnet test --no-restore --verbosity normal /p:AltCover=true /p:AltCoverAssemblyExcludeFilter="xunit"
+    - name: Codecov
+      uses: codecov/codecov-action@v1.2.1
+      with:
+        token: ${{ secrets.CODECOV_TOKEN }}
+        file: tests/Carter.Cache.Tests/coverage.xml
     - name: Pack
       run: dotnet pack src/Carter.Cache/Carter.Cache.csproj -o $NUPKGS --include-symbols
     - name: Publish Feedz
