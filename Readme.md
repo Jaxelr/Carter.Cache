@@ -4,9 +4,9 @@ An extensable library to cache your [Carter][carter] modules.
 
 ## Builds
 
-| Github  | Branch |
-| :---:     | :---: |
-| ![.NET](https://github.com/Jaxelr/Carter.Cache/workflows/.NET/badge.svg?branch=master) | master |
+| Github  | Branch | Coverage | 
+| :---:     | :---: | :---: |
+| ![.NET](https://github.com/Jaxelr/Carter.Cache/workflows/.NET/badge.svg?branch=master) | master | [![CodeCov][codecov-master-img]][codecov-master] | 
 
 ## Packages
 
@@ -106,3 +106,5 @@ Also a custom Key can be easily defined by implementing the ICacheKey interface:
 [mit-img]: http://img.shields.io/badge/License-MIT-blue.svg
 [mit]: https://github.com/Jaxelr/Carter.Cache/blob/master/LICENSE
 [carter]: https://github.com/CarterCommunity/Carter
+[codecov-master-img]: https://codecov.io/gh/Jaxelr/Carter.Cache/branch/master/graph/badge.svg
+[codecov-master]: https://codecov.io/gh/Jaxelr/Carter.Cache/branch/master
