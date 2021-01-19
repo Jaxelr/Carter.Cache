@@ -1,12 +1,12 @@
 # Carter.Cache [![Mit License][mit-img]][mit]
 
-An extensable library to cache your [Carter][carter] modules.
+An extensible library to cache your [Carter][carter] modules.
 
 ## Builds
 
-| Github  | Branch | Coverage | 
+| Github  | Branch | Coverage |
 | :---:     | :---: | :---: |
-| ![.NET](https://github.com/Jaxelr/Carter.Cache/workflows/.NET/badge.svg?branch=master) | master | [![CodeCov][codecov-master-img]][codecov-master] | 
+| ![.NET](https://github.com/Jaxelr/Carter.Cache/workflows/.NET/badge.svg?branch=master) | master | [![CodeCov][codecov-master-img]][codecov-master] |
 
 ## Packages
 
@@ -40,7 +40,7 @@ using Carter.Cache;
     public void ConfigureServices(IServiceCollection services)
         {
             //It is recommended to always provide a caching max size limit
-            services.AddCarterCaching(new CachingOption(2048)); 
+            services.AddCarterCaching(new CachingOption(2048));
             services.AddCarter();
         }
 ```
