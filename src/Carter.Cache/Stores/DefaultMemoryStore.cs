@@ -6,7 +6,7 @@ namespace Carter.Cache.Stores
     public class DefaultMemoryStore : ICacheStore
     {
         private readonly IMemoryCache cache;
-        private readonly long sizeLimit;
+        internal readonly long SizeLimit;
         private long size;
 
         public DefaultMemoryStore() : this(new MemoryCache(new MemoryCacheOptions()))
@@ -15,7 +15,7 @@ namespace Carter.Cache.Stores
 
         public DefaultMemoryStore(MemoryCacheOptions options) : this(new MemoryCache(options))
         {
-            sizeLimit = options.SizeLimit ?? 0;
+            SizeLimit = options.SizeLimit ?? 0;
         }
 
         public DefaultMemoryStore(long maxSize) : this(new MemoryCacheOptions() { SizeLimit = maxSize })
@@ -62,7 +62,7 @@ namespace Carter.Cache.Stores
                 return;
             }
 
-            if (sizeLimit > 0 && sizeLimit == size && !ContainsKey(key))
+            if (SizeLimit > 0 && SizeLimit == size && !ContainsKey(key))
             {
                 return;
             }
@@ -72,7 +72,7 @@ namespace Carter.Cache.Stores
                 var options = new MemoryCacheEntryOptions()
                     .SetAbsoluteExpiration(expiration)
                     .RegisterPostEvictionCallback(callback: Eviction, state: this)
-                    .SetSize(sizeLimit);
+                    .SetSize(SizeLimit);
 
                 cache.Set(key, response, options);
                 size++;
