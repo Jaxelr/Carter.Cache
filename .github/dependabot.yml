@@ -10,7 +10,6 @@ updates:
       prefix: "deps"
     open-pull-requests-limit: 5
     labels:
-      - "nuget"
       - "dependencies"
   - package-ecosystem: "nuget"
     directory: "/src/Carter.Cache" #Carter.Cache.csproj
@@ -21,7 +20,6 @@ updates:
       prefix: "deps"
     open-pull-requests-limit: 5
     labels:
-      - "nuget"
       - "dependencies"
   - package-ecosystem: "nuget"
     directory: "/tests/Carter.Cache.Tests" #Carter.Cache.Tests.csproj
@@ -32,6 +30,5 @@ updates:
       prefix: "deps"
     open-pull-requests-limit: 5
     labels:
-      - "nuget"
       - "dependencies"
 
