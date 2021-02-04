@@ -39,7 +39,7 @@ namespace Carter.Cache
         {
             foreach (string headerKey in Headers.Keys)
             {
-                if (!context.Response.Headers.ContainsKey(headerKey))
+                if (!context.Response.Headers.ContainsKey(headerKey.ToLowerInvariant()))
                 {
                     context.Response.Headers[headerKey] = Headers[headerKey];
                 }
