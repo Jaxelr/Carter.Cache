@@ -93,5 +93,28 @@ namespace Carter.Cache.Tests.Unit.Extensions
             Assert.Equal(fakeHeader,
                 req.HttpContext.Features.Get<CachingProperty>().CustomHeader);
         }
+
+        [Fact]
+        public void HttpRequest_as_cacheable_capability_datetime_seconds_and_custom_header()
+        {
+            //Arrange
+            const int elapsedSeconds = 3;
+            const string fakeHeader = "X-FakeHeader";
+            var fakeDate = DateTime.Now.AddSeconds(elapsedSeconds);
+
+            var req = A.Fake<HttpRequest>();
+            var props = A.Fake<CachingProperty>();
+
+            A.CallTo(() => req.HttpContext.Features.Get<CachingProperty>()).Returns(props);
+
+            //Act
+            var fakeSpanCalculated = fakeDate - DateTime.UtcNow;
+            req.AsCacheable(fakeDate, fakeHeader);
+
+            //Assert
+            Assert.NotNull(req);
+            Assert.True(fakeSpanCalculated.TotalSeconds - req.HttpContext.Features.Get<CachingProperty>().Expiration.TotalSeconds < 0.001); //Close Enough?
+            Assert.Equal(fakeHeader, req.HttpContext.Features.Get<CachingProperty>().CustomHeader);
+        }
     }
 }

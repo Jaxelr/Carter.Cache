@@ -42,7 +42,7 @@ namespace Carter.Cache.Tests.Unit.Models
         public void Build_url_with_ip_address()
         {
             //Arrange
-            string localIp = "http://127.0.0.1:5000";
+            const string localIp = "http://127.0.0.1:5000";
             var local = new Url(localIp);
 
             //Act
@@ -88,10 +88,12 @@ namespace Carter.Cache.Tests.Unit.Models
         public void Build_url_with_null_query()
         {
             //Arrange
-            var local = new Url(SecureLocalhost);
+            var local = new Url(SecureLocalhost)
+            {
+                Query = null
+            };
 
             //Act
-            local.Query = null;
             string query = local.Query;
 
             //Assert
