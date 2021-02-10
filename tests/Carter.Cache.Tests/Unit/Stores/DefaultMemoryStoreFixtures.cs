@@ -36,6 +36,23 @@ namespace Carter.Cache.Tests.Unit.Stores
         }
 
         [Fact]
+        public void IMemory_cache_empty_key()
+        {
+            //Arrange
+            var cache = new DefaultMemoryStore();
+            var expiration = new TimeSpan(0, 1, 0);
+
+            var response = A.Fake<CachedResponse>();
+
+            //Act
+            cache.Set(string.Empty, response, expiration);
+
+            //Assert
+            Assert.NotNull(cache);
+            Assert.NotNull(response);
+        }
+
+        [Fact]
         public void IMemory_cache_empty_set()
         {
             //Arrange
@@ -64,6 +81,66 @@ namespace Carter.Cache.Tests.Unit.Stores
             var response = A.Fake<CachedResponse>();
 
             //Act
+            cache.Set(key, response, expiration);
+            bool found = cache.TryGetValue(key, out var getResponse);
+
+            //Assert
+            Assert.Equal(response, getResponse);
+            Assert.True(found);
+        }
+
+        [Fact]
+        public void IMemory_cache_with_value_set_get_with_size_limit()
+        {
+            //Arrange
+            var cache = new DefaultMemoryStore(1);
+            var expiration = new TimeSpan(0, 1, 0);
+            const string key = "-Random-Key-";
+
+            var response = A.Fake<CachedResponse>();
+
+            //Act
+            cache.Set(key, response, expiration);
+            bool found = cache.TryGetValue(key, out var getResponse);
+
+            //Assert
+            Assert.Equal(response, getResponse);
+            Assert.True(found);
+        }
+
+        [Fact]
+        public void IMemory_cache_with_value_set_get_with_over_size_limit()
+        {
+            //Arrange
+            var cache = new DefaultMemoryStore(1);
+            var expiration = new TimeSpan(0, 1, 0);
+            const string key = "-Random-Key-";
+            const string key2 = "-Random-Key-2";
+
+            var response = A.Fake<CachedResponse>();
+
+            //Act
+            cache.Set(key, response, expiration);
+            cache.Set(key2, response, expiration);
+            bool found = cache.TryGetValue(key, out var getResponse);
+
+            //Assert
+            Assert.Equal(response, getResponse);
+            Assert.True(found);
+        }
+
+        [Fact]
+        public void IMemory_cache_with_value_set_get_with_over_size_limit_same_key()
+        {
+            //Arrange
+            var cache = new DefaultMemoryStore(1);
+            var expiration = new TimeSpan(0, 1, 0);
+            const string key = "-Random-Key-";
+
+            var response = A.Fake<CachedResponse>();
+
+            //Act
+            cache.Set(key, response, expiration);
             cache.Set(key, response, expiration);
             bool found = cache.TryGetValue(key, out var getResponse);
 
