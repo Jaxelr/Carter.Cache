@@ -62,7 +62,7 @@ namespace Carter.Cache.Stores
                 return;
             }
 
-            if (SizeLimit > 0 && SizeLimit == size && !ContainsKey(key))
+            if (SizeLimit > 0 && SizeLimit == size)
             {
                 return;
             }
@@ -78,12 +78,6 @@ namespace Carter.Cache.Stores
                 size++;
             }
         }
-
-        /// <summary>
-        /// Verify the cache contains the key indicated.
-        /// </summary>
-        /// <param name="key"></param>
-        private bool ContainsKey(string key) => cache.TryGetValue(key, out _);
 
         /// <summary>
         /// Once the record is evicted from the cache, subtract 1 from  the size
