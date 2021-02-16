@@ -43,7 +43,6 @@ namespace Carter.Cache.Tests.Unit
             Assert.StrictEqual(store, cachingOption.Store);
         }
 
-
         [Fact]
         public void Default_caching_option_with_constructor_store_max_size()
         {
