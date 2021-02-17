@@ -69,6 +69,27 @@ namespace Carter.Cache.Tests.Unit.Extensions
         }
 
         [Fact]
+        public void HttpContext_as_cacheable_capability_absolute_expiration()
+        {
+            //Arrange
+            var fakeExpiration = DateTime.UtcNow.AddMinutes(1);
+            var fakeSpan = fakeExpiration - DateTime.UtcNow;
+
+            var req = A.Fake<HttpContext>();
+            var props = A.Fake<CachingProperty>();
+
+            A.CallTo(() => req.Features.Get<CachingProperty>()).Returns(props);
+
+            //Act
+            req.AsCacheable(fakeExpiration);
+
+            //Assert
+            Assert.True(
+                Math.Abs(fakeSpan.TotalMinutes - req.Features.Get<CachingProperty>().Expiration.TotalMinutes) < 0.01
+            );
+        }
+
+        [Fact]
         public void HttpContext_as_cacheable_capability_timespan_seconds_with_custom_header()
         {
             //Arrange
