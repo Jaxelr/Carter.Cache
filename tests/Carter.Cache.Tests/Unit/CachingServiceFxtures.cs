@@ -88,9 +88,12 @@ namespace Carter.Cache.Tests.Unit
             A.CallTo(() => ctx.Features.Get<CachingProperty>()).Returns(props);
             A.CallTo(() => ctx.Request).Returns(request);
             A.CallTo(() => ctx.Response).Returns(response);
+
             A.CallTo(() => request.Scheme).Returns(scheme);
             A.CallTo(() => request.Host).Returns(new HostString(host, port));
             A.CallTo(() => request.Path).Returns(path);
+
+            A.CallTo(() => response.StatusCode).Returns(StatusCodes.Status200OK);
 
             var cachedResponse = new CachedResponse(ctx, Array.Empty<byte>());
 
