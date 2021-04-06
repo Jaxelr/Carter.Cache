@@ -43,6 +43,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{
 		.github\workflows\ci.yml = .github\workflows\ci.yml
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Carter.Cache.Memcached", "src\Carter.Cache.Memcached\Carter.Cache.Memcached.csproj", "{AB1B90C9-FA9C-4199-97AE-1EDA82445A3B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -61,6 +63,10 @@ Global
 		{5CEE5B34-8FEE-44AD-A562-D8171365CCF7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5CEE5B34-8FEE-44AD-A562-D8171365CCF7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5CEE5B34-8FEE-44AD-A562-D8171365CCF7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AB1B90C9-FA9C-4199-97AE-1EDA82445A3B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AB1B90C9-FA9C-4199-97AE-1EDA82445A3B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AB1B90C9-FA9C-4199-97AE-1EDA82445A3B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AB1B90C9-FA9C-4199-97AE-1EDA82445A3B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -72,6 +78,7 @@ Global
 		{1AE46B00-A4AA-4240-BDEC-019B2E074D17} = {22BF799C-B98C-40FC-A701-92B892E0A332}
 		{5CEE5B34-8FEE-44AD-A562-D8171365CCF7} = {E65CADC8-48D7-49F0-BE62-CBA6C70079D8}
 		{0DBDB871-F2E7-4998-8AC5-C6A689E6723A} = {22BF799C-B98C-40FC-A701-92B892E0A332}
+		{AB1B90C9-FA9C-4199-97AE-1EDA82445A3B} = {069F24F1-932B-4285-A211-77DE71A28988}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4C7DAAE6-F427-4044-AAA7-E955004D1833}
