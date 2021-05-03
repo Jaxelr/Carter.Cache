@@ -67,8 +67,7 @@ namespace Sample.Carter.Cache.Application
             app.UseEndpoints(builder => builder.MapCarter());
         }
 
-        private static OpenApiOptions GetOpenApiOptions(AppSettings settings) =>
-        new OpenApiOptions()
+        private static OpenApiOptions GetOpenApiOptions(AppSettings settings) => new()
         {
             DocumentTitle = ServiceName,
             ServerUrls = settings.ServerUrls,
