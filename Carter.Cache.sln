@@ -20,7 +20,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{E65CADC8
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{3006122C-A413-40BE-BA08-49CE24392313}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sample.Carter.Cache.Application", "samples\Sample.Carter.Cache.Application.csproj", "{02A8D615-F747-4E2B-B80C-9078E664B01C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sample.Carter.Cache.Application", "samples\Sample.Carter.Cache.Application\Sample.Carter.Cache.Application.csproj", "{02A8D615-F747-4E2B-B80C-9078E664B01C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{22BF799C-B98C-40FC-A701-92B892E0A332}"
 	ProjectSection(SolutionItems) = preProject
