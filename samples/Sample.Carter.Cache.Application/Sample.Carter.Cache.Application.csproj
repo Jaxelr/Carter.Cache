@@ -20,7 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\src\Carter.Cache\Carter.Cache.csproj" />
+    <ProjectReference Include="..\..\src\Carter.Cache\Carter.Cache.csproj" />
   </ItemGroup>
 
   <ItemGroup>
