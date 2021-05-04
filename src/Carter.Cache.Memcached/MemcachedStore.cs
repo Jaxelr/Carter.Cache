@@ -1,6 +1,7 @@
 ﻿using System;
 using Carter.Cache.Stores;
 using Enyim.Caching;
+using Enyim.Caching.Memcached;
 
 namespace Carter.Cache.Memcached
 {
@@ -31,7 +32,7 @@ namespace Carter.Cache.Memcached
 
             if (expiration.TotalSeconds > 0)
             {
-                client.Set(key, response, expiration.Seconds);
+                client.Store(StoreMode.Set, key, response, expiration);
             }
         }
 
