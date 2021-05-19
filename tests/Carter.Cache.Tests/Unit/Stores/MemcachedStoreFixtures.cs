@@ -13,7 +13,7 @@ namespace Carter.Cache.Tests.Unit.Stores
         private const string Host = "127.0.0.1";
         private const int Port = 11211;
 
-        private MemcachedClient GetMemcachedClient()
+        private static MemcachedClient GetMemcachedClient()
         {
             var factory = A.Fake<ILoggerFactory>();
             var configuration = A.Fake<MemcachedClientConfiguration>();
