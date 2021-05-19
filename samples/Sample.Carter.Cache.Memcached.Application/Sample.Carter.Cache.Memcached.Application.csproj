@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
-    <AssemblyName>Sample.Carter.Cache.Application</AssemblyName>
+    <AssemblyName>Sample.Carter.Cache.Memcached.Application</AssemblyName>
     <OutputType>Exe</OutputType>
   </PropertyGroup>
   <ItemGroup>
@@ -9,6 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="EnyimMemcachedCore" Version="2.5.3" />
     <PackageReference Include="Microsoft.AspNetCore.Server.IISIntegration" Version="2.2.1" />
     <PackageReference Include="Microsoft.AspNetCore.Server.Kestrel" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Hosting" Version="2.2.7" />

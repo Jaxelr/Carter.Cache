@@ -1,6 +1,6 @@
 ﻿using Carter.OpenApi;
 
-namespace Sample.Carter.Cache.Application.Modules
+namespace Sample.Carter.Cache.Memcached.Application.Modules
 {
     public class GetHello : RouteMetaData
     {

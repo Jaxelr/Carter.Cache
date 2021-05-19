@@ -1,15 +1,19 @@
+using System;
 using System.Collections.Generic;
 using Carter;
 using Carter.Cache;
+using Carter.Cache.Memcached;
+using Carter.Cache.Stores;
+using Enyim.Caching;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Sample.Carter.Cache.Application.Entities;
-using Sample.Carter.Cache.Application.Repository;
+using Sample.Carter.Cache.Memcached.Application.Entities;
+using Sample.Carter.Cache.Memcached.Application.Repository;
 
-namespace Sample.Carter.Cache.Application
+namespace Sample.Carter.Cache.Memcached.Application
 {
     public class Startup
     {
@@ -47,7 +51,13 @@ namespace Sample.Carter.Cache.Application
                 opt.AddConfiguration(Configuration.GetSection("Logging"));
             });
 
-            services.AddCarterCaching(new CachingOption(2048));
+            services.AddEnyimMemcached(options => options.AddServer("127.0.0.1", 11211));
+            services.AddSingleton<ICacheStore>(provider => new MemcachedStore(provider.GetRequiredService<IMemcachedClient>()));
+            services.AddSingleton(provider => new CachingOption() { Store = provider.GetRequiredService<ICacheStore>() });
+
+            IServiceProvider serviceProvider = services.BuildServiceProvider();
+
+            services.AddCarterCaching(serviceProvider.GetRequiredService<CachingOption>());
 
             services.AddCarter(options => options.OpenApi = GetOpenApiOptions(settings));
         }

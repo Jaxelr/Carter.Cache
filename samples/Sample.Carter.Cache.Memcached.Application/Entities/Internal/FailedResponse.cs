@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Sample.Carter.Cache.Application.Entities
+namespace Sample.Carter.Cache.Memcached.Application.Entities
 {
     public class FailedResponse
     {
