@@ -3,10 +3,10 @@ using Carter;
 using Carter.Cache;
 using Carter.Request;
 using Carter.Response;
-using Sample.Carter.Cache.Application.Entities;
-using Sample.Carter.Cache.Application.Repository;
+using Sample.Carter.Cache.Memcached.Application.Entities;
+using Sample.Carter.Cache.Memcached.Application.Repository;
 
-namespace Sample.Carter.Cache.Application.Modules
+namespace Sample.Carter.Cache.Memcached.Application.Modules
 {
     public class HelloModule : CarterModule
     {

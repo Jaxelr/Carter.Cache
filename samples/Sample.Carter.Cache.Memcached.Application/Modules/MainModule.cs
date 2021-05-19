@@ -1,8 +1,8 @@
 ﻿using System.Threading.Tasks;
 using Carter;
-using Sample.Carter.Cache.Application.Entities;
+using Sample.Carter.Cache.Memcached.Application.Entities;
 
-namespace Sample.Carter.Cache.Application.Modules
+namespace Sample.Carter.Cache.Memcached.Application.Modules
 {
     public class MainModule : CarterModule
     {

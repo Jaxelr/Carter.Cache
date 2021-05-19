@@ -1,4 +1,4 @@
-﻿namespace Sample.Carter.Cache.Application.Repository
+﻿namespace Sample.Carter.Cache.Memcached.Application.Repository
 {
     public interface IHelloRepository
     {
