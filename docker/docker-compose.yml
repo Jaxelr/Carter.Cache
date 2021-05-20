@@ -1,0 +1,22 @@
+version: '3'
+services:
+
+  memcached:
+    # For more details on configuring the Memcahed Docker image, see:
+    #   https://hub.docker.com/_/memcached
+    image: memcached
+
+    # Expose the default Memcached port on localhost
+    ports:
+      - '11211:11211'
+    container_name: memecached
+
+  redis:
+    # For more details on configuring the Redis Docker image, see:
+    #   https://hub.docker.com/_/redis
+    image: redis
+
+    # Expose the default Redis port on localhost
+    ports:
+    - "6379:6379"
+    container_name: redisito
