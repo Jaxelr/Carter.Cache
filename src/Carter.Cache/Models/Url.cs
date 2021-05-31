@@ -118,7 +118,7 @@ namespace Carter.Cache
         /// Clones the url.
         /// </summary>
         /// <returns>Returns a new cloned instance of the url.</returns>
-        public Url Clone() => new Url
+        public Url Clone() => new()
         {
             BasePath = BasePath,
             HostName = HostName,
@@ -147,7 +147,7 @@ namespace Carter.Cache
         /// </summary>
         /// <param name="url">The instance that should be cast.</param>
         /// <returns>An <see cref="Uri"/> representation of the <paramref name="url"/>.</returns>
-        public static implicit operator Uri(Url url) => new Uri(url.ToString(), UriKind.Absolute);
+        public static implicit operator Uri(Url url) => new(url.ToString(), UriKind.Absolute);
 
         /// <summary>
         /// Casts a <see cref="Uri"/> instance to a <see cref="Url"/> instance
