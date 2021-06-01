@@ -15,6 +15,11 @@ namespace Carter.Cache
         public string ContentType { get; set; }
         public TimeSpan Expiry { get; set; }
 
+        public CachedResponse()
+        {
+            //Default constructor used to read from cache scenarios.
+        }
+
         public CachedResponse(HttpContext ctx, byte[] body)
         {
             var property = ctx.Features.Get<CachingProperty>();
