@@ -58,7 +58,6 @@ namespace Sample.Carter.Cache.Memcached.Application
             IServiceProvider serviceProvider = services.BuildServiceProvider();
 
             services.AddCarterCaching(serviceProvider.GetRequiredService<CachingOption>());
-
             services.AddCarter(options => options.OpenApi = GetOpenApiOptions(settings));
         }
 

@@ -17,7 +17,7 @@ namespace Carter.Cache
 
         public CachedResponse()
         {
-            //Default constructor used to read from cache scenarios.
+            //For mapping from the cache store.
         }
 
         public CachedResponse(HttpContext ctx, byte[] body)

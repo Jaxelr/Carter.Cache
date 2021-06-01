@@ -90,26 +90,6 @@ namespace Carter.Cache.Tests.Unit.Stores
             Assert.NotNull(response);
         }
 
-        //[Fact]
-        //public void Memcached_cache_with_value_set_get()
-        //{
-        //    //Arrange
-        //    var client = GetMemcachedClient();
-        //    var cache = new MemcachedStore(client);
-        //    var expiration = new TimeSpan(0, 1, 0);
-        //    const string key = "-Random-Key-2";
-
-        //    var response = A.Fake<CachedResponse>();
-
-        //    //Act
-        //    cache.Set(key, response, expiration);
-        //    bool found = cache.TryGetValue(key, out var getResponse);
-
-        //    //Assert
-        //    Assert.Equal(response, getResponse);
-        //    Assert.True(found);
-        //}
-
         [Fact]
         public void Memcached_cache_with_value_set_remove_get()
         {
