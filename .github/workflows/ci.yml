@@ -17,6 +17,8 @@ jobs:
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 5.0.100
+    - name: Run dependency images
+      run: docker-compose -f docker/docker-compose.yml up -d
     - name: Install dependencies
       run: dotnet restore
     - name: Build
