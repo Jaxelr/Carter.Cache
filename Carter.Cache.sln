@@ -47,6 +47,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Carter.Cache.Memcached", "s
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sample.Carter.Cache.Memcached.Application", "samples\Sample.Carter.Cache.Memcached.Application\Sample.Carter.Cache.Memcached.Application.csproj", "{33BDD428-9420-4AE0-8553-4272FCAB8CD8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Carter.Cache.Sample.Tests", "tests\Carter.Cache.Sample.Tests\Carter.Cache.Sample.Tests.csproj", "{A03CCB1A-944C-4D7A-BA1A-E1DAF48837ED}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -73,6 +75,10 @@ Global
 		{33BDD428-9420-4AE0-8553-4272FCAB8CD8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{33BDD428-9420-4AE0-8553-4272FCAB8CD8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{33BDD428-9420-4AE0-8553-4272FCAB8CD8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A03CCB1A-944C-4D7A-BA1A-E1DAF48837ED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A03CCB1A-944C-4D7A-BA1A-E1DAF48837ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A03CCB1A-944C-4D7A-BA1A-E1DAF48837ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A03CCB1A-944C-4D7A-BA1A-E1DAF48837ED}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
