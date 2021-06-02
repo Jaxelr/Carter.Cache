@@ -47,7 +47,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Carter.Cache.Memcached", "s
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sample.Carter.Cache.Memcached.Application", "samples\Sample.Carter.Cache.Memcached.Application\Sample.Carter.Cache.Memcached.Application.csproj", "{33BDD428-9420-4AE0-8553-4272FCAB8CD8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Carter.Cache.Sample.Tests", "tests\Carter.Cache.Sample.Tests\Carter.Cache.Sample.Tests.csproj", "{A03CCB1A-944C-4D7A-BA1A-E1DAF48837ED}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Carter.Cache.Sample.Tests", "tests\Carter.Cache.Sample.Tests\Carter.Cache.Sample.Tests.csproj", "{A03CCB1A-944C-4D7A-BA1A-E1DAF48837ED}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Carter.Cache.Sample.Memcached.Tests", "tests\Carter.Cache.Sample.Memcached.Tests\Carter.Cache.Sample.Memcached.Tests.csproj", "{BE592EC7-B97C-43F8-A903-52DB12890903}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -79,6 +81,10 @@ Global
 		{A03CCB1A-944C-4D7A-BA1A-E1DAF48837ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A03CCB1A-944C-4D7A-BA1A-E1DAF48837ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A03CCB1A-944C-4D7A-BA1A-E1DAF48837ED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BE592EC7-B97C-43F8-A903-52DB12890903}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BE592EC7-B97C-43F8-A903-52DB12890903}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BE592EC7-B97C-43F8-A903-52DB12890903}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BE592EC7-B97C-43F8-A903-52DB12890903}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -92,6 +98,8 @@ Global
 		{0DBDB871-F2E7-4998-8AC5-C6A689E6723A} = {22BF799C-B98C-40FC-A701-92B892E0A332}
 		{AB1B90C9-FA9C-4199-97AE-1EDA82445A3B} = {069F24F1-932B-4285-A211-77DE71A28988}
 		{33BDD428-9420-4AE0-8553-4272FCAB8CD8} = {3006122C-A413-40BE-BA08-49CE24392313}
+		{A03CCB1A-944C-4D7A-BA1A-E1DAF48837ED} = {E65CADC8-48D7-49F0-BE62-CBA6C70079D8}
+		{BE592EC7-B97C-43F8-A903-52DB12890903} = {E65CADC8-48D7-49F0-BE62-CBA6C70079D8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4C7DAAE6-F427-4044-AAA7-E955004D1833}
