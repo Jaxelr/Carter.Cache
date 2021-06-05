@@ -13,6 +13,7 @@ An extensible library to cache your [Carter][carter] modules.
 Package | NuGet (Stable) | MyGet (Prerelease)
 | :--- | :---: | :---: |
 | Carter.Cache | [![NuGet][carter-cache-img]][carter-cache] | [![MyGet][myget-carter-cache-img]][myget-carter-cache] |
+| Carter.Cache.Memcached | [![NuGet][carter-cache-memcached-img]][carter-cache-memcached] | [![MyGet][myget-carter-cache-memcached-img]][myget-carter-cache-memcached] |
 
 ## Installation
 
@@ -103,6 +104,10 @@ Also a custom Key can be easily defined by implementing the ICacheKey interface:
 [carter-cache]: https://www.nuget.org/packages/Carter.Cache
 [myget-carter-cache-img]: https://img.shields.io/myget/carter-cache/v/Carter.Cache.svg
 [myget-carter-cache]: https://www.myget.org/feed/carter-cache/package/nuget/Carter.Cache
+[carter-cache-memcached-img]: https://img.shields.io/nuget/v/Carter.Cache.Memcached.svg
+[carter-cache-memcached]: https://www.nuget.org/packages/Carter.Cache.Memcached
+[myget-carter-cache-memcached-img]: https://img.shields.io/myget/carter-cache/v/Carter.Cache.Memcached.svg
+[myget-carter-cache-memcached]: https://www.myget.org/feed/carter-cache/package/nuget/Carter.Cache.Memcached
 [mit-img]: http://img.shields.io/badge/License-MIT-blue.svg
 [mit]: https://github.com/Jaxelr/Carter.Cache/blob/master/LICENSE
 [carter]: https://github.com/CarterCommunity/Carter
