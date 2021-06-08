@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace Carter.Cache
 {
-    public class CachedResponse
+    public class CachedResponse 
     {
         public Dictionary<string, string> Headers { get; set; }
         public CachingProperty Property { get; set; }

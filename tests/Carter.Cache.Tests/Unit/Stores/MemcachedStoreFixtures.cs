@@ -1,9 +1,9 @@
 ﻿using System;
 using Carter.Cache.Memcached;
 using Enyim.Caching;
-using Enyim.Caching.Configuration;
 using FakeItEasy;
-using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Xunit;
 
 namespace Carter.Cache.Tests.Unit.Stores
@@ -15,12 +15,13 @@ namespace Carter.Cache.Tests.Unit.Stores
 
         private static MemcachedClient GetMemcachedClient()
         {
-            var factory = A.Fake<ILoggerFactory>();
-            var configuration = A.Fake<MemcachedClientConfiguration>();
-
-            configuration.AddServer(Host, Port);
-
-            return new MemcachedClient(factory, configuration);
+            IServiceCollection services = new ServiceCollection();
+            var configuration = new ConfigurationBuilder().Build();
+            services.AddSingleton<IConfiguration>(configuration);
+            services.AddEnyimMemcached(options => options.AddServer(Host, Port));
+            services.AddLogging();
+            IServiceProvider serviceProvider = services.BuildServiceProvider();
+            return serviceProvider.GetService<IMemcachedClient>() as MemcachedClient;
         }
 
         [Fact]
@@ -109,6 +110,37 @@ namespace Carter.Cache.Tests.Unit.Stores
             //Assert
             Assert.Null(getResponse);
             Assert.False(found);
+        }
+
+        [Fact]
+        public void Memcached_cache_with_value_set_get()
+        {
+            //Arrange
+            var client = GetMemcachedClient();
+            var cache = new MemcachedStore(client);
+            var expiration = new TimeSpan(0, 1, 0);
+            const string key = "Key";
+            const string contentType = "application/json";
+            const int statusCode = 200;
+
+            var response = new CachedResponse
+            {
+                ContentType = contentType,
+                Expiry = expiration,
+                StatusCode = statusCode,
+                ContentLength = 1,
+            };
+
+            //Act
+            cache.Set(key, response, expiration);
+            bool found = cache.TryGetValue(key, out var getResponse);
+
+            //Assert
+            Assert.Equal(response.ContentType, getResponse.ContentType);
+            Assert.Equal(response.StatusCode, getResponse.StatusCode);
+            Assert.Equal(response.Expiry, getResponse.Expiry);
+            Assert.Equal(1, response.ContentLength);
+            Assert.True(found);
         }
     }
 }
