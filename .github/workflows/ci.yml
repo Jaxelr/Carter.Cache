@@ -32,6 +32,8 @@ jobs:
         file: tests/Carter.Cache.Tests/coverage.xml
     - name: Pack
       run: dotnet pack src/Carter.Cache/Carter.Cache.csproj -o $NUPKGS --include-symbols
+    - name: Pack Memcached 
+      run: dotnet pack src/Carter.Cache.Memcached/Carter.Cache.Memcached.csproj -o $NUPKGS --include-symbols
     - name: Publish Feedz
       run: dotnet nuget push "$NUPKGS/*.nupkg" --skip-duplicate --source $MYGET_FEED -k ${{ secrets.MYGET_KEY }}
 env:
