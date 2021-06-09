@@ -100,6 +100,45 @@ Also a custom Key can be easily defined by implementing the ICacheKey interface:
     }
 ```
 
+### Memcached store
+
+A memcached store which includes the dependency on [EnyimMemcachedCore](https://www.nuget.org/packages/EnyimMemcachedCore/) and can be plugged in to replace the in memory store.
+The usage requires the following reconfigurations on the ConfigureServices method of Startup:
+
+```csharp
+    public void ConfigureServices(IServiceCollection services)
+        {
+            //...
+
+            //EnyimMemcached requires a logging 
+            services.AddLogging(opt =>
+            {
+                opt.ClearProviders();
+                opt.AddConsole();
+                opt.AddDebug();
+                opt.AddConfiguration(Configuration.GetSection("Logging"));
+            });
+
+            //Point to the server / port desired
+            services.AddEnyimMemcached(options => options.AddServer("127.0.0.1", 11211));
+
+            //Resolve the IMemcachedClient dependency using EnyimMemcached
+            services.AddSingleton<ICacheStore>(provider => new MemcachedStore(provider.GetRequiredService<IMemcachedClient>()));
+
+            //Define Caching options using the store configured
+            services.AddSingleton(provider => new CachingOption() { Store = provider.GetRequiredService<ICacheStore>() });
+
+            IServiceProvider serviceProvider = services.BuildServiceProvider();
+
+            //Pass it as a dependency to the add
+            services.AddCarterCaching(serviceProvider.GetRequiredService<CachingOption>());
+
+            //...
+        }
+```
+
+For more information check the [sample](/samples/Sample.Carter.Cache.Memcached.Application) included.
+
 [carter-cache-img]: https://img.shields.io/nuget/v/Carter.Cache.svg
 [carter-cache]: https://www.nuget.org/packages/Carter.Cache
 [myget-carter-cache-img]: https://img.shields.io/myget/carter-cache/v/Carter.Cache.svg
