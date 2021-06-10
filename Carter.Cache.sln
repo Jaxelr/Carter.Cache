@@ -59,6 +59,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docker", "docker", "{9705DD
 		docker\docker-compose.yml = docker\docker-compose.yml
 	EndProjectSection
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Carter.Cache.Redis", "src\Carter.Cache.Redis\Carter.Cache.Redis.csproj", "{D3C46C9D-90E8-4CF9-AAF5-58DAC5A9D4DB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -93,6 +95,10 @@ Global
 		{BE592EC7-B97C-43F8-A903-52DB12890903}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BE592EC7-B97C-43F8-A903-52DB12890903}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BE592EC7-B97C-43F8-A903-52DB12890903}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D3C46C9D-90E8-4CF9-AAF5-58DAC5A9D4DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D3C46C9D-90E8-4CF9-AAF5-58DAC5A9D4DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D3C46C9D-90E8-4CF9-AAF5-58DAC5A9D4DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D3C46C9D-90E8-4CF9-AAF5-58DAC5A9D4DB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -109,6 +115,7 @@ Global
 		{A03CCB1A-944C-4D7A-BA1A-E1DAF48837ED} = {E65CADC8-48D7-49F0-BE62-CBA6C70079D8}
 		{BE592EC7-B97C-43F8-A903-52DB12890903} = {E65CADC8-48D7-49F0-BE62-CBA6C70079D8}
 		{9705DD2C-6579-41EB-A8ED-4DDA66CE3098} = {A32770F0-77A8-4500-846D-346ED62732CE}
+		{D3C46C9D-90E8-4CF9-AAF5-58DAC5A9D4DB} = {069F24F1-932B-4285-A211-77DE71A28988}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4C7DAAE6-F427-4044-AAA7-E955004D1833}
