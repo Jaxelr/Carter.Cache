@@ -23,6 +23,10 @@ namespace Sample.Carter.Cache.Memcached.Application
 
         private const string ServiceName = "Sample";
 
+        private const string LOCALHOST = "127.0.0.1";
+
+        private const int PORT = 11211;
+
         public Startup(IWebHostEnvironment env)
         {
             var builder = new ConfigurationBuilder()
@@ -51,7 +55,7 @@ namespace Sample.Carter.Cache.Memcached.Application
                 opt.AddConfiguration(Configuration.GetSection("Logging"));
             });
 
-            services.AddEnyimMemcached(options => options.AddServer("127.0.0.1", 11211));
+            services.AddEnyimMemcached(options => options.AddServer(LOCALHOST, PORT));
             services.AddSingleton<ICacheStore>(provider => new MemcachedStore(provider.GetRequiredService<IMemcachedClient>()));
             services.AddSingleton(provider => new CachingOption() { Store = provider.GetRequiredService<ICacheStore>() });
 
