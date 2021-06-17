@@ -8,9 +8,9 @@ namespace Sample.Carter.Cache.Application.Modules
     {
         public MainModule(AppSettings appSettings)
         {
-            Get("/", (_, res) =>
+            Get("/", (ctx) =>
             {
-                res.Redirect(appSettings.RouteDefinition.RoutePrefix);
+                ctx.Response.Redirect(appSettings.RouteDefinition.RoutePrefix);
 
                 return Task.CompletedTask;
             });
