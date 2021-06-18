@@ -1,7 +1,6 @@
 ﻿using System;
-using System.IO;
-using System.Runtime.Serialization.Formatters.Binary;
 using Carter.Cache.Stores;
+using Newtonsoft.Json;
 using StackExchange.Redis;
 
 namespace Carter.Cache.Redis
@@ -44,7 +43,7 @@ namespace Carter.Cache.Redis
 
             if (expiration.TotalSeconds > 0)
             {
-                bool ack = cache.StringSet(key, Serialize(response), expiry: expiration);
+                bool ack = cache.StringSet(key, JsonConvert.SerializeObject(response), expiry: expiration);
 
                 if (!ack)
                 {
@@ -72,51 +71,11 @@ namespace Carter.Cache.Redis
 
             if (result.HasValue)
             {
-                response = Deserialize<CachedResponse>(result);
+                response = JsonConvert.DeserializeObject<CachedResponse>(result);
                 return true;
             }
 
             return false;
-        }
-
-        /// <summary>
-        /// Serialize the object into an array of bytes using the binary formatter
-        /// </summary>
-        /// <param name="o"></param>
-        /// <returns></returns>
-        private static byte[] Serialize(object o)
-        {
-            byte[] objectDataAsStream = null;
-
-            if (o != null)
-            {
-                var binaryFormatter = new BinaryFormatter();
-                using var memoryStream = new MemoryStream();
-                binaryFormatter.Serialize(memoryStream, o);
-                objectDataAsStream = memoryStream.ToArray();
-            }
-
-            return objectDataAsStream;
-        }
-
-        /// <summary>
-        /// Deserialize the array of bytes into a poco using the binary formatter
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="stream"></param>
-        /// <returns></returns>
-        private static T Deserialize<T>(byte[] stream)
-        {
-            var result = default(T);
-
-            if (stream != null)
-            {
-                var binaryFormatter = new BinaryFormatter();
-                using var memoryStream = new MemoryStream(stream);
-                result = (T) binaryFormatter.Deserialize(memoryStream);
-            }
-
-            return result;
         }
     }
 }
