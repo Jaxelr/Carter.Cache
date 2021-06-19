@@ -1,7 +1,7 @@
 ﻿using System;
 using Sample.Carter.Cache.Memcached.Application.Repository;
 
-namespace Carter.Cache.Sample.Tests.Mocks
+namespace Carter.Cache.Sample.Memcached.Tests.Mocks
 {
     public class MockHelloRepository : IHelloRepository
     {

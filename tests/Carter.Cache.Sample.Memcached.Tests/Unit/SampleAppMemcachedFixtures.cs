@@ -12,7 +12,7 @@ using Sample.Carter.Cache.Memcached.Application;
 using Sample.Carter.Cache.Memcached.Application.Repository;
 using Xunit;
 
-namespace Carter.Cache.Sample.Tests.Unit
+namespace Carter.Cache.Sample.Memcached.Tests.Unit
 {
     public class SampleAppMemcachedFixtures : IDisposable
     {
