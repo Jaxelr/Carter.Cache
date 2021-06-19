@@ -26,12 +26,10 @@ namespace Carter.Cache.Sample.Tests
             featureCollection.Set<IHelloRepository>(new Mocks.MockHelloRepository());
 
             server = new TestServer(WebHost.CreateDefaultBuilder()
-                    .UseStartup<Startup>(), featureCollection
-            );
+                    .UseStartup<Startup>(), featureCollection);
 
             client = server.CreateClient();
         }
-
 
         public void Dispose()
         {
@@ -53,7 +51,6 @@ namespace Carter.Cache.Sample.Tests
             Assert.Equal(HttpStatusCode.OK, res.StatusCode);
             Assert.Contains(name, await res.Content.ReadAsStringAsync());
         }
-
 
         [Fact]
         public async Task Hello_module_get_hello_world_from_cache()
@@ -88,7 +85,6 @@ namespace Carter.Cache.Sample.Tests
             Assert.False(res2.Headers.Contains("X-Carter-Cache-Expiration"));
         }
 
-
         [Fact]
         public async Task Hello_module_get_hello_world2()
         {
@@ -102,7 +98,6 @@ namespace Carter.Cache.Sample.Tests
             Assert.Equal(HttpStatusCode.OK, res.StatusCode);
             Assert.Contains(name, await res.Content.ReadAsStringAsync());
         }
-
 
         [Fact]
         public async Task Hello_module_get_hello_world2_from_cache()
