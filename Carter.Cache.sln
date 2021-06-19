@@ -63,6 +63,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Carter.Cache.Redis", "src\C
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sample.Carter.Cache.Redis.Application", "samples\Sample.Carter.Cache.Redis.Application\Sample.Carter.Cache.Redis.Application.csproj", "{217D5582-C5DF-4105-AEA2-C1C66D5D3C61}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Carter.Cache.Sample.Redis.Tests", "tests\Carter.Cache.Sample.Redis.Tests\Carter.Cache.Sample.Redis.Tests.csproj", "{993A99CF-84B2-4BD2-BEDE-759DEE91FFD7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -105,6 +107,10 @@ Global
 		{217D5582-C5DF-4105-AEA2-C1C66D5D3C61}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{217D5582-C5DF-4105-AEA2-C1C66D5D3C61}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{217D5582-C5DF-4105-AEA2-C1C66D5D3C61}.Release|Any CPU.Build.0 = Release|Any CPU
+		{993A99CF-84B2-4BD2-BEDE-759DEE91FFD7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{993A99CF-84B2-4BD2-BEDE-759DEE91FFD7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{993A99CF-84B2-4BD2-BEDE-759DEE91FFD7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{993A99CF-84B2-4BD2-BEDE-759DEE91FFD7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -123,6 +129,7 @@ Global
 		{9705DD2C-6579-41EB-A8ED-4DDA66CE3098} = {A32770F0-77A8-4500-846D-346ED62732CE}
 		{D3C46C9D-90E8-4CF9-AAF5-58DAC5A9D4DB} = {069F24F1-932B-4285-A211-77DE71A28988}
 		{217D5582-C5DF-4105-AEA2-C1C66D5D3C61} = {3006122C-A413-40BE-BA08-49CE24392313}
+		{993A99CF-84B2-4BD2-BEDE-759DEE91FFD7} = {E65CADC8-48D7-49F0-BE62-CBA6C70079D8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4C7DAAE6-F427-4044-AAA7-E955004D1833}
