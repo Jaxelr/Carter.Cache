@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Text;
 using Carter.Cache.Redis;
 using Carter.Cache.Tests.Fakes;
 using FakeItEasy;
@@ -10,13 +9,7 @@ namespace Carter.Cache.Tests.Unit.Stores
 {
     public class RedisStoreFixtures
     {
-        byte[] Datum;
         private const string REDIS_LOCALHOST = "127.0.0.1:6379";
-
-        public RedisStoreFixtures()
-        {
-            Datum = Encoding.UTF8.GetBytes($"Hello world with custom id: {Guid.NewGuid()}");
-        }
 
         [Fact]
         public void Redis_cache_empty_get()
@@ -94,6 +87,28 @@ namespace Carter.Cache.Tests.Unit.Stores
             //Assert
             Assert.NotNull(cache);
             Assert.NotNull(response);
+        }
+
+
+        [Fact]
+        public void Redis_cache_empty_set_no_timespan()
+        {
+            //Arrange
+            var cache = new RedisStore(REDIS_LOCALHOST);
+            var expiration = new TimeSpan(0, 0, 0);
+            const string key = "-Random-Key-";
+
+            var response = A.Fake<FakeCachedResponse>();
+
+            //Act
+            cache.Set(key, response, expiration);
+            bool found = cache.TryGetValue(key, out var getResponse);
+
+            //Assert
+            Assert.NotNull(cache);
+            Assert.NotNull(response);
+            Assert.False(found);
+            Assert.Null(getResponse);
         }
 
         [Fact]
