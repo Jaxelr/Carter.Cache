@@ -1,5 +1,6 @@
 ﻿using System;
 using Carter.Cache.Stores;
+using Carter.Cache.Tests.Fakes;
 using FakeItEasy;
 using Xunit;
 
@@ -42,7 +43,7 @@ namespace Carter.Cache.Tests.Unit.Stores
             var cache = new DefaultMemoryStore();
             var expiration = new TimeSpan(0, 1, 0);
 
-            var response = A.Fake<CachedResponse>();
+            var response = A.Fake<FakeCachedResponse>();
 
             //Act
             cache.Set(string.Empty, response, expiration);
@@ -60,7 +61,7 @@ namespace Carter.Cache.Tests.Unit.Stores
             var expiration = new TimeSpan(0, 1, 0);
             const string key = "-Random-Key-";
 
-            var response = A.Fake<CachedResponse>();
+            var response = A.Fake<FakeCachedResponse>();
 
             //Act
             cache.Set(key, response, expiration);
@@ -78,7 +79,7 @@ namespace Carter.Cache.Tests.Unit.Stores
             var expiration = new TimeSpan(0, 1, 0);
             const string key = "-Random-Key-";
 
-            var response = A.Fake<CachedResponse>();
+            var response = A.Fake<FakeCachedResponse>();
 
             //Act
             cache.Set(key, response, expiration);
@@ -97,7 +98,7 @@ namespace Carter.Cache.Tests.Unit.Stores
             var expiration = new TimeSpan(0, 1, 0);
             const string key = "-Random-Key-";
 
-            var response = A.Fake<CachedResponse>();
+            var response = A.Fake<FakeCachedResponse>();
 
             //Act
             cache.Set(key, response, expiration);
@@ -117,7 +118,7 @@ namespace Carter.Cache.Tests.Unit.Stores
             const string key = "-Random-Key-";
             const string key2 = "-Random-Key-2";
 
-            var response = A.Fake<CachedResponse>();
+            var response = A.Fake<FakeCachedResponse>();
 
             //Act
             cache.Set(key, response, expiration);
@@ -137,7 +138,7 @@ namespace Carter.Cache.Tests.Unit.Stores
             var expiration = new TimeSpan(0, 1, 0);
             const string key = "-Random-Key-";
 
-            var response = A.Fake<CachedResponse>();
+            var response = A.Fake<FakeCachedResponse>();
 
             //Act
             cache.Set(key, response, expiration);
@@ -157,7 +158,7 @@ namespace Carter.Cache.Tests.Unit.Stores
             var expiration = new TimeSpan(0, 1, 0);
             const string key = "-Random-Key-";
 
-            var response = A.Fake<CachedResponse>();
+            var response = A.Fake<FakeCachedResponse>();
 
             //Act
             cache.Set(key, response, expiration);
