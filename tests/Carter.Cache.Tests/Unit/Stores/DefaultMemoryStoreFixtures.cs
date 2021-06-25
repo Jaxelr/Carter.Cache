@@ -59,7 +59,7 @@ namespace Carter.Cache.Tests.Unit.Stores
             //Arrange
             var cache = new DefaultMemoryStore();
             var expiration = new TimeSpan(0, 1, 0);
-            const string key = "-Random-Key-";
+            const string key = "-Random-Key-1";
 
             var response = A.Fake<FakeCachedResponse>();
 
@@ -77,7 +77,7 @@ namespace Carter.Cache.Tests.Unit.Stores
             //Arrange
             var cache = new DefaultMemoryStore();
             var expiration = new TimeSpan(0, 1, 0);
-            const string key = "-Random-Key-";
+            const string key = "-Random-Key-2";
 
             var response = A.Fake<FakeCachedResponse>();
 
@@ -96,7 +96,7 @@ namespace Carter.Cache.Tests.Unit.Stores
             //Arrange
             var cache = new DefaultMemoryStore(1);
             var expiration = new TimeSpan(0, 1, 0);
-            const string key = "-Random-Key-";
+            const string key = "-Random-Key-3";
 
             var response = A.Fake<FakeCachedResponse>();
 
@@ -115,8 +115,8 @@ namespace Carter.Cache.Tests.Unit.Stores
             //Arrange
             var cache = new DefaultMemoryStore(1);
             var expiration = new TimeSpan(0, 1, 0);
-            const string key = "-Random-Key-";
-            const string key2 = "-Random-Key-2";
+            const string key = "-Random-Key-4";
+            const string key2 = "-Random-Key-5";
 
             var response = A.Fake<FakeCachedResponse>();
 
@@ -136,7 +136,7 @@ namespace Carter.Cache.Tests.Unit.Stores
             //Arrange
             var cache = new DefaultMemoryStore(1);
             var expiration = new TimeSpan(0, 1, 0);
-            const string key = "-Random-Key-";
+            const string key = "-Random-Key-6";
 
             var response = A.Fake<FakeCachedResponse>();
 
@@ -156,7 +156,7 @@ namespace Carter.Cache.Tests.Unit.Stores
             //Arrange
             var cache = new DefaultMemoryStore();
             var expiration = new TimeSpan(0, 1, 0);
-            const string key = "-Random-Key-";
+            const string key = "-Random-Key-7";
 
             var response = A.Fake<FakeCachedResponse>();
 
