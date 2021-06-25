@@ -151,7 +151,7 @@ namespace Carter.Cache.Tests.Unit.Stores
             var client = GetMemcachedClient();
             var cache = new MemcachedStore(client);
             var expiration = new TimeSpan(0, 0, 0);
-            const string key = "-Random-Key-";
+            const string key = "-Random-Key-4";
 
             var response = A.Fake<FakeCachedResponse>();
 
