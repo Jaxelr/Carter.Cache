@@ -1,5 +1,6 @@
 ﻿using System;
 using Carter.Cache.Memcached;
+using Carter.Cache.Tests.Fakes;
 using Enyim.Caching;
 using FakeItEasy;
 using Microsoft.Extensions.Configuration;
@@ -62,7 +63,7 @@ namespace Carter.Cache.Tests.Unit.Stores
             var cache = new MemcachedStore(client);
             var expiration = new TimeSpan(0, 1, 0);
 
-            var response = A.Fake<CachedResponse>();
+            var response = A.Fake<FakeCachedResponse>();
 
             //Act
             cache.Set(string.Empty, response, expiration);
@@ -81,7 +82,7 @@ namespace Carter.Cache.Tests.Unit.Stores
             var expiration = new TimeSpan(0, 1, 0);
             const string key = "-Random-Key-";
 
-            var response = A.Fake<CachedResponse>();
+            var response = A.Fake<FakeCachedResponse>();
 
             //Act
             cache.Set(key, response, expiration);
@@ -100,7 +101,7 @@ namespace Carter.Cache.Tests.Unit.Stores
             var expiration = new TimeSpan(0, 1, 0);
             const string key = "-Random-Key-3";
 
-            var response = A.Fake<CachedResponse>();
+            var response = A.Fake<FakeCachedResponse>();
 
             //Act
             cache.Set(key, response, expiration);
@@ -141,6 +142,28 @@ namespace Carter.Cache.Tests.Unit.Stores
             Assert.Equal(response.Expiry, getResponse.Expiry);
             Assert.Equal(1, response.ContentLength);
             Assert.True(found);
+        }
+
+        [Fact]
+        public void Memcached_cache_empty_set_no_timespan()
+        {
+            //Arrange
+            var client = GetMemcachedClient();
+            var cache = new MemcachedStore(client);
+            var expiration = new TimeSpan(0, 0, 0);
+            const string key = "-Random-Key-";
+
+            var response = A.Fake<FakeCachedResponse>();
+
+            //Act
+            cache.Set(key, response, expiration);
+            bool found = cache.TryGetValue(key, out var getResponse);
+
+            //Assert
+            Assert.NotNull(cache);
+            Assert.NotNull(response);
+            Assert.False(found);
+            Assert.Null(getResponse);
         }
     }
 }
