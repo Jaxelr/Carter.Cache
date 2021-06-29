@@ -21,6 +21,16 @@ updates:
     labels:
       - "dependencies"
   - package-ecosystem: "nuget"
+    directory: "/samples/Sample.Carter.Cache.Redis.Application" #Sample.Carter.Cache.Redis.Application.csproj
+    schedule:
+      interval: "weekly"
+      day: "friday"
+    commit-message:
+      prefix: "deps"
+    open-pull-requests-limit: 5
+    labels:
+      - "dependencies"
+  - package-ecosystem: "nuget"
     directory: "/src/Carter.Cache" #Carter.Cache.csproj
     schedule:
       interval: "weekly"
@@ -32,6 +42,16 @@ updates:
       - "dependencies"
   - package-ecosystem: "nuget"
     directory: "/src/Carter.Cache.Memcached" #Carter.Cache.Memcached.csproj
+    schedule:
+      interval: "weekly"
+      day: "friday"
+    commit-message:
+      prefix: "deps"
+    open-pull-requests-limit: 5
+    labels:
+      - "dependencies"
+  - package-ecosystem: "nuget"
+    directory: "/src/Carter.Cache.Redis" #Carter.Cache.Redis.csproj
     schedule:
       interval: "weekly"
       day: "friday"
@@ -70,5 +90,13 @@ updates:
     open-pull-requests-limit: 5
     labels:
       - "dependencies"
-
-
+  - package-ecosystem: "nuget"
+    directory: "/tests/Carter.Cache.Sample.Redis.Tests" #Carter.Cache.Sample.Redis.Tests.csproj
+    schedule:
+      interval: "weekly"
+      day: "friday"
+    commit-message:
+      prefix: "deps"
+    open-pull-requests-limit: 5
+    labels:
+      - "dependencies"
