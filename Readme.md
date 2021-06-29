@@ -14,6 +14,7 @@ Package | NuGet (Stable) | MyGet (Prerelease)
 | :--- | :---: | :---: |
 | Carter.Cache | [![NuGet][carter-cache-img]][carter-cache] | [![MyGet][myget-carter-cache-img]][myget-carter-cache] |
 | Carter.Cache.Memcached | [![NuGet][carter-cache-memcached-img]][carter-cache-memcached] | [![MyGet][myget-carter-cache-memcached-img]][myget-carter-cache-memcached] |
+| Carter.Cache.Redis | [![NuGet][carter-cache-redis-img]][carter-cache-redis] | [![MyGet][myget-carter-cache-redis-img]][myget-carter-cache-redis] |
 
 ## Installation
 
@@ -100,10 +101,27 @@ Also a custom Key can be easily defined by implementing the ICacheKey interface:
     }
 ```
 
+### Redis store
+
+A redis store which includes the dependency on [StackExchange.Redis](https://www.nuget.org/packages/StackExchange.Redis/) and can be used as a replacement of the memory store.
+
+Firstly, install the library using .net cli `dotnet add package Carter.Cache.Redis` or using Package Manager `Install-Package Carter.Cache.Redis`. The usage requires the following configurations on the Startup.cs file:
+
+```csharp
+    public void ConfigureServices(IServiceCollection services)
+        {
+            //...
+
+            services.AddSingleton<ICacheStore>(new RedisStore("127.0.0.1:6379"));
+            services.AddSingleton(provider => new CachingOption() { Store = provider.GetRequiredService<ICacheStore>() });
+        }
+```
+
 ### Memcached store
 
-A memcached store which includes the dependency on [EnyimMemcachedCore](https://www.nuget.org/packages/EnyimMemcachedCore/) and can be plugged in to replace the in memory store.
-The usage requires the following reconfigurations on the ConfigureServices method of Startup:
+Alternatively, a memcached store can also be included as an alternatively, using a dependency on the library [EnyimMemcachedCore](https://www.nuget.org/packages/EnyimMemcachedCore/).
+
+To install, using .net cli `dotnet add package Carter.Cache.Memcached` or using Package Manager `Install-Package Carter.Cache.Memcached`. The usage requires the following reconfigurations on the ConfigureServices method of Startup:
 
 ```csharp
     public void ConfigureServices(IServiceCollection services)
@@ -137,7 +155,7 @@ The usage requires the following reconfigurations on the ConfigureServices metho
         }
 ```
 
-For more information check the [sample](/samples/Sample.Carter.Cache.Memcached.Application) included.
+For more information check the [samples](/samples) included.
 
 [carter-cache-img]: https://img.shields.io/nuget/v/Carter.Cache.svg
 [carter-cache]: https://www.nuget.org/packages/Carter.Cache
@@ -147,6 +165,10 @@ For more information check the [sample](/samples/Sample.Carter.Cache.Memcached.A
 [carter-cache-memcached]: https://www.nuget.org/packages/Carter.Cache.Memcached
 [myget-carter-cache-memcached-img]: https://img.shields.io/myget/carter-cache/v/Carter.Cache.Memcached.svg
 [myget-carter-cache-memcached]: https://www.myget.org/feed/carter-cache/package/nuget/Carter.Cache.Memcached
+[carter-cache-redis-img]: https://img.shields.io/nuget/v/Carter.Cache.Redis.svg
+[carter-cache-redis]: https://www.nuget.org/packages/Carter.Cache.Redis
+[myget-carter-cache-redis-img]: https://img.shields.io/myget/carter-cache/v/Carter.Cache.Redis.svg
+[myget-carter-cache-redis]: https://www.myget.org/feed/carter-cache/package/nuget/Carter.Cache.Redis
 [mit-img]: http://img.shields.io/badge/License-MIT-blue.svg
 [mit]: https://github.com/Jaxelr/Carter.Cache/blob/master/LICENSE
 [carter]: https://github.com/CarterCommunity/Carter
