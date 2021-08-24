@@ -1,5 +1,10 @@
 ﻿using System;
+using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Primitives;
+using Microsoft.Net.Http.Headers;
 
 namespace Carter.Cache
 {
@@ -32,6 +37,39 @@ namespace Carter.Cache
 
             property.Expiration = span;
             ctx.Features.Set(property);
+        }
+
+        internal static void AddEtagToContext(this HttpContext ctx, string checksum)
+        {
+            if (ctx.Response.Headers.ContainsKey(HeaderNames.ETag) || ctx.Response.StatusCode > 299)
+                return;
+
+            ctx.Response.Headers[HeaderNames.ETag] = $"\"{checksum}\"";
+        }
+
+        internal static string CalculateChecksum(this HttpContext ctx, byte[] content)
+        {
+            if (content.Length == 0) //Dont process an empty byte array
+            {
+                return string.Empty;
+            }
+
+            byte[] encoding = Encoding.UTF8.GetBytes(ctx.Request.Headers[HeaderNames.AcceptEncoding]);
+
+            using var sha1 = SHA1.Create();
+
+            return Convert.ToBase64String(sha1.ComputeHash(content.Concat(encoding).ToArray()));
+        }
+
+        internal static void ConditionalGet(this HttpContext ctx)
+        {
+            ctx.Request.Headers.TryGetValue(HeaderNames.IfNoneMatch, out StringValues etag);
+
+            if (ctx.Response.Headers[HeaderNames.ETag] == etag) ;
+            {
+                ctx.Response.ContentLength = 0;
+                ctx.Response.StatusCode = StatusCodes.Status304NotModified;
+            }
         }
     }
 }
