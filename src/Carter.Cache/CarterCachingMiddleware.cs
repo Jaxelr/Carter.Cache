@@ -55,6 +55,8 @@ namespace Carter.Cache
 
                 if (options.ValidResponse(ctx))
                 {
+                    string checksum = ctx.CalculateChecksum(bytes);
+                    ctx.AddEtagToContext(checksum);
                     await service.SetCache(ctx, new CachedResponse(ctx, bytes), options);
                 }
             }
