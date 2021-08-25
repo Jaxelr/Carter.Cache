@@ -46,17 +46,18 @@ namespace Carter.Cache
 
                 byte[] bytes = memoryStream.ToArray();
 
-                if (memoryStream.Length > 0)
-                {
-                    memoryStream.Seek(0, SeekOrigin.Begin);
-
-                    await memoryStream.CopyToAsync(originalStream);
-                }
-
                 if (options.ValidResponse(ctx))
                 {
-                    //string checksum = ctx.CalculateChecksum(bytes);
-                    //ctx.AddEtagToContext(checksum);
+                    string checksum = ctx.CalculateChecksum(bytes);
+                    ctx.AddEtagToContext(checksum);
+
+                    if (memoryStream.Length > 0)
+                    {
+                        memoryStream.Seek(0, SeekOrigin.Begin);
+
+                        await memoryStream.CopyToAsync(originalStream);
+                    }
+
                     await service.SetCache(ctx, new CachedResponse(ctx, bytes), options);
                 }
             }
