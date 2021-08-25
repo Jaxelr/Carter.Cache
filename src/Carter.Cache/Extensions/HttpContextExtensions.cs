@@ -54,7 +54,16 @@ namespace Carter.Cache
                 return string.Empty;
             }
 
-            byte[] encoding = Encoding.UTF8.GetBytes(ctx.Request.Headers[HeaderNames.AcceptEncoding]);
+            byte[] encoding;
+
+            if (ctx.Request.Headers.ContainsKey(HeaderNames.AcceptEncoding))
+            {
+                encoding = Encoding.UTF8.GetBytes(ctx.Request.Headers[HeaderNames.AcceptEncoding]);
+            }
+            else
+            {
+                encoding = new byte[0];
+            }
 
             using var sha1 = SHA1.Create();
 
