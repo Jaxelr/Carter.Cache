@@ -80,7 +80,7 @@ namespace Carter.Cache.Tests.Unit.Stores
             var client = GetMemcachedClient();
             var cache = new MemcachedStore(client);
             var expiration = new TimeSpan(0, 1, 0);
-            const string key = "-Random-Key-";
+            const string key = "Random-Key-1";
 
             var response = A.Fake<FakeCachedResponse>();
 
@@ -99,7 +99,7 @@ namespace Carter.Cache.Tests.Unit.Stores
             var client = GetMemcachedClient();
             var cache = new MemcachedStore(client);
             var expiration = new TimeSpan(0, 1, 0);
-            const string key = "-Random-Key-3";
+            const string key = "Random-Key-3";
 
             var response = A.Fake<FakeCachedResponse>();
 
@@ -120,7 +120,7 @@ namespace Carter.Cache.Tests.Unit.Stores
             var client = GetMemcachedClient();
             var cache = new MemcachedStore(client);
             var expiration = new TimeSpan(0, 1, 0);
-            const string key = "Key";
+            const string key = "Random-Key-4";
             const string contentType = "application/json";
             const int statusCode = 200;
 
@@ -151,7 +151,7 @@ namespace Carter.Cache.Tests.Unit.Stores
             var client = GetMemcachedClient();
             var cache = new MemcachedStore(client);
             var expiration = new TimeSpan(0, 0, 0);
-            const string key = "-Random-Key-4";
+            const string key = "-Random-Key-5";
 
             var response = A.Fake<FakeCachedResponse>();
 
