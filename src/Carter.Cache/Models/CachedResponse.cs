@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Net.Http.Headers;
 
 namespace Carter.Cache
 {
@@ -36,6 +37,11 @@ namespace Carter.Cache
             ContentType = response.ContentType;
             StatusCode = response.StatusCode;
             Expiry = property.Expiration;
+
+            if (ctx.Response.Headers.ContainsKey(HeaderNames.ETag))
+            {
+                Headers.Add(HeaderNames.ETag, ctx.Response.Headers[HeaderNames.ETag]);
+            }
 
             Headers.Add(property.CustomHeader, property.Expiration.ToString());
         }
