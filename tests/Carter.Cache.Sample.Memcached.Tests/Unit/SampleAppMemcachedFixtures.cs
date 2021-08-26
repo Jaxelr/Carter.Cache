@@ -70,6 +70,25 @@ namespace Carter.Cache.Sample.Memcached.Tests.Unit
         }
 
         [Fact]
+        public async Task Hello_module_get_hello_world_from_cache_with_etag()
+        {
+            //Arrange
+            const string name = "myMemcachedUser7";
+            const string etag = "Etag";
+
+            //Act
+            var res1 = await client.GetAsync($"/hello/{name}");
+            var res2 = await client.GetAsync($"/hello/{name}");
+
+            //Assert
+            Assert.Equal(res2.StatusCode, res1.StatusCode);
+            Assert.Equal(await res1.Content.ReadAsStringAsync(), await res2.Content.ReadAsStringAsync());
+            Assert.True(res1.Headers.Contains(etag));
+            Assert.True(res2.Headers.Contains(etag));
+            Assert.True(res2.Headers.Contains("X-Carter-Cache-Expiration"));
+        }
+
+        [Fact]
         public async Task Hello_module_get_hello_world_from_cache_expired()
         {
             //Arrange

@@ -84,6 +84,7 @@ namespace Carter.Cache.Sample.Tests
             Assert.Equal(await res1.Content.ReadAsStringAsync(), await res2.Content.ReadAsStringAsync());
             Assert.True(res1.Headers.Contains(etag));
             Assert.True(res2.Headers.Contains(etag));
+            Assert.True(res2.Headers.Contains("X-Carter-Cache-Expiration"));
         }
 
         [Fact]
