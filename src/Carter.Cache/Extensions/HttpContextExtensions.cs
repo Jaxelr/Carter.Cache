@@ -54,27 +54,16 @@ namespace Carter.Cache
                 return string.Empty;
             }
 
-            byte[] encoding;
-
-            if (ctx.Request.Headers.ContainsKey(HeaderNames.AcceptEncoding))
-            {
-                encoding = Encoding.UTF8.GetBytes(ctx.Request.Headers[HeaderNames.AcceptEncoding]);
-            }
-            else
-            {
-                encoding = new byte[0];
-            }
-
             using var sha1 = SHA1.Create();
 
-            return Convert.ToBase64String(sha1.ComputeHash(content.Concat(encoding).ToArray()));
+            return Convert.ToBase64String(sha1.ComputeHash(content.ToArray()));
         }
 
         internal static void ConditionalGet(this HttpContext ctx)
         {
             ctx.Request.Headers.TryGetValue(HeaderNames.IfNoneMatch, out StringValues etag);
 
-            if (ctx.Response.Headers[HeaderNames.ETag] == etag) ;
+            if (ctx.Response.Headers[HeaderNames.ETag] == etag)
             {
                 ctx.Response.ContentLength = 0;
                 ctx.Response.StatusCode = StatusCodes.Status304NotModified;
