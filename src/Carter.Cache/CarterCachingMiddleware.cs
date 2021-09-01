@@ -18,7 +18,7 @@ namespace Carter.Cache
         {
             if (options.ValidRequest(ctx))
             {
-                bool cacheHit = await service.CheckCache(ctx, options);
+                bool cacheHit = await CheckCache(ctx, options);
 
                 if (!cacheHit)
                 {
@@ -65,6 +65,16 @@ namespace Carter.Cache
             {
                 response.Body = originalStream;
             }
+        }
+
+        private async Task<bool> CheckCache(HttpContext ctx, CachingOption options)
+        {
+            if (ctx.ConditionalGet())
+            {
+                return true;
+            }
+
+            return await service.CheckCache(ctx, options);
         }
     }
 }
