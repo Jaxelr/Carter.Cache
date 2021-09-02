@@ -2,7 +2,6 @@
 using System.Linq;
 using System.Security.Cryptography;
 using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Primitives;
 using Microsoft.Net.Http.Headers;
 
 namespace Carter.Cache
@@ -55,21 +54,6 @@ namespace Carter.Cache
 
             using var sha1 = SHA1.Create();
             return Convert.ToBase64String(sha1.ComputeHash(content.ToArray()));
-        }
-
-        internal static bool ConditionalGet(this HttpContext ctx)
-        {
-            ctx.Request.Headers.TryGetValue(HeaderNames.IfNoneMatch, out StringValues etag);
-
-            if (!string.IsNullOrWhiteSpace(etag) && ctx.Response.Headers[HeaderNames.ETag] == etag)
-            {
-                ctx.Response.ContentLength = 0;
-                ctx.Response.StatusCode = StatusCodes.Status304NotModified;
-
-                return true;
-            }
-
-            return false;
         }
     }
 }

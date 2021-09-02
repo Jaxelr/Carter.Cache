@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Primitives;
 using Microsoft.Net.Http.Headers;
 
 namespace Carter.Cache
@@ -46,20 +47,29 @@ namespace Carter.Cache
             Headers.Add(property.CustomHeader, property.Expiration.ToString());
         }
 
-        public async Task MapToContext(HttpContext context)
+        public async Task MapToContext(HttpContext ctx)
         {
             foreach (string headerKey in Headers.Keys)
             {
-                if (!context.Response.Headers.ContainsKey(headerKey.ToLowerInvariant()))
+                if (!ctx.Response.Headers.ContainsKey(headerKey.ToLowerInvariant()))
                 {
-                    context.Response.Headers[headerKey] = Headers[headerKey];
+                    ctx.Response.Headers[headerKey] = Headers[headerKey];
                 }
             }
 
-            context.Response.ContentType = ContentType;
-            context.Response.StatusCode = StatusCode;
+            ctx.Request.Headers.TryGetValue(HeaderNames.IfNoneMatch, out StringValues etag);
 
-            await context.Response.Body.WriteAsync(Body, 0, Body.Length);
+            if (!string.IsNullOrWhiteSpace(etag) && ctx.Response.Headers[HeaderNames.ETag] == etag)
+            {
+                ctx.Response.ContentLength = 0;
+                ctx.Response.StatusCode = StatusCodes.Status304NotModified;
+            }
+            else
+            {
+                ctx.Response.ContentType = ContentType;
+                ctx.Response.StatusCode = StatusCode;
+                await ctx.Response.Body.WriteAsync(Body, 0, Body.Length);
+            }
         }
     }
 }
