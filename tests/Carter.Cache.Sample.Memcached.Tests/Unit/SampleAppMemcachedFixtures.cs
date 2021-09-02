@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Net;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore;
@@ -18,6 +19,7 @@ namespace Carter.Cache.Sample.Memcached.Tests.Unit
     {
         private readonly HttpClient client;
         private readonly TestServer server;
+        private const string DefaultCacheHeader = "X-Carter-Cache-Expiration";
 
         public SampleAppMemcachedFixtures()
         {
@@ -66,26 +68,7 @@ namespace Carter.Cache.Sample.Memcached.Tests.Unit
             //Assert
             Assert.Equal(res2.StatusCode, res1.StatusCode);
             Assert.Equal(await res1.Content.ReadAsStringAsync(), await res2.Content.ReadAsStringAsync());
-            Assert.True(res2.Headers.Contains("X-Carter-Cache-Expiration"));
-        }
-
-        [Fact]
-        public async Task Hello_module_get_hello_world_from_cache_with_etag()
-        {
-            //Arrange
-            const string name = "myMemcachedUser7";
-            const string etag = "Etag";
-
-            //Act
-            var res1 = await client.GetAsync($"/hello/{name}");
-            var res2 = await client.GetAsync($"/hello/{name}");
-
-            //Assert
-            Assert.Equal(res2.StatusCode, res1.StatusCode);
-            Assert.Equal(await res1.Content.ReadAsStringAsync(), await res2.Content.ReadAsStringAsync());
-            Assert.True(res1.Headers.Contains(etag));
-            Assert.True(res2.Headers.Contains(etag));
-            Assert.True(res2.Headers.Contains("X-Carter-Cache-Expiration"));
+            Assert.True(res2.Headers.Contains(DefaultCacheHeader));
         }
 
         [Fact]
@@ -102,7 +85,7 @@ namespace Carter.Cache.Sample.Memcached.Tests.Unit
             //Assert
             Assert.Equal(res2.StatusCode, res1.StatusCode);
             Assert.NotEqual(await res1.Content.ReadAsStringAsync(), await res2.Content.ReadAsStringAsync());
-            Assert.False(res2.Headers.Contains("X-Carter-Cache-Expiration"));
+            Assert.False(res2.Headers.Contains(DefaultCacheHeader));
         }
 
         [Fact]
@@ -132,7 +115,7 @@ namespace Carter.Cache.Sample.Memcached.Tests.Unit
             //Assert
             Assert.Equal(res2.StatusCode, res1.StatusCode);
             Assert.Equal(await res1.Content.ReadAsStringAsync(), await res2.Content.ReadAsStringAsync());
-            Assert.True(res2.Headers.Contains("X-Carter-Cache-Expiration"));
+            Assert.True(res2.Headers.Contains(DefaultCacheHeader));
         }
 
         [Fact]
@@ -149,7 +132,44 @@ namespace Carter.Cache.Sample.Memcached.Tests.Unit
             //Assert
             Assert.Equal(res2.StatusCode, res1.StatusCode);
             Assert.NotEqual(await res1.Content.ReadAsStringAsync(), await res2.Content.ReadAsStringAsync());
-            Assert.False(res2.Headers.Contains("X-Carter-Cache-Expiration"));
+            Assert.False(res2.Headers.Contains(DefaultCacheHeader));
+        }
+
+        [Fact]
+        public async Task Hello_module_get_hello_world_from_cache_with_etag()
+        {
+            //Arrange
+            const string name = "myMemcachedUser7";
+            const string etag = "Etag";
+
+            //Act
+            var res1 = await client.GetAsync($"/hello/{name}");
+            var res2 = await client.GetAsync($"/hello/{name}");
+
+            //Assert
+            Assert.Equal(res2.StatusCode, res1.StatusCode);
+            Assert.Equal(await res1.Content.ReadAsStringAsync(), await res2.Content.ReadAsStringAsync());
+            Assert.True(res1.Headers.Contains(etag));
+            Assert.True(res2.Headers.Contains(etag));
+            Assert.True(res2.Headers.Contains(DefaultCacheHeader));
+        }
+
+        [Fact]
+        public async Task Hello_module_get_hello_world_from_cache_with_etag_not_modified()
+        {
+            //Arrange
+            const string name = "myMemcachedUser7";
+
+            //Act
+            var res1 = await client.GetAsync($"/hello/{name}");
+            var etag = new EntityTagHeaderValue(res1.Headers.ETag.Tag);
+
+            client.DefaultRequestHeaders.IfNoneMatch.Add(etag);
+            var res2 = await client.GetAsync($"/hello/{name}");
+
+            //Assert
+            Assert.Equal(HttpStatusCode.OK, res1.StatusCode);
+            Assert.Equal(HttpStatusCode.NotModified, res2.StatusCode);
         }
     }
 }
