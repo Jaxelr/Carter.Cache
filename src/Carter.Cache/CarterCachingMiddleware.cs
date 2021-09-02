@@ -67,14 +67,6 @@ namespace Carter.Cache
             }
         }
 
-        private async Task<bool> CheckCache(HttpContext ctx, CachingOption options)
-        {
-            if (ctx.ConditionalGet())
-            {
-                return true;
-            }
-
-            return await service.CheckCache(ctx, options);
-        }
+        private async Task<bool> CheckCache(HttpContext ctx, CachingOption options) => await service.CheckCache(ctx, options);
     }
 }
