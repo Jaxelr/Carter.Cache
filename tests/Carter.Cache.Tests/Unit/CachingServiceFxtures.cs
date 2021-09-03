@@ -26,6 +26,23 @@ namespace Carter.Cache.Tests.Unit
         }
 
         [Fact]
+        public async Task Service_check_cache_with_null_request()
+        {
+            //Arrange
+            var ctx = A.Fake<HttpContext>();
+            var option = A.Fake<CachingOption>();
+            var service = A.Fake<CarterCachingService>();
+
+            A.CallTo(() => ctx.Request).Returns(null);
+
+            //Act
+            bool cacheHit = await service.CheckCache(ctx, option);
+
+            //Assert
+            Assert.False(cacheHit);
+        }
+
+        [Fact]
         public async Task Service_check_cache_with_request()
         {
             //Arrange
