@@ -3,6 +3,7 @@ using System.Text;
 using System.Threading.Tasks;
 using FakeItEasy;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Net.Http.Headers;
 using Xunit;
 
 namespace Carter.Cache.Tests.Unit.Models
@@ -138,6 +139,60 @@ namespace Carter.Cache.Tests.Unit.Models
 
             //Assert
             Assert.Equal(cachedResponse.ContentType, response.ContentType);
+        }
+
+        [Fact]
+        public async Task Http_context_maps_etag()
+        {
+            //Arrange
+            const string fakeEtag = "123456";
+            var context = A.Fake<HttpContext>();
+            var response = A.Fake<HttpResponse>();
+            var request = A.Fake<HttpRequest>();
+
+            A.CallTo(() => request.Headers.ContainsKey(HeaderNames.ETag)).Returns(true);
+            A.CallTo(() => request.Headers[HeaderNames.ETag]).Returns(fakeEtag);
+
+            A.CallTo(() => response.Headers.ContainsKey(HeaderNames.ETag)).Returns(true);
+            A.CallTo(() => response.Headers[HeaderNames.ETag]).Returns(fakeEtag);
+            A.CallTo(() => context.Request).Returns(request);
+            A.CallTo(() => context.Response).Returns(response);
+
+            //Act
+            var cachedResponse = new CachedResponse(context, Array.Empty<byte>());
+            await cachedResponse.MapToContext(context);
+
+            //Assert
+            Assert.Equal(cachedResponse.Headers[HeaderNames.ETag], response.Headers[HeaderNames.ETag]);
+        }
+
+
+        [Fact]
+        public async Task Http_context_maps_if_none_match()
+        {
+            //Arrange
+            const string fakeEtag = "84de625db71b56d480d47bdc32377d23144b8c65";
+            var fakeIfNoneMatch = new Microsoft.Extensions.Primitives.StringValues(fakeEtag);
+            var context = A.Fake<HttpContext>();
+            var response = A.Fake<HttpResponse>();
+            var request = A.Fake<HttpRequest>();
+
+            A.CallTo(() => request.Headers.TryGetValue(HeaderNames.IfNoneMatch, out fakeIfNoneMatch))
+                .Returns(true);
+            A.CallTo(() => context.Request).Returns(request);
+
+            A.CallTo(() => response.Headers.ContainsKey(HeaderNames.ETag)).Returns(true);
+            A.CallTo(() => response.Headers[HeaderNames.ETag]).Returns(fakeEtag);
+            A.CallTo(() => context.Response).Returns(response);
+
+            //Act
+            var cachedResponse = new CachedResponse(context, Array.Empty<byte>());
+            await cachedResponse.MapToContext(context);
+
+            //Assert
+            Assert.Equal(cachedResponse.Headers[HeaderNames.ETag], response.Headers[HeaderNames.ETag]);
+            Assert.Equal(StatusCodes.Status304NotModified, response.StatusCode);
+            Assert.Equal(0, response.ContentLength);
         }
     }
 }
