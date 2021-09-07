@@ -2,7 +2,7 @@
   <PropertyGroup>
     <PackageId>$(AssemblyName)</PackageId>
     <Authors>Jaxel Rojas</Authors>
-    <Version>0.0.5</Version>
+    <Version>0.0.6</Version>
     <Copyright>Copyright 2021</Copyright>
     <LangVersion>9.0</LangVersion>
     <TargetFramework>netstandard2.0</TargetFramework>
