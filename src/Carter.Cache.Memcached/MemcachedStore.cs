@@ -5,11 +5,13 @@ using Enyim.Caching.Memcached;
 
 namespace Carter.Cache.Memcached
 {
-    public class MemcachedStore : ICacheStore
+    public class MemcachedStore : ICacheStore, IDisposable
     {
         private readonly IMemcachedClient client;
 
         public MemcachedStore(IMemcachedClient client) => this.client = client;
+
+        public void Dispose() => client.Dispose();
 
         /// <summary>
         /// Remove the element with the key provided.
