@@ -5,28 +5,31 @@ using StackExchange.Redis;
 
 namespace Carter.Cache.Redis
 {
-    public class RedisStore : ICacheStore
+    public class RedisStore : ICacheStore, IDisposable
     {
         private readonly ConnectionMultiplexer redis;
-        private readonly IDatabase cache;
 
         public RedisStore(ConfigurationOptions options)
         {
             redis = ConnectionMultiplexer.Connect(options);
-            cache = redis.GetDatabase();
         }
 
         public RedisStore(string configuration)
         {
             redis = ConnectionMultiplexer.Connect(configuration);
-            cache = redis.GetDatabase();
         }
+
+        public void Dispose() => redis.Dispose();
 
         /// <summary>
         /// Remove the element with the key provided.
         /// </summary>
         /// <param name="key"></param>
-        public void Remove(string key) => cache.KeyDelete(key);
+        public void Remove(string key)
+        {
+            var cache = redis.GetDatabase();
+            cache.KeyDelete(key);
+        }
 
         /// <summary>
         /// Store the CachedResponse object and assign the key provided for the duration included.
@@ -43,6 +46,8 @@ namespace Carter.Cache.Redis
 
             if (expiration.TotalSeconds > 0)
             {
+                var cache = redis.GetDatabase();
+
                 bool ack = cache.StringSet(key, JsonConvert.SerializeObject(response), expiry: expiration);
 
                 if (!ack)
@@ -66,6 +71,8 @@ namespace Carter.Cache.Redis
             {
                 return false;
             }
+
+            var cache = redis.GetDatabase();
 
             var result = cache.StringGet(key);
 
