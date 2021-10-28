@@ -2,7 +2,7 @@
 
 namespace Carter.Cache.Stores
 {
-    public interface ICacheStore
+    public interface ICacheStore : IDisposable
     {
         bool TryGetValue(string key, out CachedResponse cachedResponse);
 

@@ -87,5 +87,7 @@ namespace Carter.Cache.Stores
         /// <param name="reason"></param>
         /// <param name="state"></param>
         private void Eviction(object key, object value, EvictionReason reason, object state) => size--;
+
+        public void Dispose() => cache.Dispose();
     }
 }
