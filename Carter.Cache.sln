@@ -28,6 +28,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{22BF799C-B98C-40FC-A701-92B892E0A332}"
 	ProjectSection(SolutionItems) = preProject
 		.github\Contributing.md = .github\Contributing.md
+		.github\dependabot.yml = .github\dependabot.yml
 		.github\Pull_request_template.md = .github\Pull_request_template.md
 		.github\stale.yml = .github\stale.yml
 	EndProjectSection
