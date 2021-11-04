@@ -9,7 +9,7 @@ assignees: Jaxelr
 
 # Describe the feature
 
-<!-- A description of what the feature requested -->
+<!-- A description of what the requested feature should be -->
 
 ## Is this feature related to a problem, describe
 
@@ -17,4 +17,4 @@ assignees: Jaxelr
 
 ## Additional context
 
-<!-- Add any other context or screenshots about the feature request here. -->
+<!-- Add any other context or screenshots about the feature request here -->
