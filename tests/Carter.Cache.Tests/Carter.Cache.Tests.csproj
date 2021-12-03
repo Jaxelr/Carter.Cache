@@ -13,7 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="altcover" Version="8.2.828" />
+    <PackageReference Include="altcover" Version="8.2.831" />
     <PackageReference Include="FakeItEasy" Version="7.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Http" Version="2.2.2" />
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="6.0.0" />
