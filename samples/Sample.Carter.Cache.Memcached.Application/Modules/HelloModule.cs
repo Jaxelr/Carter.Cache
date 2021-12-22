@@ -1,24 +1,27 @@
 ﻿using System;
 using Carter;
 using Carter.Cache;
-using Carter.Request;
+using Carter.OpenApi;
 using Carter.Response;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Routing;
 using Sample.Carter.Cache.Memcached.Application.Entities;
 using Sample.Carter.Cache.Memcached.Application.Repository;
 
 namespace Sample.Carter.Cache.Memcached.Application.Modules
 {
-    public class HelloModule : CarterModule
+    public class HelloModule : ICarterModule
     {
-        public HelloModule(IHelloRepository repository)
+        private const string UserTag = "Hello";
+
+        public void AddRoutes(IEndpointRouteBuilder app)
         {
-            Get<GetHello>("/Hello/{name}", async (ctx) =>
+            app.MapGet("/Hello/{name}", async (string name, IHelloRepository repository, HttpContext ctx) =>
             {
                 try
                 {
                     ctx.AsCacheable(10);
-
-                    string name = ctx.Request.RouteValues.As<string>("name");
 
                     string response = repository.SayHello(name);
 
@@ -36,33 +39,43 @@ namespace Sample.Carter.Cache.Memcached.Application.Modules
                     ctx.Response.StatusCode = 500;
                     await ctx.Response.Negotiate(new FailedResponse(ex));
                 }
-            });
+            })
+            .Produces<string>(200)
+            .Produces(204)
+            .Produces<FailedResponse>(500)
+            .WithName("Hello")
+            .WithTags(UserTag)
+            .IncludeInOpenApi();
 
-            Get<GetHello>("/Hello2/{name}", async (req, res) =>
+            app.MapGet("/Hello2/{name}", async (string name, IHelloRepository repository, HttpContext ctx) =>
             {
                 try
                 {
-                    req.HttpContext.AsCacheable(15);
-
-                    string name = req.RouteValues.As<string>("name");
+                    ctx.AsCacheable(15);
 
                     string response = repository.SayHello(name);
 
                     if (response == null)
                     {
-                        res.StatusCode = 204;
+                        ctx.Response.StatusCode = 204;
                         return;
                     }
 
-                    res.StatusCode = 200;
-                    await res.Negotiate(response);
+                    ctx.Response.StatusCode = 200;
+                    await ctx.Response.Negotiate(response);
                 }
                 catch (Exception ex)
                 {
-                    res.StatusCode = 500;
-                    await res.Negotiate(new FailedResponse(ex));
+                    ctx.Response.StatusCode = 500;
+                    await ctx.Response.Negotiate(new FailedResponse(ex));
                 }
-            });
+            })
+            .Produces<string>(200)
+            .Produces(204)
+            .Produces<FailedResponse>(500)
+            .WithName("Hello")
+            .WithTags(UserTag)
+            .IncludeInOpenApi();
         }
     }
 }
