@@ -4,12 +4,9 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Hosting.Server.Features;
-using Microsoft.AspNetCore.Http.Features;
-using Microsoft.AspNetCore.TestHost;
-using Sample.Carter.Cache.Memcached.Application;
+using Carter.Cache.Sample.Memcached.Tests.Mocks;
+using Microsoft.AspNetCore.Mvc.Testing;
+using Microsoft.Extensions.DependencyInjection;
 using Sample.Carter.Cache.Memcached.Application.Repository;
 using Xunit;
 
@@ -18,27 +15,19 @@ namespace Carter.Cache.Sample.Memcached.Tests.Unit
     public class SampleAppMemcachedFixtures : IDisposable
     {
         private readonly HttpClient client;
-        private readonly TestServer server;
         private const string DefaultCacheHeader = "X-Carter-Cache-Expiration";
 
         public SampleAppMemcachedFixtures()
         {
-            var featureCollection = new FeatureCollection();
-            featureCollection.Set<IServerAddressesFeature>(new ServerAddressesFeature());
-            featureCollection.Set<IHelloRepository>(new Mocks.MockHelloRepository());
-
-            server = new TestServer(WebHost.CreateDefaultBuilder()
-                    .UseStartup<Startup>(), featureCollection
-            );
+            var server = new WebApplicationFactory<Program>()
+                    .WithWebHostBuilder(builder => builder.ConfigureServices(services => services.AddSingleton<IHelloRepository, MockHelloRepository>()));
 
             client = server.CreateClient();
         }
 
         public void Dispose()
         {
-            server?.Dispose();
-            client?.Dispose();
-            GC.SuppressFinalize(this);
+            client?.Dispose(); GC.SuppressFinalize(this);
         }
 
         [Fact]
