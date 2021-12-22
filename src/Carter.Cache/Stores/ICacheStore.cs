@@ -1,13 +1,12 @@
 ﻿using System;
 
-namespace Carter.Cache.Stores
+namespace Carter.Cache.Stores;
+
+public interface ICacheStore : IDisposable
 {
-    public interface ICacheStore : IDisposable
-    {
-        bool TryGetValue(string key, out CachedResponse cachedResponse);
+    bool TryGetValue(string key, out CachedResponse cachedResponse);
 
-        void Set(string key, CachedResponse response, TimeSpan expiration);
+    void Set(string key, CachedResponse response, TimeSpan expiration);
 
-        void Remove(string key);
-    }
+    void Remove(string key);
 }

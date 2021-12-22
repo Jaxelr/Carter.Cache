@@ -4,7 +4,7 @@
     <Authors>Jaxel Rojas</Authors>
     <Version>0.0.7</Version>
     <Copyright>Copyright 2021</Copyright>
-    <LangVersion>9.0</LangVersion>
+    <LangVersion>latest</LangVersion>
     <TargetFramework>netstandard2.0</TargetFramework>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <RepositoryUrl>https://github.com/Jaxelr/Carter.Cache.git</RepositoryUrl>
