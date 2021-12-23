@@ -73,7 +73,7 @@ namespace Sample.Carter.Cache.Application.Modules
             .Produces<string>(200)
             .Produces(204)
             .Produces<FailedResponse>(500)
-            .WithName("Hello")
+            .WithName("Hello2")
             .WithTags(UserTag)
             .IncludeInOpenApi();
         }
