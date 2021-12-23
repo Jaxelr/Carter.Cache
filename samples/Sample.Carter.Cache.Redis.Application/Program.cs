@@ -1,3 +1,4 @@
+using System;
 using Carter;
 using Carter.Cache;
 using Carter.Cache.Redis;
@@ -41,13 +42,17 @@ builder.Services.AddLogging(opt =>
     opt.AddConfiguration(builder.Configuration.GetSection("Logging"));
 });
 
-builder.Services.AddCarter();
-
 //Dependencies
+builder.Services.AddSingleton(settings); //AppSettings
 builder.Services.AddSingleton<ICacheStore>(new RedisStore(REDIS_LOCALHOST));
 builder.Services.AddSingleton(provider => new CachingOption() { Store = provider.GetRequiredService<ICacheStore>() });
 
 builder.Services.AddSingleton<IHelloRepository, HelloRepository>();
+
+IServiceProvider serviceProvider = builder.Services.BuildServiceProvider();
+
+builder.Services.AddCarterCaching(serviceProvider.GetRequiredService<CachingOption>());
+builder.Services.AddCarter();
 
 //HealthChecks
 builder.Services.AddHealthChecks();
@@ -90,6 +95,7 @@ app.UseRouting();
 app.UseSwagger();
 app.UseSwaggerUI();
 
+app.UseCarterCaching();
 app.UseEndpoints(builder => builder.MapCarter());
 
 app.Run();

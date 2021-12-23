@@ -1,4 +1,5 @@
 using Carter;
+using Carter.Cache;
 using Carter.OpenApi;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
@@ -38,9 +39,11 @@ builder.Services.AddLogging(opt =>
     opt.AddConfiguration(builder.Configuration.GetSection("Logging"));
 });
 
+builder.Services.AddCarterCaching(new CachingOption(2048));
 builder.Services.AddCarter();
 
 //Dependencies
+builder.Services.AddSingleton(settings); //AppSettings
 builder.Services.AddSingleton<IHelloRepository, HelloRepository>();
 
 //HealthChecks
@@ -84,6 +87,7 @@ app.UseRouting();
 app.UseSwagger();
 app.UseSwaggerUI();
 
+app.UseCarterCaching();
 app.UseEndpoints(builder => builder.MapCarter());
 
 app.Run();

@@ -1,3 +1,4 @@
+using System;
 using Carter;
 using Carter.Cache;
 using Carter.Cache.Memcached;
@@ -44,14 +45,17 @@ builder.Services.AddLogging(opt =>
     opt.AddConfiguration(builder.Configuration.GetSection("Logging"));
 });
 
-builder.Services.AddCarter();
-
 //Dependencies
+builder.Services.AddSingleton(settings); //AppSettings
 builder.Services.AddEnyimMemcached(options => options.AddServer(LOCALHOST, PORT));
 builder.Services.AddSingleton<ICacheStore>(provider => new MemcachedStore(provider.GetRequiredService<IMemcachedClient>()));
 builder.Services.AddSingleton(provider => new CachingOption() { Store = provider.GetRequiredService<ICacheStore>() });
-
 builder.Services.AddSingleton<IHelloRepository, HelloRepository>();
+
+IServiceProvider serviceProvider = builder.Services.BuildServiceProvider();
+
+builder.Services.AddCarterCaching(serviceProvider.GetRequiredService<CachingOption>());
+builder.Services.AddCarter();
 
 //HealthChecks
 builder.Services.AddHealthChecks();
@@ -94,6 +98,7 @@ app.UseRouting();
 app.UseSwagger();
 app.UseSwaggerUI();
 
+app.UseCarterCaching();
 app.UseEndpoints(builder => builder.MapCarter());
 
 app.Run();
