@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Description>A caching library helper for your Carter API</Description>
     <PackageTags>carter cache</PackageTags>
-    <PackageReleaseNotes>Initial version.</PackageReleaseNotes>
+    <PackageReleaseNotes>Release targeting dotnet 6</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>

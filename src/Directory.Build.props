@@ -2,8 +2,8 @@
   <PropertyGroup>
     <PackageId>$(AssemblyName)</PackageId>
     <Authors>Jaxel Rojas</Authors>
-    <Version>0.0.7</Version>
-    <Copyright>Copyright 2021</Copyright>
+    <Version>0.0.8</Version>
+    <Copyright>Copyright 2022</Copyright>
     <LangVersion>latest</LangVersion>
     <TargetFramework>netstandard2.0</TargetFramework>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
