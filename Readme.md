@@ -32,44 +32,47 @@ PM> Install-Package Carter
 
 ## Sample usage
 
-1. Add carter caching to your Startup.cs:
+1. Add carter caching to your Program.cs:
 
 ```csharp
-using Carter.Cache;
+var builder = WebApplication.CreateBuilder(args);
 
-// The rest of your Startup.cs definition...
+//The rest of your Program.cs configuration ....
 
-    public void ConfigureServices(IServiceCollection services)
-        {
-            //It is recommended to always provide a caching max size limit
-            services.AddCarterCaching(new CachingOption(2048));
-            services.AddCarter();
-        }
+//It is recommended to always provide a caching max size limit
+builder.Services.AddCarterCaching(new CachingOption(2048));
+builder.Services.AddCarter();
 ```
 
 1. Define a Configuration usage
 
 ```csharp
-    public void Configure(IApplicationBuilder app, AppSettings appSettings)
-    {
-        app.UseCarterCaching();
-        app.UseEndpoints(builder => builder.MapCarter());
-    }
+var app = builder.Build();
+
+//The rest of your configuration usage ....
+
+app.UseCarterCaching();
+app.UseEndpoints(builder => builder.MapCarter());
+
+app.Run();
+
 ```
+
+
 
 1. Add the Cacheable clause to your module:
 
 ```csharp
-    public class HomeModule : CarterModule
+    public class HomeModule : ICarterModule
     {
-        public HomeModule()
+        public void AddRoutes(IEndpointRouteBuilder app)
         {
-            Get("/", (req, res) =>
+            app.MapGet("/", (HttpContext ctx) =>
             {
-                req.AsCacheable(10); //In Seconds
+                ctx.AsCacheable(10); //In Seconds
 
-                res.StatusCode = 200;
-                return res.WriteAsync("Hello world");
+                ctx.Response.StatusCode = 200;
+                return ctx.Response.WriteAsync("Hello world");
             });
         }
     }
@@ -108,13 +111,18 @@ A redis store which includes the dependency on [StackExchange.Redis](https://www
 Firstly, install the library using .net cli `dotnet add package Carter.Cache.Redis` or using Package Manager `Install-Package Carter.Cache.Redis`. The usage requires the following configurations on the Startup.cs file:
 
 ```csharp
-    public void ConfigureServices(IServiceCollection services)
-        {
-            //...
+//The rest of your Program.cs ....
 
-            services.AddSingleton<ICacheStore>(new RedisStore("127.0.0.1:6379"));
-            services.AddSingleton(provider => new CachingOption() { Store = provider.GetRequiredService<ICacheStore>() });
-        }
+builder.Services.AddSingleton<ICacheStore>(new RedisStore("127.0.0.1:6379"));
+builder.Services.AddSingleton(provider => new CachingOption()
+{
+    Store = provider.GetRequiredService<ICacheStore>()
+});
+
+IServiceProvider serviceProvider = builder.Services.BuildServiceProvider();
+
+builder.Services.AddCarterCaching(serviceProvider.GetRequiredService<CachingOption>());
+builder.Services.AddCarter();
 ```
 
 ### Memcached store
@@ -124,35 +132,24 @@ Alternatively, a memcached store can also be included as an alternatively, using
 To install, using .net cli `dotnet add package Carter.Cache.Memcached` or using Package Manager `Install-Package Carter.Cache.Memcached`. The usage requires the following reconfigurations on the ConfigureServices method of Startup:
 
 ```csharp
-    public void ConfigureServices(IServiceCollection services)
-        {
-            //...
+//The rest of your Program.cs ....
 
-            //EnyimMemcached requires a logging 
-            services.AddLogging(opt =>
-            {
-                opt.ClearProviders();
-                opt.AddConsole();
-                opt.AddDebug();
-                opt.AddConfiguration(Configuration.GetSection("Logging"));
-            });
+//Point to the server / port desired
+builder.Services.AddEnyimMemcached(options => options.AddServer("127.0.0.1", 11211));
 
-            //Point to the server / port desired
-            services.AddEnyimMemcached(options => options.AddServer("127.0.0.1", 11211));
+//Resolve the IMemcachedClient dependency using EnyimMemcached
+builder.Services.AddSingleton<ICacheStore>(provider => new MemcachedStore(provider.GetRequiredService<IMemcachedClient>()));
 
-            //Resolve the IMemcachedClient dependency using EnyimMemcached
-            services.AddSingleton<ICacheStore>(provider => new MemcachedStore(provider.GetRequiredService<IMemcachedClient>()));
+//Define Caching options using the store configured
+builder.Services.AddSingleton(provider => new CachingOption()
+{
+    Store = provider.GetRequiredService<ICacheStore>() 
+});
 
-            //Define Caching options using the store configured
-            services.AddSingleton(provider => new CachingOption() { Store = provider.GetRequiredService<ICacheStore>() });
+IServiceProvider serviceProvider = services.BuildServiceProvider();
 
-            IServiceProvider serviceProvider = services.BuildServiceProvider();
-
-            //Pass it as a dependency to the add
-            services.AddCarterCaching(serviceProvider.GetRequiredService<CachingOption>());
-
-            //...
-        }
+//Pass it as a dependency to the add
+services.AddCarterCaching(serviceProvider.GetRequiredService<CachingOption>());
 ```
 
 For more information check the [samples](/samples) included.
