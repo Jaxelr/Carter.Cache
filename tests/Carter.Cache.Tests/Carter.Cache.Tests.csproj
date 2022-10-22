@@ -1,11 +1,11 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
-    <PackageReference Include="altcover" Version="8.3.839" />
+    <PackageReference Include="altcover" Version="8.4.840" />
     <PackageReference Include="FakeItEasy" Version="7.3.1" />
     <PackageReference Include="Microsoft.AspNetCore.Http" Version="2.2.2" />
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="6.0.1" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.1" />
     <PackageReference Include="Microsoft.Extensions.Logging" Version="6.0.0" />
   </ItemGroup>
 
@@ -14,5 +14,4 @@
     <ProjectReference Include="..\..\src\Carter.Cache.Redis\Carter.Cache.Redis.csproj" />
     <ProjectReference Include="..\..\src\Carter.Cache\Carter.Cache.csproj" />
   </ItemGroup>
-
 </Project>
