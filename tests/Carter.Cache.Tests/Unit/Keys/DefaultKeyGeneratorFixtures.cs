@@ -2,7 +2,6 @@
 using Carter.Cache.Keys;
 using FakeItEasy;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Http.Internal;
 using Xunit;
 
 namespace Carter.Cache.Tests.Unit.Keys
