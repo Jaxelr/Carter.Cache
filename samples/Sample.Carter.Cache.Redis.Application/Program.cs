@@ -96,6 +96,6 @@ app.UseSwagger();
 app.UseSwaggerUI();
 
 app.UseCarterCaching();
-app.UseEndpoints(builder => builder.MapCarter());
+app.MapCarter();
 
 app.Run();
