@@ -52,7 +52,7 @@ var app = builder.Build();
 //The rest of your configuration usage ....
 
 app.UseCarterCaching();
-app.UseEndpoints(builder => builder.MapCarter());
+app.MapCarter();
 
 app.Run();
 
@@ -143,7 +143,7 @@ builder.Services.AddSingleton<ICacheStore>(provider => new MemcachedStore(provid
 //Define Caching options using the store configured
 builder.Services.AddSingleton(provider => new CachingOption()
 {
-    Store = provider.GetRequiredService<ICacheStore>() 
+    Store = provider.GetRequiredService<ICacheStore>()
 });
 
 IServiceProvider serviceProvider = services.BuildServiceProvider();
