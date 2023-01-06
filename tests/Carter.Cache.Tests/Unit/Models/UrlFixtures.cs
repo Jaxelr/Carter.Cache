@@ -20,7 +20,7 @@ namespace Carter.Cache.Tests.Unit.Models
             //Assert
             Assert.True(local.IsSecure);
             Assert.Equal(SecureLocalhost, local.ToString());
-            Assert.Equal(result, SecureLocalhost);
+            Assert.Equal(SecureLocalhost, result);
         }
 
         [Fact]
@@ -35,7 +35,7 @@ namespace Carter.Cache.Tests.Unit.Models
             //Assert
             Assert.False(local.IsSecure);
             Assert.Equal(Localhost, local.ToString());
-            Assert.Equal(result, Localhost);
+            Assert.Equal(Localhost, result);
         }
 
         [Fact]
@@ -51,7 +51,7 @@ namespace Carter.Cache.Tests.Unit.Models
             //Assert
             Assert.False(local.IsSecure);
             Assert.Equal(localIp, local.ToString());
-            Assert.Equal(result, localIp);
+            Assert.Equal(localIp, result);
         }
 
         [Fact]
