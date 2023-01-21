@@ -348,6 +348,7 @@ MigrationBackup/
 
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
-tests/Carter.Cache.Tests/coverage.xml
+
+**/coverage.xml
 reportgenerator.bat
 MSBuild_Logs/
