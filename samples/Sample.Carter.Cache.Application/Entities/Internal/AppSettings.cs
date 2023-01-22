@@ -1,12 +1,11 @@
-﻿namespace Sample.Carter.Cache.Application.Entities
+﻿namespace Sample.Carter.Cache.Application.Entities;
+
+/// <summary>
+/// This is obtained from the appsettings.json on Startup
+/// </summary>
+public record AppSettings
 {
-    /// <summary>
-    /// This is obtained from the appsettings.json on Startup
-    /// </summary>
-    public class AppSettings
-    {
-        public CacheConfig Cache { get; set; }
-        public RouteDefinition RouteDefinition { get; set; }
-        public string[] ServerUrls { get; set; }
-    }
+    public CacheConfig Cache { get; set; }
+    public RouteDefinition RouteDefinition { get; set; }
+    public string[] ServerUrls { get; set; }
 }
