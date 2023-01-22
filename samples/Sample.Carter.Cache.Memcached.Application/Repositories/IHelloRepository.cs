@@ -1,7 +1,6 @@
-﻿namespace Sample.Carter.Cache.Memcached.Application.Repository
+﻿namespace Sample.Carter.Cache.Memcached.Application.Repository;
+
+public interface IHelloRepository
 {
-    public interface IHelloRepository
-    {
-        string SayHello(string name);
-    }
+    string SayHello(string name);
 }
