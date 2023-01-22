@@ -1,8 +1,7 @@
-﻿namespace Sample.Carter.Cache.Redis.Application.Entities
+﻿namespace Sample.Carter.Cache.Redis.Application.Entities;
+
+public record RouteDefinition
 {
-    public class RouteDefinition
-    {
-        public string RouteSuffix { get; set; }
-        public string Version { get; set; }
-    }
+    public string RouteSuffix { get; set; }
+    public string Version { get; set; }
 }
