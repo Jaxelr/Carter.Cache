@@ -2,24 +2,23 @@
 using Microsoft.AspNetCore.Builder;
 using Xunit;
 
-namespace Carter.Cache.Tests.Unit.Extensions
+namespace Carter.Cache.Tests.Unit.Extensions;
+
+public class ApplicationBuilderExtensionsFixtures
 {
-    public class ApplicationBuilderExtensionsFixtures
+    [Fact]
+    public void Application_builder()
     {
-        [Fact]
-        public void Application_builder()
-        {
-            //Arrange
-            var builder = A.Fake<IApplicationBuilder>();
+        //Arrange
+        var builder = A.Fake<IApplicationBuilder>();
 
-            A.CallTo(() => builder.ApplicationServices.GetService(typeof(CachingOption)))
-                .Returns(new CachingOption());
+        A.CallTo(() => builder.ApplicationServices.GetService(typeof(CachingOption)))
+            .Returns(new CachingOption());
 
-            //Act
-            builder.UseCarterCaching();
+        //Act
+        builder.UseCarterCaching();
 
-            //Assert
-            Assert.NotNull(builder.ServerFeatures.Get<CarterCachingService>());
-        }
+        //Assert
+        Assert.NotNull(builder.ServerFeatures.Get<CarterCachingService>());
     }
 }

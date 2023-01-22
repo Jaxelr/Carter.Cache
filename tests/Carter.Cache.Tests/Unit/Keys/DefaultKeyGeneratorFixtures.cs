@@ -4,160 +4,159 @@ using FakeItEasy;
 using Microsoft.AspNetCore.Http;
 using Xunit;
 
-namespace Carter.Cache.Tests.Unit.Keys
+namespace Carter.Cache.Tests.Unit.Keys;
+
+public class DefaultKeyGeneratorFixtures
 {
-    public class DefaultKeyGeneratorFixtures
+    [Fact]
+    public void Default_keyed_null()
     {
-        [Fact]
-        public void Default_keyed_null()
+        //Arrange
+        var keyGen = new DefaultKeyGenerator();
+
+        //Act
+        string key = keyGen.Get(null);
+
+        //Assert
+        Assert.Empty(key);
+    }
+
+    [Fact]
+    public void Default_keyed_value()
+    {
+        //Arrange
+        const string scheme = "http";
+        const string host = "localhost";
+        const int port = 80;
+        const string path = "/hello";
+
+        var request = A.Fake<HttpRequest>();
+
+        A.CallTo(() => request.Scheme).Returns(scheme);
+        A.CallTo(() => request.Host).Returns(new HostString(host, port));
+        A.CallTo(() => request.Path).Returns(path);
+
+        var keyGen = new DefaultKeyGenerator();
+
+        //Act
+        string key = keyGen.Get(request);
+
+        //Assert
+        Assert.Contains(scheme, key);
+        Assert.Contains(host, key);
+        Assert.Contains(port.ToString(), key);
+        Assert.Contains(path, key);
+    }
+
+    [Fact]
+    public void Default_keyed_value_with_query()
+    {
+        //Arrange
+        const string scheme = "http";
+        const string host = "localhost";
+        const int port = 80;
+        const string path = "/hello";
+        const string queryId = "id";
+        const string queryValue = "value";
+
+        var request = A.Fake<HttpRequest>();
+
+        var query = new Dictionary<string, Microsoft.Extensions.Primitives.StringValues>
         {
-            //Arrange
-            var keyGen = new DefaultKeyGenerator();
+            { queryId, new Microsoft.Extensions.Primitives.StringValues(queryValue) }
+        };
 
-            //Act
-            string key = keyGen.Get(null);
+        A.CallTo(() => request.Scheme).Returns(scheme);
+        A.CallTo(() => request.Host).Returns(new HostString(host, port));
+        A.CallTo(() => request.Path).Returns(path);
+        A.CallTo(() => request.Query).Returns(new QueryCollection(query));
 
-            //Assert
-            Assert.Empty(key);
-        }
+        var keyGen = new DefaultKeyGenerator();
 
-        [Fact]
-        public void Default_keyed_value()
+        //Act
+        string key = keyGen.Get(request);
+
+        //Assert
+        Assert.Contains(scheme, key);
+        Assert.Contains(host, key);
+        Assert.Contains(port.ToString(), key);
+        Assert.Contains(path, key);
+        Assert.Contains(queryId, key);
+        Assert.Contains(queryValue, key);
+    }
+
+    [Fact]
+    public void Default_keyed_value_with_accept_header()
+    {
+        //Arrange
+        const string scheme = "http";
+        const string host = "localhost";
+        const int port = 80;
+        const string path = "/hello";
+        const string headerId = "Accept";
+        const string headerValue = "application/json";
+
+        var request = A.Fake<HttpRequest>();
+
+        var headers = new Dictionary<string, Microsoft.Extensions.Primitives.StringValues>
         {
-            //Arrange
-            const string scheme = "http";
-            const string host = "localhost";
-            const int port = 80;
-            const string path = "/hello";
+            { headerId, new Microsoft.Extensions.Primitives.StringValues(headerValue) }
+        };
 
-            var request = A.Fake<HttpRequest>();
+        A.CallTo(() => request.Scheme).Returns(scheme);
+        A.CallTo(() => request.Host).Returns(new HostString(host, port));
+        A.CallTo(() => request.Path).Returns(path);
+        A.CallTo(() => request.Headers).Returns(new HeaderDictionary(headers));
 
-            A.CallTo(() => request.Scheme).Returns(scheme);
-            A.CallTo(() => request.Host).Returns(new HostString(host, port));
-            A.CallTo(() => request.Path).Returns(path);
+        var keyGen = new DefaultKeyGenerator();
 
-            var keyGen = new DefaultKeyGenerator();
+        //Act
+        string key = keyGen.Get(request);
 
-            //Act
-            string key = keyGen.Get(request);
+        //Assert
+        Assert.Contains(scheme, key);
+        Assert.Contains(host, key);
+        Assert.Contains(port.ToString(), key);
+        Assert.Contains(path, key);
+        Assert.Contains(headerId, key);
+        Assert.Contains(headerValue, key);
+    }
 
-            //Assert
-            Assert.Contains(scheme, key);
-            Assert.Contains(host, key);
-            Assert.Contains(port.ToString(), key);
-            Assert.Contains(path, key);
-        }
+    [Fact]
+    public void Default_keyed_value_with_form()
+    {
+        //Arrange
+        const string scheme = "http";
+        const string host = "localhost";
+        const int port = 80;
+        const string path = "/hello";
+        const string formId = "formId";
+        const string formValue = "formValue";
 
-        [Fact]
-        public void Default_keyed_value_with_query()
+        var request = A.Fake<HttpRequest>();
+
+        var forms = new Dictionary<string, Microsoft.Extensions.Primitives.StringValues>
         {
-            //Arrange
-            const string scheme = "http";
-            const string host = "localhost";
-            const int port = 80;
-            const string path = "/hello";
-            const string queryId = "id";
-            const string queryValue = "value";
+            { formId, new Microsoft.Extensions.Primitives.StringValues(formValue) }
+        };
 
-            var request = A.Fake<HttpRequest>();
+        A.CallTo(() => request.Scheme).Returns(scheme);
+        A.CallTo(() => request.Host).Returns(new HostString(host, port));
+        A.CallTo(() => request.Path).Returns(path);
+        A.CallTo(() => request.Form).Returns(new FormCollection(forms));
+        A.CallTo(() => request.HasFormContentType).Returns(true);
 
-            var query = new Dictionary<string, Microsoft.Extensions.Primitives.StringValues>
-            {
-                { queryId, new Microsoft.Extensions.Primitives.StringValues(queryValue) }
-            };
+        var keyGen = new DefaultKeyGenerator();
 
-            A.CallTo(() => request.Scheme).Returns(scheme);
-            A.CallTo(() => request.Host).Returns(new HostString(host, port));
-            A.CallTo(() => request.Path).Returns(path);
-            A.CallTo(() => request.Query).Returns(new QueryCollection(query));
+        //Act
+        string key = keyGen.Get(request);
 
-            var keyGen = new DefaultKeyGenerator();
-
-            //Act
-            string key = keyGen.Get(request);
-
-            //Assert
-            Assert.Contains(scheme, key);
-            Assert.Contains(host, key);
-            Assert.Contains(port.ToString(), key);
-            Assert.Contains(path, key);
-            Assert.Contains(queryId, key);
-            Assert.Contains(queryValue, key);
-        }
-
-        [Fact]
-        public void Default_keyed_value_with_accept_header()
-        {
-            //Arrange
-            const string scheme = "http";
-            const string host = "localhost";
-            const int port = 80;
-            const string path = "/hello";
-            const string headerId = "Accept";
-            const string headerValue = "application/json";
-
-            var request = A.Fake<HttpRequest>();
-
-            var headers = new Dictionary<string, Microsoft.Extensions.Primitives.StringValues>
-            {
-                { headerId, new Microsoft.Extensions.Primitives.StringValues(headerValue) }
-            };
-
-            A.CallTo(() => request.Scheme).Returns(scheme);
-            A.CallTo(() => request.Host).Returns(new HostString(host, port));
-            A.CallTo(() => request.Path).Returns(path);
-            A.CallTo(() => request.Headers).Returns(new HeaderDictionary(headers));
-
-            var keyGen = new DefaultKeyGenerator();
-
-            //Act
-            string key = keyGen.Get(request);
-
-            //Assert
-            Assert.Contains(scheme, key);
-            Assert.Contains(host, key);
-            Assert.Contains(port.ToString(), key);
-            Assert.Contains(path, key);
-            Assert.Contains(headerId, key);
-            Assert.Contains(headerValue, key);
-        }
-
-        [Fact]
-        public void Default_keyed_value_with_form()
-        {
-            //Arrange
-            const string scheme = "http";
-            const string host = "localhost";
-            const int port = 80;
-            const string path = "/hello";
-            const string formId = "formId";
-            const string formValue = "formValue";
-
-            var request = A.Fake<HttpRequest>();
-
-            var forms = new Dictionary<string, Microsoft.Extensions.Primitives.StringValues>
-            {
-                { formId, new Microsoft.Extensions.Primitives.StringValues(formValue) }
-            };
-
-            A.CallTo(() => request.Scheme).Returns(scheme);
-            A.CallTo(() => request.Host).Returns(new HostString(host, port));
-            A.CallTo(() => request.Path).Returns(path);
-            A.CallTo(() => request.Form).Returns(new FormCollection(forms));
-            A.CallTo(() => request.HasFormContentType).Returns(true);
-
-            var keyGen = new DefaultKeyGenerator();
-
-            //Act
-            string key = keyGen.Get(request);
-
-            //Assert
-            Assert.Contains(scheme, key);
-            Assert.Contains(host, key);
-            Assert.Contains(port.ToString(), key);
-            Assert.Contains(path, key);
-            Assert.Contains(formId, key);
-            Assert.Contains(formValue, key);
-        }
+        //Assert
+        Assert.Contains(scheme, key);
+        Assert.Contains(host, key);
+        Assert.Contains(port.ToString(), key);
+        Assert.Contains(path, key);
+        Assert.Contains(formId, key);
+        Assert.Contains(formValue, key);
     }
 }
