@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Linq;
-using System.Security.Cryptography;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Net.Http.Headers;
 
@@ -43,16 +41,5 @@ public static class HttpContextExtensions
             return;
 
         ctx.Response.Headers[HeaderNames.ETag] = $"\"{checksum}\"";
-    }
-
-    internal static string CalculateChecksum(this HttpContext ctx, byte[] content)
-    {
-        if (content.Length == 0) //Dont process an empty byte array
-        {
-            return string.Empty;
-        }
-
-        using var sha1 = SHA1.Create();
-        return Convert.ToBase64String(sha1.ComputeHash(content.ToArray()));
     }
 }

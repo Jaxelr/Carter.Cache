@@ -158,7 +158,7 @@ public class CachingServiceFxtures
         A.CallTo(() => response.StatusCode).Returns(StatusCodes.Status200OK);
 
         A.CallTo(() => response.Headers.ContainsKey(HeaderNames.ETag)).Returns(true);
-        A.CallTo(() => response.Headers[HeaderNames.ETag]).Returns(ctx.CalculateChecksum(body));
+        A.CallTo(() => response.Headers[HeaderNames.ETag]).Returns(CarterCachingMiddleware.CalculateChecksum(body));
 
         var cachedResponse = new CachedResponse(ctx, body);
 

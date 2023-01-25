@@ -1,4 +1,7 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
+using System.Linq;
+using System.Security.Cryptography;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 
@@ -48,7 +51,7 @@ public class CarterCachingMiddleware
 
             if (options.ValidResponse(ctx))
             {
-                string checksum = ctx.CalculateChecksum(bytes);
+                string checksum = CalculateChecksum(bytes);
                 ctx.AddEtagToContext(checksum);
 
                 if (memoryStream.Length > 0)
@@ -68,4 +71,16 @@ public class CarterCachingMiddleware
     }
 
     private async Task<bool> CheckCache(HttpContext ctx, CachingOption options) => await service.CheckCache(ctx, options);
+
+    internal static string CalculateChecksum(byte[] content)
+    {
+        if (content.Length == 0) //Dont process an empty byte array
+        {
+            return string.Empty;
+        }
+
+        using var sha1 = SHA1.Create();
+
+        return Convert.ToBase64String(sha1.ComputeHash(content.ToArray()));
+    }
 }
