@@ -1,6 +1,6 @@
 ﻿using System;
+using System.Text.Json;
 using Carter.Cache.Stores;
-using Newtonsoft.Json;
 using StackExchange.Redis;
 
 namespace Carter.Cache.Redis;
@@ -8,15 +8,18 @@ namespace Carter.Cache.Redis;
 public class RedisStore : ICacheStore
 {
     private readonly ConnectionMultiplexer redis;
+    private readonly JsonSerializerOptions jsonSerializerOptions;
 
-    public RedisStore(ConfigurationOptions options)
+    public RedisStore(ConfigurationOptions options, JsonSerializerOptions jsonSerializerOptions = default)
     {
         redis = ConnectionMultiplexer.Connect(options);
+        this.jsonSerializerOptions = jsonSerializerOptions;
     }
 
-    public RedisStore(string configuration)
+    public RedisStore(string configuration, JsonSerializerOptions jsonSerializerOptions = default)
     {
         redis = ConnectionMultiplexer.Connect(configuration);
+        this.jsonSerializerOptions = jsonSerializerOptions;
     }
 
     public void Dispose() => redis.Dispose();
@@ -48,7 +51,7 @@ public class RedisStore : ICacheStore
         {
             var cache = redis.GetDatabase();
 
-            bool ack = cache.StringSet(key, JsonConvert.SerializeObject(response), expiry: expiration);
+            bool ack = cache.StringSet(key, JsonSerializer.Serialize(response, jsonSerializerOptions), expiry: expiration);
 
             if (!ack)
             {
@@ -78,7 +81,7 @@ public class RedisStore : ICacheStore
 
         if (result.HasValue)
         {
-            response = JsonConvert.DeserializeObject<CachedResponse>(result);
+            response = JsonSerializer.Deserialize<CachedResponse>(result, jsonSerializerOptions);
             return true;
         }
 
