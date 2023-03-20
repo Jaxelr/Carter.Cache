@@ -41,6 +41,24 @@ public class RedisStoreFixtures
         Assert.Null(response);
     }
 
+
+    [Fact]
+    public void Redis_cache_empty_get_with_ConfigOptions_and_custom_json_serializer()
+    {
+        //Arrange
+        var configOptions = ConfigurationOptions.Parse(REDIS_LOCALHOST);
+        var cache = new RedisStore(configOptions, FakeJsonSerializer.Options);
+
+        //Act
+        bool found = cache.TryGetValue(string.Empty, out var response);
+
+        //Assert
+        Assert.NotNull(cache);
+        Assert.False(found);
+        Assert.Null(response);
+    }
+
+
     [Fact]
     public void Redis_cache_empty_remove()
     {
@@ -115,6 +133,30 @@ public class RedisStoreFixtures
     {
         //Arrange
         var cache = new RedisStore(REDIS_LOCALHOST);
+        var expiration = new TimeSpan(0, 1, 0);
+        const string key = "-Random-Key-2";
+
+        var response = A.Fake<FakeCachedResponse>();
+
+        //Act
+        cache.Set(key, response, expiration);
+        bool found = cache.TryGetValue(key, out var getResponse);
+
+        //Assert
+        Assert.True(found);
+        Assert.Equal(response.ContentType, getResponse.ContentType);
+        Assert.Equal(response.Body, getResponse.Body);
+        Assert.Equal(response.ContentLength, getResponse.ContentLength);
+        Assert.Equal(response.StatusCode, getResponse.StatusCode);
+        Assert.Equal(response.Expiry, getResponse.Expiry);
+        Assert.Equal(response.Headers, getResponse.Headers);
+    }
+
+    [Fact]
+    public void Redis_cache_with_value_set_get_with_custom_json_serializer()
+    {
+        //Arrange
+        var cache = new RedisStore(REDIS_LOCALHOST, FakeJsonSerializer.Options);
         var expiration = new TimeSpan(0, 1, 0);
         const string key = "-Random-Key-2";
 
