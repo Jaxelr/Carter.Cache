@@ -125,6 +125,25 @@ builder.Services.AddCarterCaching(serviceProvider.GetRequiredService<CachingOpti
 builder.Services.AddCarter();
 ```
 
+As part of the redis definition, you can optionally provide a json serializer definition to be used for the serialization of the cached response. This uses the [System.Text.Json](https://www.nuget.org/packages/System.Text.Json) library.
+
+```csharp
+//The rest of your Program.cs ....
+
+var jsonOptions = new System.Text.Json.JsonSerializerOptions() { AllowTrailingCommas = true };
+
+builder.Services.AddSingleton<ICacheStore>(new RedisStore("127.0.0.1:6379", jsonOptions));
+builder.Services.AddSingleton(provider => new CachingOption()
+{
+    Store = provider.GetRequiredService<ICacheStore>()
+});
+
+IServiceProvider serviceProvider = builder.Services.BuildServiceProvider();
+
+builder.Services.AddCarterCaching(serviceProvider.GetRequiredService<CachingOption>());
+builder.Services.AddCarter();
+```
+
 ### Memcached store
 
 Alternatively, a memcached store can also be included as an alternatively, using a dependency on the library [EnyimMemcachedCore](https://www.nuget.org/packages/EnyimMemcachedCore/).
