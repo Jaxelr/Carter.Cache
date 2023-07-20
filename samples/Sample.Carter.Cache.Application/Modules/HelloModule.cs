@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
-using Sample.Carter.Cache.Application.Entities;
 using Sample.Carter.Cache.Application.Repository;
 
 namespace Sample.Carter.Cache.Application.Modules;
