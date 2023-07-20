@@ -101,4 +101,4 @@ app.UseSwaggerUI();
 app.UseCarterCaching();
 app.MapCarter();
 
-app.Run();
+await app.RunAsync();
