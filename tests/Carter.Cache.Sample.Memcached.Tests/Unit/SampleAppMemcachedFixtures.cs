@@ -27,7 +27,8 @@ public class SampleAppMemcachedFixtures : IDisposable
 
     public void Dispose()
     {
-        client?.Dispose(); GC.SuppressFinalize(this);
+        client?.Dispose();
+        GC.SuppressFinalize(this);
     }
 
     [Fact]
