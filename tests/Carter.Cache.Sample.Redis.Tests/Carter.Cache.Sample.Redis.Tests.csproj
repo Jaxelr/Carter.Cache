@@ -1,8 +1,5 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="7.0.9" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\..\samples\Sample.Carter.Cache.Redis.Application\Sample.Carter.Cache.Redis.Application.csproj" />
   </ItemGroup>
 </Project>
