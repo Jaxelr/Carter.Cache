@@ -8,7 +8,7 @@ using Xunit;
 
 namespace Carter.Cache.Tests.Unit.Models;
 
-public class CachedResponseFixtures
+public class CachedResponseTests
 {
     [Fact]
     public void Cached_response_maps()

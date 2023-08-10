@@ -4,20 +4,20 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading;
 using System.Threading.Tasks;
-using Carter.Cache.Sample.Memcached.Tests.Mocks;
+using Carter.Cache.Sample.Redis.Tests.Mocks;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.Extensions.DependencyInjection;
-using Sample.Carter.Cache.Memcached.Application.Repository;
+using Sample.Carter.Cache.Redis.Application.Repository;
 using Xunit;
 
-namespace Carter.Cache.Sample.Memcached.Tests.Unit;
+namespace Carter.Cache.Sample.Redis.Tests.Unit;
 
-public class SampleAppMemcachedFixtures : IDisposable
+public class SampleAppRedisTests : IDisposable
 {
     private readonly HttpClient client;
     private const string DefaultCacheHeader = "X-Carter-Cache-Expiration";
 
-    public SampleAppMemcachedFixtures()
+    public SampleAppRedisTests()
     {
         var server = new WebApplicationFactory<Program>()
                 .WithWebHostBuilder(builder => builder.ConfigureServices(services => services.AddSingleton<IHelloRepository, MockHelloRepository>()));
@@ -35,7 +35,7 @@ public class SampleAppMemcachedFixtures : IDisposable
     public async Task Hello_module_get_hello_world()
     {
         //Arrange
-        const string name = "myMemcachedUser";
+        const string name = "myRedisUser";
 
         //Act
         var res = await client.GetAsync($"/hello/{name}");
@@ -49,7 +49,7 @@ public class SampleAppMemcachedFixtures : IDisposable
     public async Task Hello_module_get_hello_world_from_cache()
     {
         //Arrange
-        const string name = "myMemcachedUser2";
+        const string name = "myRedisUser2";
 
         //Act
         var res1 = await client.GetAsync($"/hello/{name}");
@@ -65,7 +65,7 @@ public class SampleAppMemcachedFixtures : IDisposable
     public async Task Hello_module_get_hello_world_from_cache_expired()
     {
         //Arrange
-        const string name = "myMemcachedUser3";
+        const string name = "myRedisUser3";
 
         //Act
         var res1 = await client.GetAsync($"/hello/{name}");
@@ -82,7 +82,7 @@ public class SampleAppMemcachedFixtures : IDisposable
     public async Task Hello_module_get_hello_world2()
     {
         //Arrange
-        const string name = "myMemcachedUser4";
+        const string name = "myRedisUser4";
 
         //Act
         var res = await client.GetAsync($"/hello2/{name}");
@@ -96,7 +96,7 @@ public class SampleAppMemcachedFixtures : IDisposable
     public async Task Hello_module_get_hello_world2_from_cache()
     {
         //Arrange
-        const string name = "myMemcachedUser5";
+        const string name = "myRedisUser5";
 
         //Act
         var res1 = await client.GetAsync($"/hello2/{name}");
@@ -112,7 +112,7 @@ public class SampleAppMemcachedFixtures : IDisposable
     public async Task Hello_module_get_hello_world2_from_cache_expired()
     {
         //Arrange
-        const string name = "myMemcachedUser6";
+        const string name = "myRedisUser6";
 
         //Act
         var res1 = await client.GetAsync($"/hello2/{name}");
@@ -129,7 +129,7 @@ public class SampleAppMemcachedFixtures : IDisposable
     public async Task Hello_module_get_hello_world_from_cache_with_etag()
     {
         //Arrange
-        const string name = "myMemcachedUser7";
+        const string name = "myRedisUser7";
         const string etag = "Etag";
 
         //Act
@@ -148,7 +148,7 @@ public class SampleAppMemcachedFixtures : IDisposable
     public async Task Hello_module_get_hello_world_from_cache_with_etag_not_modified()
     {
         //Arrange
-        const string name = "myMemcachedUser7";
+        const string name = "myRedisUser8";
 
         //Act
         var res1 = await client.GetAsync($"/hello/{name}");

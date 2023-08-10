@@ -6,7 +6,7 @@ using Xunit;
 
 namespace Carter.Cache.Tests.Unit.Extensions;
 
-public class HttpContextExtensionsFixtures
+public class HttpContextExtensionsTests
 {
     [Fact]
     public void HttpContext_as_cacheable_capability_int_seconds()

@@ -5,7 +5,7 @@ using Xunit;
 
 namespace Carter.Cache.Tests.Unit.Extensions;
 
-public class ServiceCollectionExtensionsFixtures
+public class ServiceCollectionExtensionsTests
 {
     [Fact]
     public void Service_collection()

@@ -3,7 +3,7 @@ using Xunit;
 
 namespace Carter.Cache.Tests.Unit.Models;
 
-public class UrlFixtures
+public class UrlTests
 {
     private const string SecureLocalhost = "https://localhost:5001";
     private const string Localhost = "http://localhost:5000";

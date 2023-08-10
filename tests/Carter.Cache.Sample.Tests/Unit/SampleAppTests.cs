@@ -12,12 +12,12 @@ using Xunit;
 
 namespace Carter.Cache.Sample.Tests;
 
-public class SampleAppFixtures : IDisposable
+public class SampleAppTests : IDisposable
 {
     private readonly HttpClient client;
     private const string DefaultCacheHeader = "X-Carter-Cache-Expiration";
 
-    public SampleAppFixtures()
+    public SampleAppTests()
     {
         var server = new WebApplicationFactory<Program>()
                 .WithWebHostBuilder(builder => builder.ConfigureServices(services => services.AddSingleton<IHelloRepository, MockHelloRepository>()));

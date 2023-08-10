@@ -8,7 +8,7 @@ using Xunit;
 
 namespace Carter.Cache.Tests.Unit;
 
-public class CachingServiceFxtures
+public class CachingServiceTests
 {
     [Fact]
     public async Task Service_check_cache_default()

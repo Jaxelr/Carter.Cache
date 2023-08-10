@@ -9,7 +9,7 @@ using Xunit;
 
 namespace Carter.Cache.Tests.Unit.Stores;
 
-public class MemcachedStoreFixtures
+public class MemcachedStoreTests
 {
     private const string Host = "127.0.0.1";
     private const int Port = 11211;

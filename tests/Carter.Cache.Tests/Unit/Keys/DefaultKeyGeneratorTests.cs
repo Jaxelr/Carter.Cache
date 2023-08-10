@@ -6,7 +6,7 @@ using Xunit;
 
 namespace Carter.Cache.Tests.Unit.Keys;
 
-public class DefaultKeyGeneratorFixtures
+public class DefaultKeyGeneratorTests
 {
     [Fact]
     public void Default_keyed_null()

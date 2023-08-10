@@ -6,7 +6,7 @@ using Xunit;
 
 namespace Carter.Cache.Tests.Unit.Stores;
 
-public class DefaultMemoryStoreFixtures
+public class DefaultMemoryStoreTests
 {
     [Fact]
     public void IMemory_cache_empty_get()

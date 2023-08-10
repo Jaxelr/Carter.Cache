@@ -7,7 +7,7 @@ using Xunit;
 
 namespace Carter.Cache.Tests.Unit.Stores;
 
-public class RedisStoreFixtures
+public class RedisStoreTests
 {
     private const string REDIS_LOCALHOST = "127.0.0.1:6379";
 

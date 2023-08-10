@@ -4,7 +4,7 @@ using Xunit;
 
 namespace Carter.Cache.Tests.Unit;
 
-public class CachingOptionsFixtures
+public class CachingOptionsTests
 {
     [Fact]
     public void Default_caching_option()

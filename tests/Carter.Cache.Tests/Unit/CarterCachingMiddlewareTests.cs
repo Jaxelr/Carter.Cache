@@ -8,7 +8,7 @@ using Xunit;
 
 namespace Carter.Cache.Tests.Unit;
 
-public class CarterCachingMiddlewareFixtures
+public class CarterCachingMiddlewareTests
 {
     [Fact]
     public void Carter_caching_middleware_constructor()

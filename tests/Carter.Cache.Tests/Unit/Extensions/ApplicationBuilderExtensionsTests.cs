@@ -4,7 +4,7 @@ using Xunit;
 
 namespace Carter.Cache.Tests.Unit.Extensions;
 
-public class ApplicationBuilderExtensionsFixtures
+public class ApplicationBuilderExtensionsTests
 {
     [Fact]
     public void Application_builder()
