@@ -1,6 +1,5 @@
 ﻿using System;
 using System.IO;
-using System.Linq;
 using System.Security.Cryptography;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
@@ -79,8 +78,6 @@ public class CarterCachingMiddleware
             return string.Empty;
         }
 
-        using var sha1 = SHA1.Create();
-
-        return Convert.ToBase64String(sha1.ComputeHash(content.ToArray()));
+        return Convert.ToBase64String(SHA1.HashData(content));
     }
 }
