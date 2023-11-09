@@ -61,11 +61,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Carter.Cache.Sample.Tests",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Carter.Cache.Sample.Memcached.Tests", "tests\Carter.Cache.Sample.Memcached.Tests\Carter.Cache.Sample.Memcached.Tests.csproj", "{BE592EC7-B97C-43F8-A903-52DB12890903}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docker", "docker", "{9705DD2C-6579-41EB-A8ED-4DDA66CE3098}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".docker", ".docker", "{9705DD2C-6579-41EB-A8ED-4DDA66CE3098}"
 	ProjectSection(SolutionItems) = preProject
-		docker\.env = docker\.env
-		docker\build-docker-compose-localhost.md = docker\build-docker-compose-localhost.md
-		docker\docker-compose.yml = docker\docker-compose.yml
+		.docker\.env = .docker\.env
+		.docker\build-docker-compose-localhost.md = .docker\build-docker-compose-localhost.md
+		.docker\docker-compose.yml = .docker\docker-compose.yml
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Carter.Cache.Redis", "src\Carter.Cache.Redis\Carter.Cache.Redis.csproj", "{D3C46C9D-90E8-4CF9-AAF5-58DAC5A9D4DB}"
