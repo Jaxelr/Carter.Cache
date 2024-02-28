@@ -28,7 +28,7 @@ jobs:
       uses: codecov/codecov-action@v1.2.1
       with:
         token: ${{ secrets.CODECOV_TOKEN }}
-        file: tests/Carter.Cache.Tests/coverage.xml
+        file: tests/Carter.Cache.Tests/coverage.net8.0.xml
     - name: Pack
       run: dotnet pack src/Carter.Cache/Carter.Cache.csproj -o $NUPKGS --include-symbols
     - name: Pack Memcached
