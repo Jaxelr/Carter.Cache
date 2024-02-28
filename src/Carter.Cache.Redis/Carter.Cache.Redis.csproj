@@ -1,8 +1,14 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
+  <PropertyGroup>
+    <Description>A redis plugin for the carter caching library</Description>
+    <PackageTags>carter cache redis</PackageTags>
+    <PackageReleaseNotes>Addition of target: dotnet 8</PackageReleaseNotes>
+  </PropertyGroup>
+
   <ItemGroup>
-    <PackageReference Include="System.Text.Json" Version="7.0.3" />
-    <PackageReference Include="StackExchange.Redis" Version="2.6.122" />
+    <PackageReference Include="System.Text.Json" Version="8.0.2" />
+    <PackageReference Include="StackExchange.Redis" Version="2.7.23" />
   </ItemGroup>
 
   <ItemGroup>

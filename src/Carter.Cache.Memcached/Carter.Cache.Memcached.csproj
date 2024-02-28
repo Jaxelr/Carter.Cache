@@ -1,7 +1,13 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
+  <PropertyGroup>
+    <Description>A memcached plugin for the carter caching library</Description>
+    <PackageTags>carter cache memcached</PackageTags>
+    <PackageReleaseNotes>Addition of target: dotnet 8</PackageReleaseNotes>
+  </PropertyGroup>
+
   <ItemGroup>
-    <PackageReference Include="EnyimMemcachedCore" Version="2.6.6" />
+    <PackageReference Include="EnyimMemcachedCore" Version="3.2.0" />
   </ItemGroup>
 
   <ItemGroup>
