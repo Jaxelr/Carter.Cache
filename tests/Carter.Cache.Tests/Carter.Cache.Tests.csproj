@@ -1,8 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
-    <PackageReference Include="altcover" Version="8.7.3" />
-    <PackageReference Include="FakeItEasy" Version="8.1.0" />
+    <PackageReference Include="altcover" Version="8.8.74" />
+    <PackageReference Include="FakeItEasy" Version="8.3.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="8.0.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.0" />
     <PackageReference Include="Microsoft.Extensions.Logging" Version="8.0.0" />
