@@ -17,8 +17,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleToAttribute">
-      <_Parameter1>Carter.Cache.Sample.Tests</_Parameter1>
-    </AssemblyAttribute>
+    <InternalsVisibleTo Include="Carter.Cache.Sample.Tests"/>
   </ItemGroup>
 </Project>

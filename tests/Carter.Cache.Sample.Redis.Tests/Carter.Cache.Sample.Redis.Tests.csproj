@@ -1,5 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <ItemGroup>
+    <PackageReference Include="StackExchange.Redis" Version="2.8.22" />
+    <PackageReference Include="System.Text.Json" Version="9.0.0" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\..\samples\Sample.Carter.Cache.Redis.Application\Sample.Carter.Cache.Redis.Application.csproj" />
   </ItemGroup>
 </Project>
