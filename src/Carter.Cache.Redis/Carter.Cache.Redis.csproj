@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Description>A redis plugin for the carter caching library</Description>
     <PackageTags>carter cache redis</PackageTags>
-    <PackageReleaseNotes>Addition of target: dotnet 8</PackageReleaseNotes>
+    <PackageReleaseNotes>Addition of target: dotnet 9</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
