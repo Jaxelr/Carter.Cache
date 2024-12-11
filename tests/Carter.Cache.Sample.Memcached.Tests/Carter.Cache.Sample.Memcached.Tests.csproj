@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <ItemGroup>
-    <PackageReference Include="EnyimMemcachedCore" Version="3.3.0" />
+    <PackageReference Include="EnyimMemcachedCore" Version="3.3.1" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\samples\Sample.Carter.Cache.Memcached.Application\Sample.Carter.Cache.Memcached.Application.csproj" />

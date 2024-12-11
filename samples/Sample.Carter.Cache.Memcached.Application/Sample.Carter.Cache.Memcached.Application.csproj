@@ -3,7 +3,7 @@
     <AssemblyName>Sample.Carter.Cache.Memcached.Application</AssemblyName>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="EnyimMemcachedCore" Version="3.3.0" />
+    <PackageReference Include="EnyimMemcachedCore" Version="3.3.1" />
   </ItemGroup>
 
   <ItemGroup>

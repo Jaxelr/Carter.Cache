@@ -2,7 +2,7 @@
 
   <ItemGroup>
     <PackageReference Include="altcover" Version="9.0.1" />
-    <PackageReference Include="EnyimMemcachedCore" Version="3.3.0" />
+    <PackageReference Include="EnyimMemcachedCore" Version="3.3.1" />
     <PackageReference Include="FakeItEasy" Version="8.3.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="9.0.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.0" />
