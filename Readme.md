@@ -6,7 +6,7 @@ An extensible library to cache your [Carter][carter] modules.
 
 | Github  | Branch | Coverage |
 | :---:     | :---: | :---: |
-| Github Actions | [![.NET][github-master-img]][github-master] | master | [![CodeCov][codecov-master-img]][codecov-master] |
+| [![.NET][github-master-img]][github-master] | master | [![CodeCov][codecov-master-img]][codecov-master] |
 
 ## Packages
 
