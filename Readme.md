@@ -6,7 +6,7 @@ An extensible library to cache your [Carter][carter] modules.
 
 | Github  | Branch | Coverage |
 | :---:     | :---: | :---: |
-| ![.NET](https://github.com/Jaxelr/Carter.Cache/workflows/.NET/badge.svg?branch=master) | master | [![CodeCov][codecov-master-img]][codecov-master] |
+| Github Actions | [![.NET][github-master-img]][github-master] | master | [![CodeCov][codecov-master-img]][codecov-master] |
 
 ## Packages
 
@@ -190,3 +190,5 @@ For more information check the [samples](/samples) included.
 [carter]: https://github.com/CarterCommunity/Carter
 [codecov-master-img]: https://codecov.io/gh/Jaxelr/Carter.Cache/branch/master/graph/badge.svg
 [codecov-master]: https://codecov.io/gh/Jaxelr/Carter.Cache/branch/master
+[github-master]: https://github.com/Jaxelr/Carter.Cache/actions/workflows/ci.yml
+[github-master-img]: https://github.com/Jaxelr/Carter.Cache/actions/workflows/ci.yml/badge.svg
