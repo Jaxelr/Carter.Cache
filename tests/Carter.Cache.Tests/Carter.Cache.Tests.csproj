@@ -4,11 +4,11 @@
     <PackageReference Include="altcover" Version="9.0.1" />
     <PackageReference Include="EnyimMemcachedCore" Version="3.4.0" />
     <PackageReference Include="FakeItEasy" Version="8.3.0" />
-    <PackageReference Include="Microsoft.Extensions.Configuration" Version="9.0.4" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.4" />
-    <PackageReference Include="Microsoft.Extensions.Logging" Version="9.0.4" />
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="9.0.6" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.6" />
+    <PackageReference Include="Microsoft.Extensions.Logging" Version="9.0.6" />
     <PackageReference Include="StackExchange.Redis" Version="2.8.31" />
-    <PackageReference Include="System.Text.Json" Version="9.0.4" />
+    <PackageReference Include="System.Text.Json" Version="9.0.6" />
   </ItemGroup>
 
   <ItemGroup>
