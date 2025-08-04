@@ -1,97 +1,17 @@
 version: 2
 updates:
   - package-ecosystem: "nuget"
-    directory: "/samples/Sample.Carter.Cache.Application" #Sample.Carter.Cache.Application.csproj
-    schedule:
-      interval: "weekly"
-      day: "friday"
-    commit-message:
-      prefix: "deps"
-    open-pull-requests-limit: 5
-    labels:
-      - "dependencies"
-  - package-ecosystem: "nuget"
-    directory: "/samples/Sample.Carter.Cache.Memcached.Application" #Sample.Carter.Cache.Memcached.Application.csproj
-    schedule:
-      interval: "weekly"
-      day: "friday"
-    commit-message:
-      prefix: "deps"
-    open-pull-requests-limit: 5
-    labels:
-      - "dependencies"
-  - package-ecosystem: "nuget"
-    directory: "/samples/Sample.Carter.Cache.Redis.Application" #Sample.Carter.Cache.Redis.Application.csproj
-    schedule:
-      interval: "weekly"
-      day: "friday"
-    commit-message:
-      prefix: "deps"
-    open-pull-requests-limit: 5
-    labels:
-      - "dependencies"
-  - package-ecosystem: "nuget"
-    directory: "/src/Carter.Cache" #Carter.Cache.csproj
-    schedule:
-      interval: "weekly"
-      day: "friday"
-    commit-message:
-      prefix: "deps"
-    open-pull-requests-limit: 5
-    labels:
-      - "dependencies"
-  - package-ecosystem: "nuget"
-    directory: "/src/Carter.Cache.Memcached" #Carter.Cache.Memcached.csproj
-    schedule:
-      interval: "weekly"
-      day: "friday"
-    commit-message:
-      prefix: "deps"
-    open-pull-requests-limit: 5
-    labels:
-      - "dependencies"
-  - package-ecosystem: "nuget"
-    directory: "/src/Carter.Cache.Redis" #Carter.Cache.Redis.csproj
-    schedule:
-      interval: "weekly"
-      day: "friday"
-    commit-message:
-      prefix: "deps"
-    open-pull-requests-limit: 5
-    labels:
-      - "dependencies"
-  - package-ecosystem: "nuget"
-    directory: "/tests/Carter.Cache.Tests" #Carter.Cache.Tests.csproj
-    schedule:
-      interval: "weekly"
-      day: "friday"
-    commit-message:
-      prefix: "deps"
-    open-pull-requests-limit: 5
-    labels:
-      - "dependencies"
-  - package-ecosystem: "nuget"
-    directory: "/tests/Carter.Cache.Sample.Tests" #Carter.Cache.Sample.Tests.csproj
-    schedule:
-      interval: "weekly"
-      day: "friday"
-    commit-message:
-      prefix: "deps"
-    open-pull-requests-limit: 5
-    labels:
-      - "dependencies"
-  - package-ecosystem: "nuget"
-    directory: "/tests/Carter.Cache.Sample.Memcached.Tests" #Carter.Cache.Sample.Memcached.Tests.csproj
-    schedule:
-      interval: "weekly"
-      day: "friday"
-    commit-message:
-      prefix: "deps"
-    open-pull-requests-limit: 5
-    labels:
-      - "dependencies"
-  - package-ecosystem: "nuget"
-    directory: "/tests/Carter.Cache.Sample.Redis.Tests" #Carter.Cache.Sample.Redis.Tests.csproj
+    directories:
+      - "/samples/Sample.Carter.Cache.Application" #Sample.Carter.Cache.Application.csproj
+      - "/samples/Sample.Carter.Cache.Memcached.Application" #Sample.Carter.Cache.Memcached.Application.csproj
+      - "/samples/Sample.Carter.Cache.Redis.Application" #Sample.Carter.Cache.Redis.Application.csproj
+      - "/src/Carter.Cache" #Carter.Cache.csproj
+      - "/src/Carter.Cache.Memcached" #Carter.Cache.Memcached.csproj
+      - "/src/Carter.Cache.Redis" #Carter.Cache.Redis.csproj
+      - "/tests/Carter.Cache.Tests" #Carter.Cache.Tests.csproj
+      - "/tests/Carter.Cache.Sample.Tests" #Carter.Cache.Sample.Tests.csproj
+      - "/tests/Carter.Cache.Sample.Redis.Tests" #Carter.Cache.Sample.Redis.Tests.csproj
+      - "/tests/Carter.Cache.Sample.Memcached.Tests" #Carter.Cache.Sample.Memcached.Tests.csproj
     schedule:
       interval: "weekly"
       day: "friday"
