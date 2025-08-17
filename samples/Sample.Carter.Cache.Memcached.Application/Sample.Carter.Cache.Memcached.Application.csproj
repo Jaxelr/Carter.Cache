@@ -3,12 +3,21 @@
     <AssemblyName>Sample.Carter.Cache.Memcached.Application</AssemblyName>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="EnyimMemcachedCore" Version="3.4.0" />
+    <PackageReference Include="EnyimMemcachedCore" Version="3.4.4" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\Carter.Cache.Memcached\Carter.Cache.Memcached.csproj" />
     <ProjectReference Include="..\..\src\Carter.Cache\Carter.Cache.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="9.0.6" />
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="9.0.6" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="9.0.6" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.6" />
+    <PackageReference Include="Carter" Version="9.0.0" />
+    <PackageReference Include="SwashBuckle.AspNetCore" Version="9.0.3" />
   </ItemGroup>
 
   <ItemGroup>
