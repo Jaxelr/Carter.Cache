@@ -85,7 +85,7 @@ app.UseHttpsRedirection();
 app.UseRouting();
 
 app.UseSwagger();
-app.UseSwaggerUI();
+app.UseSwaggerUI((setup) => setup.SwaggerEndpoint($"/swagger/{settings.RouteDefinition.Version}/swagger.json", ServiceName));
 
 app.UseCarterCaching();
 app.MapCarter();
