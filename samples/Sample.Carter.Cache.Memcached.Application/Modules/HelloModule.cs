@@ -56,7 +56,7 @@ public class HelloModule : ICarterModule
         {
             try
             {
-                ctx.AsCacheable(15);
+                ctx.AsCacheable(10);
 
                 string response = repository.SayHello(name);
 

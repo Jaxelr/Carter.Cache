@@ -69,7 +69,7 @@ public class SampleAppMemcachedTests : IDisposable
 
         //Act
         var res1 = await client.GetAsync($"/hello/{name}");
-        Thread.Sleep(new TimeSpan(0, 0, 0, 10));
+        Thread.Sleep(new TimeSpan(0, 0, 0, 15));
         var res2 = await client.GetAsync($"/hello/{name}");
 
         //Assert
