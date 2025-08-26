@@ -4,6 +4,7 @@
     <CentralPackageTransitivePinningEnabled>false</CentralPackageTransitivePinningEnabled>
   </PropertyGroup>
   <ItemGroup>
+    <PackageVersion Include="altcover" Version="9.0.1" />
     <PackageVersion Include="EnyimMemcachedCore" Version="3.4.4" />
     <PackageVersion Include="Microsoft.Extensions.Caching.Memory" Version="9.0.6" />
     <PackageVersion Include="StackExchange.Redis" Version="2.8.31" />
