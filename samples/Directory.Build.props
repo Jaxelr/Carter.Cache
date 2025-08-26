@@ -4,7 +4,4 @@
     <OutputType>Exe</OutputType>
     <LangVersion>latest</LangVersion>
   </PropertyGroup>
-  <ItemGroup>
-    <None Remove=".editorconfig" />
-  </ItemGroup>
 </Project>
