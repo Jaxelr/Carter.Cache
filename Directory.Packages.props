@@ -7,7 +7,7 @@
     <PackageVersion Include="altcover" Version="9.0.1" />
     <PackageVersion Include="FakeItEasy" Version="8.3.0" />
     <PackageVersion Include="EnyimMemcachedCore" Version="3.4.4" />
-    <PackageVersion Include="Microsoft.Extensions.Caching.Memory" Version="9.0.6" />
+    <PackageVersion Include="Microsoft.Extensions.Caching.Memory" Version="9.0.9" />
     <PackageVersion Include="StackExchange.Redis" Version="2.8.31" />
     <PackageVersion Include="System.Text.Json" Version="9.0.6" />
     <PackageVersion Include="Carter" Version="9.0.0" />
