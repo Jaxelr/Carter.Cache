@@ -1,5 +1,4 @@
 ﻿using System;
-using Xunit;
 
 namespace Carter.Cache.Tests.Unit.Models;
 

@@ -1,7 +1,6 @@
 ﻿using System.Linq;
 using FakeItEasy;
 using Microsoft.Extensions.DependencyInjection;
-using Xunit;
 
 namespace Carter.Cache.Tests.Unit.Extensions;
 

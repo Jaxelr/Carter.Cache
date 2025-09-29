@@ -1,6 +1,5 @@
 ﻿using Carter.Cache.Keys;
 using Carter.Cache.Stores;
-using Xunit;
 
 namespace Carter.Cache.Tests.Unit;
 

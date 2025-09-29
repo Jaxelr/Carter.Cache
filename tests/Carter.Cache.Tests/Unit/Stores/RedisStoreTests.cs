@@ -3,7 +3,6 @@ using Carter.Cache.Redis;
 using Carter.Cache.Tests.Fakes;
 using FakeItEasy;
 using StackExchange.Redis;
-using Xunit;
 
 namespace Carter.Cache.Tests.Unit.Stores;
 

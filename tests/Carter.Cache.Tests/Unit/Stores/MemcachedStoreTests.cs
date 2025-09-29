@@ -5,7 +5,6 @@ using Enyim.Caching;
 using FakeItEasy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Xunit;
 
 namespace Carter.Cache.Tests.Unit.Stores;
 
