@@ -2,7 +2,6 @@
 using Carter.Cache.Stores;
 using Carter.Cache.Tests.Fakes;
 using FakeItEasy;
-using Xunit;
 
 namespace Carter.Cache.Tests.Unit.Stores;
 

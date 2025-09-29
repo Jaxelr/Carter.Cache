@@ -7,7 +7,6 @@ using Carter.Cache.Sample.Memcached.Tests.Mocks;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.Extensions.DependencyInjection;
 using Sample.Carter.Cache.Memcached.Application.Repository;
-using Xunit;
 
 namespace Carter.Cache.Sample.Memcached.Tests.Unit;
 

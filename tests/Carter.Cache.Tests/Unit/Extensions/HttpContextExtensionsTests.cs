@@ -2,7 +2,6 @@
 using FakeItEasy;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Net.Http.Headers;
-using Xunit;
 
 namespace Carter.Cache.Tests.Unit.Extensions;
 

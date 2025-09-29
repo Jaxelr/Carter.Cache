@@ -1,7 +1,6 @@
 ﻿using System;
 using FakeItEasy;
 using Microsoft.AspNetCore.Http;
-using Xunit;
 
 namespace Carter.Cache.Tests.Unit.Extensions;
 

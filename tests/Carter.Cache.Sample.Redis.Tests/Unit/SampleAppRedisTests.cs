@@ -7,7 +7,6 @@ using Carter.Cache.Sample.Redis.Tests.Mocks;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.Extensions.DependencyInjection;
 using Sample.Carter.Cache.Redis.Application.Repository;
-using Xunit;
 
 namespace Carter.Cache.Sample.Redis.Tests.Unit;
 
