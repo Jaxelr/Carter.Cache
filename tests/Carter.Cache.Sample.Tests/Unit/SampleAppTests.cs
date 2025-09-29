@@ -115,7 +115,7 @@ public class SampleAppTests : IDisposable
 
         //Act
         var res1 = await client.GetAsync($"/hello2/{name}", TestContext.Current.CancellationToken);
-        await Task.Delay(TimeSpan.FromSeconds(10), TestContext.Current.CancellationToken);
+        await Task.Delay(TimeSpan.FromSeconds(15), TestContext.Current.CancellationToken);
         var res2 = await client.GetAsync($"/hello2/{name}", TestContext.Current.CancellationToken);
 
         //Assert
