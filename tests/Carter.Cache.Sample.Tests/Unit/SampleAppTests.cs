@@ -2,7 +2,6 @@ using System;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Threading;
 using System.Threading.Tasks;
 using Carter.Cache.Sample.Tests.Mocks;
 using Microsoft.AspNetCore.Mvc.Testing;
@@ -69,7 +68,7 @@ public class SampleAppTests : IDisposable
 
         //Act
         var res1 = await client.GetAsync($"/hello/{name}", TestContext.Current.CancellationToken);
-        Thread.Sleep(new TimeSpan(0, 0, 0, 10));
+        await Task.Delay(TimeSpan.FromSeconds(10), TestContext.Current.CancellationToken);
         var res2 = await client.GetAsync($"/hello/{name}", TestContext.Current.CancellationToken);
 
         //Assert
@@ -116,7 +115,7 @@ public class SampleAppTests : IDisposable
 
         //Act
         var res1 = await client.GetAsync($"/hello2/{name}", TestContext.Current.CancellationToken);
-        Thread.Sleep(new TimeSpan(0, 0, 0, 15));
+        await Task.Delay(TimeSpan.FromSeconds(10), TestContext.Current.CancellationToken);
         var res2 = await client.GetAsync($"/hello2/{name}", TestContext.Current.CancellationToken);
 
         //Assert
