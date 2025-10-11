@@ -6,9 +6,9 @@
   <ItemGroup>
     <PackageVersion Include="altcover" Version="9.0.1" />
     <PackageVersion Include="FakeItEasy" Version="8.3.0" />
-    <PackageVersion Include="EnyimMemcachedCore" Version="3.4.4" />
+    <PackageVersion Include="EnyimMemcachedCore" Version="3.4.5" />
     <PackageVersion Include="Microsoft.Extensions.Caching.Memory" Version="9.0.9" />
-    <PackageVersion Include="StackExchange.Redis" Version="2.8.31" />
+    <PackageVersion Include="StackExchange.Redis" Version="2.9.25" />
     <PackageVersion Include="System.Text.Json" Version="9.0.9" />
     <PackageVersion Include="Carter" Version="9.0.0" />
     <PackageVersion Include="Microsoft.Extensions.Hosting" Version="9.0.9" />
@@ -17,10 +17,10 @@
     <PackageVersion Include="Microsoft.Extensions.DependencyInjection" Version="9.0.9" />
     <PackageVersion Include="Microsoft.Extensions.Logging" Version="9.0.9" />
     <PackageVersion Include="Microsoft.SourceLink.GitHub" Version="8.0.0" />
-    <PackageVersion Include="SwashBuckle.AspNetCore" Version="8.1.1" />
+    <PackageVersion Include="SwashBuckle.AspNetCore" Version="9.0.6" />
     <PackageVersion Include="Microsoft.AspNetCore.Mvc.Testing" Version="9.0.9" />
     <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="18.0.0" />
-    <PackageVersion Include="Microsoft.OpenApi" Version="1.6.24" />
+    <PackageVersion Include="Microsoft.OpenApi" Version="1.6.28" />
     <PackageVersion Include="xunit.v3" Version="3.1.0" />
     <PackageVersion Include="xunit.runner.visualstudio" Version="3.1.5" />
   </ItemGroup>
