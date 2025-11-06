@@ -41,7 +41,7 @@ public class CarterCachingMiddleware
 
         try
         {
-            using var memoryStream = new MemoryStream();
+            await using var memoryStream = new MemoryStream();
             response.Body = memoryStream;
 
             await next(ctx);

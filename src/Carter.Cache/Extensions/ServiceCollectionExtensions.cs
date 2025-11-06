@@ -5,11 +5,11 @@ namespace Carter.Cache;
 
 public static class ServiceCollectionExtensions
 {
-    public static void AddCarterCaching(this IServiceCollection services, Action<CachingOption> options = null)
+    public static void AddCarterCaching(this IServiceCollection services, Action<CachingOption>? options = null)
     {
         var cachingOptions = new CachingOption();
 
-        options(cachingOptions);
+        options?.Invoke(cachingOptions);
 
         services.AddCarterCaching(cachingOptions);
     }

@@ -6,27 +6,27 @@ namespace Carter.Cache;
 
 public static class HttpContextExtensions
 {
-    public static void AsCacheable(this HttpContext ctx, int seconds, string customHeader = null)
+    public static void AsCacheable(this HttpContext ctx, int seconds, string? customHeader = null)
     {
         var span = TimeSpan.FromSeconds(seconds);
 
         ctx.AddResponseExpirationHeader(span, customHeader);
     }
 
-    public static void AsCacheable(this HttpContext ctx, TimeSpan span, string customHeader = null) => ctx.AddResponseExpirationHeader(span, customHeader);
+    public static void AsCacheable(this HttpContext ctx, TimeSpan span, string? customHeader = null) => ctx.AddResponseExpirationHeader(span, customHeader);
 
-    public static void AsCacheable(this HttpContext ctx, DateTime absoluteExpiration, string customHeader = null)
+    public static void AsCacheable(this HttpContext ctx, DateTime absoluteExpiration, string? customHeader = null)
     {
         var span = absoluteExpiration - DateTime.UtcNow;
 
         ctx.AddResponseExpirationHeader(span, customHeader);
     }
 
-    internal static void AddResponseExpirationHeader(this HttpContext ctx, TimeSpan span, string customHeader = null)
+    internal static void AddResponseExpirationHeader(this HttpContext ctx, TimeSpan span, string? customHeader = null)
     {
         var property = ctx.Features.Get<CachingProperty>() ?? new CachingProperty();
 
-        if (customHeader != null)
+        if (customHeader is not null)
         {
             property.CustomHeader = customHeader;
         }

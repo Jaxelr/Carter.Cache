@@ -32,12 +32,15 @@ public class DefaultMemoryStore : ICacheStore
     /// <returns>True if the value exists, false if it doesnt</returns>
     public bool TryGetValue(string key, out CachedResponse response)
     {
-        response = null;
+        response = null!;
 
-        if (cache.TryGetValue(key, out CachedResponse value))
+        if (cache.TryGetValue(key, out CachedResponse? value))
         {
-            response = value;
-            return true;
+            if (value is not null)
+            {
+                response = value;
+                return true;
+            }
         }
 
         return false;
@@ -71,7 +74,7 @@ public class DefaultMemoryStore : ICacheStore
         {
             var options = new MemoryCacheEntryOptions()
                 .SetAbsoluteExpiration(expiration)
-                .RegisterPostEvictionCallback(callback: Eviction, state: this)
+                .RegisterPostEvictionCallback(callback: Eviction!, state: this)
                 .SetSize(SizeLimit);
 
             cache.Set(key, response, options);

@@ -8,15 +8,15 @@ namespace Carter.Cache.Redis;
 public class RedisStore : ICacheStore
 {
     private readonly ConnectionMultiplexer redis;
-    private readonly JsonSerializerOptions jsonSerializerOptions;
+    private readonly JsonSerializerOptions? jsonSerializerOptions;
 
-    public RedisStore(ConfigurationOptions options, JsonSerializerOptions jsonSerializerOptions = default)
+    public RedisStore(ConfigurationOptions options, JsonSerializerOptions? jsonSerializerOptions = default)
     {
         redis = ConnectionMultiplexer.Connect(options);
         this.jsonSerializerOptions = jsonSerializerOptions;
     }
 
-    public RedisStore(string configuration, JsonSerializerOptions jsonSerializerOptions = default)
+    public RedisStore(string configuration, JsonSerializerOptions? jsonSerializerOptions = default)
     {
         redis = ConnectionMultiplexer.Connect(configuration);
         this.jsonSerializerOptions = jsonSerializerOptions;
@@ -68,7 +68,7 @@ public class RedisStore : ICacheStore
     /// <returns>True if the value exists, false if not</returns>
     public bool TryGetValue(string key, out CachedResponse response)
     {
-        response = null;
+        response = null!;
 
         if (string.IsNullOrEmpty(key))
         {
@@ -81,7 +81,7 @@ public class RedisStore : ICacheStore
 
         if (result.HasValue)
         {
-            response = JsonSerializer.Deserialize<CachedResponse>(result, jsonSerializerOptions);
+            response = JsonSerializer.Deserialize<CachedResponse>(result!, jsonSerializerOptions)!;
             return true;
         }
 

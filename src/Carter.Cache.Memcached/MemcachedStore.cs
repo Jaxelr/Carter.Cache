@@ -46,7 +46,7 @@ public class MemcachedStore : ICacheStore
     /// <returns>True if the value exists, false if not</returns>
     public bool TryGetValue(string key, out CachedResponse response)
     {
-        response = null;
+        response = null!;
 
         if (client.TryGet(key, out CachedResponse value))
         {
