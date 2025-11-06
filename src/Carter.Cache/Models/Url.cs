@@ -11,9 +11,9 @@ namespace Carter.Cache;
 /// <remarks>Since this is for  internal use, and fragments are not passed to the server, fragments are not supported.</remarks>
 public sealed class Url
 {
-    private string basePath;
+    private string? basePath;
 
-    private string query;
+    private string? query;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="Url"/> class.
@@ -64,7 +64,7 @@ public sealed class Url
     /// </summary>
     public string BasePath
     {
-        get => basePath;
+        get => basePath!;
         set => basePath = (value ?? string.Empty).TrimEnd('/');
     }
 
@@ -79,7 +79,7 @@ public sealed class Url
     /// </summary>
     public string Query
     {
-        get => query;
+        get => query!;
         set => query = GetQuery(value);
     }
 
@@ -179,7 +179,7 @@ public sealed class Url
 
     private static string GetHostName(string hostName)
     {
-        if (IPAddress.TryParse(hostName, out IPAddress address))
+        if (IPAddress.TryParse(hostName, out IPAddress? address))
         {
             string addressString = address.ToString();
 

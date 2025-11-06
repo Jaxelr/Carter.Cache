@@ -5,6 +5,7 @@
     <Version>0.3.1</Version>
     <Copyright>Copyright 2025</Copyright>
     <LangVersion>latest</LangVersion>
+    <Nullable>enable</Nullable>
     <TargetFrameworks>net8.0;net9.0</TargetFrameworks>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <RepositoryUrl>https://github.com/Jaxelr/Carter.Cache.git</RepositoryUrl>

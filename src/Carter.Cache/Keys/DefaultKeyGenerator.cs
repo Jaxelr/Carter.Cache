@@ -9,7 +9,7 @@ public class DefaultKeyGenerator : ICacheKey
 {
     public string Get(HttpRequest request)
     {
-        if (request == null)
+        if (request is null)
         {
             return string.Empty;
         }
@@ -18,20 +18,20 @@ public class DefaultKeyGenerator : ICacheKey
 
         foreach (var queryKey in request.Query)
         {
-            parameters[queryKey.Key] = queryKey.Value;
+            parameters[queryKey.Key] = queryKey.Value!;
         }
 
         if (request.HasFormContentType)
         {
             foreach (var formKey in request.Form)
             {
-                parameters[formKey.Key] = formKey.Value;
+                parameters[formKey.Key] = formKey.Value!;
             }
         }
 
         if (request.Headers.ContainsKey(HeaderNames.Accept))
         {
-            parameters.Add(HeaderNames.Accept, request.Headers[HeaderNames.Accept]);
+            parameters.Add(HeaderNames.Accept, request.Headers[HeaderNames.Accept]!);
         }
 
         var url = new Url
