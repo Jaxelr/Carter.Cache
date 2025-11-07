@@ -2,7 +2,7 @@
 
 public record CacheConfig
 {
-    public bool CacheEnabled { get; set; }
-    public int CacheTimespan { get; set; }
-    public int CacheMaxSize { get; set; }
+    public bool CacheEnabled { get; set; } = true;
+    public int CacheTimespan { get; set; } = 60;
+    public int CacheMaxSize { get; set; } = 2048;
 }

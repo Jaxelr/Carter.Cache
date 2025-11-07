@@ -2,6 +2,6 @@
 
 public record RouteDefinition
 {
-    public string RouteSuffix { get; set; }
-    public string Version { get; set; }
+    public string RouteSuffix { get; set; } = string.Empty;
+    public string Version { get; set; } = string.Empty;
 }
