@@ -5,7 +5,7 @@
 /// </summary>
 public record AppSettings
 {
-    public CacheConfig Cache { get; set; }
-    public RouteDefinition RouteDefinition { get; set; }
-    public string[] ServerUrls { get; set; }
+    public CacheConfig Cache { get; set; } = new();
+    public RouteDefinition RouteDefinition { get; set; } = new();
+    public string[] ServerUrls { get; set; } = [];
 }

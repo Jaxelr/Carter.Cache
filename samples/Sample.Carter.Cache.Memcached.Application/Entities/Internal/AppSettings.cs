@@ -5,6 +5,6 @@
 /// </summary>
 public record AppSettings
 {
-    public RouteDefinition RouteDefinition { get; set; }
-    public string[] ServerUrls { get; set; }
+    public RouteDefinition RouteDefinition { get; set; } = new();
+    public string[] ServerUrls { get; set; } = [];
 }
