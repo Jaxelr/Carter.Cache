@@ -21,7 +21,7 @@ public class MemcachedStoreTests
         services.AddEnyimMemcached(options => options.AddServer(Host, Port));
         services.AddLogging();
         IServiceProvider serviceProvider = services.BuildServiceProvider();
-        return serviceProvider.GetService<IMemcachedClient>() as MemcachedClient;
+        return serviceProvider.GetService<IMemcachedClient>() as MemcachedClient ?? throw new InvalidOperationException();
     }
 
     [Fact]

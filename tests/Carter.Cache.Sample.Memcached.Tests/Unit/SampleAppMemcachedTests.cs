@@ -150,7 +150,7 @@ public class SampleAppMemcachedTests : IDisposable
 
         //Act
         var res1 = await client.GetAsync($"/hello/{name}", TestContext.Current.CancellationToken);
-        var etag = new EntityTagHeaderValue(res1.Headers.ETag.Tag);
+        var etag = new EntityTagHeaderValue(res1.Headers?.ETag?.Tag!);
 
         client.DefaultRequestHeaders.IfNoneMatch.Add(etag);
         var res2 = await client.GetAsync($"/hello/{name}", TestContext.Current.CancellationToken);

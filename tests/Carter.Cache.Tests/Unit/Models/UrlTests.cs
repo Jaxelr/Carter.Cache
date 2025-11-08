@@ -89,7 +89,7 @@ public class UrlTests
         //Arrange
         var local = new Url(SecureLocalhost)
         {
-            Query = null
+            Query = null!
         };
 
         //Act
@@ -161,7 +161,7 @@ public class UrlTests
         var result = (Uri) local;
 
         //Assert
-        Assert.Equal(result.ToString(), string.Concat(local.ToString(), "/"));
+        Assert.Equal(result.ToString(), $"{local.ToString()}/");
     }
 
     [Fact]
@@ -175,6 +175,6 @@ public class UrlTests
         var result = (Url) local;
 
         //Assert
-        Assert.Equal(result.ToString(), string.Concat("http://", local.ToString()));
+        Assert.Equal(result.ToString(), $"http://{local}");
     }
 }

@@ -40,7 +40,7 @@ public class ServiceCollectionExtensionsTests
         var service = A.Fake<IServiceCollection>();
 
         //Act
-        service.AddCarterCaching(options => options.ValidRequest = null);
+        service.AddCarterCaching(options => options.ValidRequest = null!);
 
         //Assert
         Assert.NotNull(service.Where(x => x.ServiceType == typeof(CachingOption)));

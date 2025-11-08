@@ -22,7 +22,7 @@ public class HttpRequestExtensionsTests
 
         //Assert
         Assert.Equal(TimeSpan.FromSeconds(elapsedSeconds),
-            req.HttpContext.Features.Get<CachingProperty>().Expiration);
+            req.HttpContext.Features.Get<CachingProperty>()?.Expiration);
     }
 
     [Fact]
@@ -43,7 +43,7 @@ public class HttpRequestExtensionsTests
         //Assert
         Assert.NotNull(req);
         Assert.Equal(fakeSpan,
-            req.HttpContext.Features.Get<CachingProperty>().Expiration);
+            req.HttpContext.Features.Get<CachingProperty>()?.Expiration);
     }
 
     [Fact]
@@ -64,9 +64,9 @@ public class HttpRequestExtensionsTests
         //Assert
         Assert.NotNull(req);
         Assert.Equal(TimeSpan.FromSeconds(elapsedSeconds),
-            req.HttpContext.Features.Get<CachingProperty>().Expiration);
+            req.HttpContext.Features.Get<CachingProperty>()?.Expiration);
         Assert.Equal(fakeHeader,
-            req.HttpContext.Features.Get<CachingProperty>().CustomHeader);
+            req.HttpContext.Features.Get<CachingProperty>()?.CustomHeader);
     }
 
     [Fact]
@@ -88,9 +88,9 @@ public class HttpRequestExtensionsTests
         //Assert
         Assert.NotNull(req);
         Assert.Equal(fakeSpan,
-            req.HttpContext.Features.Get<CachingProperty>().Expiration);
+            req.HttpContext.Features.Get<CachingProperty>()?.Expiration);
         Assert.Equal(fakeHeader,
-            req.HttpContext.Features.Get<CachingProperty>().CustomHeader);
+            req.HttpContext.Features.Get<CachingProperty>()?.CustomHeader);
     }
 
     [Fact]
@@ -112,7 +112,7 @@ public class HttpRequestExtensionsTests
 
         //Assert
         Assert.NotNull(req);
-        Assert.True(fakeSpanCalculated.TotalSeconds - req.HttpContext.Features.Get<CachingProperty>().Expiration.TotalSeconds < 0.001); //Close Enough?
-        Assert.Equal(fakeHeader, req.HttpContext.Features.Get<CachingProperty>().CustomHeader);
+        Assert.True(fakeSpanCalculated.TotalSeconds - req.HttpContext.Features.Get<CachingProperty>()?.Expiration.TotalSeconds < 0.001); //Close Enough?
+        Assert.Equal(fakeHeader, req.HttpContext.Features.Get<CachingProperty>()?.CustomHeader);
     }
 }
