@@ -23,7 +23,7 @@ public class HttpContextExtensionsTests
 
         //Assert
         Assert.Equal(TimeSpan.FromSeconds(elapsedSeconds),
-            req.Features.Get<CachingProperty>().Expiration);
+            req.Features.Get<CachingProperty>()?.Expiration);
     }
 
     [Fact]
@@ -43,9 +43,9 @@ public class HttpContextExtensionsTests
 
         //Assert
         Assert.Equal(TimeSpan.FromSeconds(elapsedSeconds),
-            req.Features.Get<CachingProperty>().Expiration);
+            req.Features.Get<CachingProperty>()?.Expiration);
         Assert.Equal(fakeHeader,
-            req.Features.Get<CachingProperty>().CustomHeader);
+            req.Features.Get<CachingProperty>()?.CustomHeader);
     }
 
     [Fact]
@@ -65,7 +65,7 @@ public class HttpContextExtensionsTests
 
         //Assert
         Assert.Equal(fakeSpan,
-            req.Features.Get<CachingProperty>().Expiration);
+            req.Features.Get<CachingProperty>()?.Expiration);
     }
 
     [Fact]
@@ -85,7 +85,7 @@ public class HttpContextExtensionsTests
 
         //Assert
         Assert.True(
-            Math.Abs(fakeSpan.TotalMinutes - req.Features.Get<CachingProperty>().Expiration.TotalMinutes) < 0.01
+            Math.Abs(fakeSpan.TotalMinutes - req.Features.Get<CachingProperty>()?.Expiration.TotalMinutes ?? 0) < 0.01
         );
     }
 
@@ -107,9 +107,9 @@ public class HttpContextExtensionsTests
 
         //Assert
         Assert.Equal(fakeSpan,
-            req.Features.Get<CachingProperty>().Expiration);
+            req.Features.Get<CachingProperty>()?.Expiration);
         Assert.Equal(fakeHeader,
-            req.Features.Get<CachingProperty>().CustomHeader);
+            req.Features.Get<CachingProperty>()?.CustomHeader);
     }
 
     [Fact]

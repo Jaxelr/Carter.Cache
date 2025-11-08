@@ -17,10 +17,10 @@ public class CachedResponseTests
         var props = new CachingProperty();
 
         //Act
-        var cachedResponse = new CachedResponse(context, Array.Empty<byte>());
+        var cachedResponse = new CachedResponse(context, []);
 
         //Assert
-        Assert.True(cachedResponse.Headers.ContainsKey(props.CustomHeader));
+        Assert.True(cachedResponse.Headers?.ContainsKey(props.CustomHeader));
     }
 
     [Fact]
@@ -50,7 +50,7 @@ public class CachedResponseTests
         A.CallTo(() => context.Features.Get<CachingProperty>()).Returns(props);
 
         //Act
-        var cachedResponse = new CachedResponse(context, Array.Empty<byte>());
+        var cachedResponse = new CachedResponse(context, []);
 
         //Assert
         Assert.Equal(timeSpan, cachedResponse.Expiry);
@@ -81,7 +81,7 @@ public class CachedResponseTests
         A.CallTo(() => context.Response).Returns(response);
 
         //Act
-        var cachedResponse = new CachedResponse(context, Array.Empty<byte>());
+        var cachedResponse = new CachedResponse(context, []);
 
         //Assert
         Assert.Equal(cachedResponse.ContentType, response.ContentType);
@@ -98,7 +98,7 @@ public class CachedResponseTests
         A.CallTo(() => context.Response).Returns(response);
 
         //Act
-        var cachedResponse = new CachedResponse(context, Array.Empty<byte>());
+        var cachedResponse = new CachedResponse(context, []);
 
         //Assert
         Assert.Equal(cachedResponse.StatusCode, response.StatusCode);
@@ -115,7 +115,7 @@ public class CachedResponseTests
         A.CallTo(() => context.Response).Returns(response);
 
         //Act
-        var cachedResponse = new CachedResponse(context, Array.Empty<byte>());
+        var cachedResponse = new CachedResponse(context, []);
         await cachedResponse.MapToContext(context);
 
         //Assert
@@ -133,7 +133,7 @@ public class CachedResponseTests
         A.CallTo(() => context.Response).Returns(response);
 
         //Act
-        var cachedResponse = new CachedResponse(context, Array.Empty<byte>());
+        var cachedResponse = new CachedResponse(context, []);
         await cachedResponse.MapToContext(context);
 
         //Assert
@@ -158,11 +158,11 @@ public class CachedResponseTests
         A.CallTo(() => context.Response).Returns(response);
 
         //Act
-        var cachedResponse = new CachedResponse(context, Array.Empty<byte>());
+        var cachedResponse = new CachedResponse(context, []);
         await cachedResponse.MapToContext(context);
 
         //Assert
-        Assert.Equal(cachedResponse.Headers[HeaderNames.ETag], response.Headers[HeaderNames.ETag]);
+        Assert.Equal(cachedResponse.Headers?[HeaderNames.ETag], response.Headers[HeaderNames.ETag]);
     }
 
     [Fact]
@@ -184,11 +184,11 @@ public class CachedResponseTests
         A.CallTo(() => context.Response).Returns(response);
 
         //Act
-        var cachedResponse = new CachedResponse(context, Array.Empty<byte>());
+        var cachedResponse = new CachedResponse(context, []);
         await cachedResponse.MapToContext(context);
 
         //Assert
-        Assert.Equal(cachedResponse.Headers[HeaderNames.ETag], response.Headers[HeaderNames.ETag]);
+        Assert.Equal(cachedResponse.Headers?[HeaderNames.ETag], response.Headers[HeaderNames.ETag]);
         Assert.Equal(StatusCodes.Status304NotModified, response.StatusCode);
         Assert.Equal(0, response.ContentLength);
     }
