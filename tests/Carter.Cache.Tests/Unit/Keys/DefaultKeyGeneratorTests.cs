@@ -14,7 +14,7 @@ public class DefaultKeyGeneratorTests
         var keyGen = new DefaultKeyGenerator();
 
         //Act
-        string key = keyGen.Get(null);
+        string key = keyGen.Get(null!);
 
         //Assert
         Assert.Empty(key);

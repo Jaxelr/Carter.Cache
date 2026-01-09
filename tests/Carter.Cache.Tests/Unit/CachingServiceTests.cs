@@ -32,7 +32,7 @@ public class CachingServiceTests
         var option = A.Fake<CachingOption>();
         var service = A.Fake<CarterCachingService>();
 
-        A.CallTo(() => ctx.Request).Returns(null);
+        A.CallTo(() => ctx.Request).Returns(null!);
 
         //Act
         bool cacheHit = await service.CheckCache(ctx, option);
