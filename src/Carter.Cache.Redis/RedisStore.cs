@@ -81,7 +81,7 @@ public class RedisStore : ICacheStore
 
         if (result.HasValue)
         {
-            response = JsonSerializer.Deserialize<CachedResponse>(result!, jsonSerializerOptions)!;
+            response = JsonSerializer.Deserialize<CachedResponse>(result.ToString(), jsonSerializerOptions)!;
             return true;
         }
 
