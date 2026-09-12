@@ -44,7 +44,7 @@ builder.Services.AddCarterCaching(new CachingOption(2048));
 builder.Services.AddCarter();
 ```
 
-1. Define a Configuration usage
+2. Add the caching middleware before mapping Carter modules:
 
 ```csharp
 var app = builder.Build();
@@ -60,7 +60,7 @@ app.Run();
 
 
 
-1. Add the Cacheable clause to your module:
+3. Mark a response as cacheable inside your route handler:
 
 ```csharp
     public class HomeModule : ICarterModule
@@ -82,10 +82,10 @@ The default configuration does use the [Microsoft.Extensions.Caching.Memory](htt
 
 ### Customization
 
-You can easily define a custom Store by implementing the ICacheStore interface with the following signature:
+Define a custom store by implementing `ICacheStore`, including the inherited `Dispose()` method:
 
 ```csharp
-    public interface ICacheStore
+    public interface ICacheStore : IDisposable
     {
         bool TryGetValue(string key, out CachedResponse cachedResponse);
 
@@ -108,7 +108,7 @@ Also a custom Key can be easily defined by implementing the ICacheKey interface:
 
 A redis store which includes the dependency on [StackExchange.Redis](https://www.nuget.org/packages/StackExchange.Redis/) and can be used as a replacement of the memory store.
 
-Firstly, install the library using .net cli `dotnet add package Carter.Cache.Redis` or using Package Manager `Install-Package Carter.Cache.Redis`. The usage requires the following configurations on the Startup.cs file:
+Install using `dotnet add package Carter.Cache.Redis` or Package Manager `Install-Package Carter.Cache.Redis`. In `Program.cs`, replace the default in-memory caching registration with:
 
 ```csharp
 //The rest of your Program.cs ....
@@ -125,7 +125,7 @@ builder.Services.AddCarterCaching(serviceProvider.GetRequiredService<CachingOpti
 builder.Services.AddCarter();
 ```
 
-As part of the redis definition, you can optionally provide a json serializer definition to be used for the serialization of the cached response. This uses the [System.Text.Json](https://www.nuget.org/packages/System.Text.Json) library.
+You can optionally pass [System.Text.Json](https://www.nuget.org/packages/System.Text.Json) serializer options to `RedisStore`:
 
 ```csharp
 //The rest of your Program.cs ....
@@ -146,9 +146,9 @@ builder.Services.AddCarter();
 
 ### Memcached store
 
-Alternatively, a memcached store can also be included as an alternatively, using a dependency on the library [EnyimMemcachedCore](https://www.nuget.org/packages/EnyimMemcachedCore/).
+Alternatively, use the Memcached store backed by [EnyimMemcachedCore](https://www.nuget.org/packages/EnyimMemcachedCore/).
 
-To install, using .net cli `dotnet add package Carter.Cache.Memcached` or using Package Manager `Install-Package Carter.Cache.Memcached`. The usage requires the following reconfigurations on the ConfigureServices method of Startup:
+Install using `dotnet add package Carter.Cache.Memcached` or Package Manager `Install-Package Carter.Cache.Memcached`. In `Program.cs`, replace the default in-memory caching registration with:
 
 ```csharp
 //The rest of your Program.cs ....
@@ -165,10 +165,11 @@ builder.Services.AddSingleton(provider => new CachingOption()
     Store = provider.GetRequiredService<ICacheStore>()
 });
 
-IServiceProvider serviceProvider = services.BuildServiceProvider();
+IServiceProvider serviceProvider = builder.Services.BuildServiceProvider();
 
 //Pass it as a dependency to the add
-services.AddCarterCaching(serviceProvider.GetRequiredService<CachingOption>());
+builder.Services.AddCarterCaching(serviceProvider.GetRequiredService<CachingOption>());
+builder.Services.AddCarter();
 ```
 
 For more information check the [samples](/samples) included.
