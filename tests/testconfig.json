@@ -1,0 +1,8 @@
+{
+  "commandLineOptions": {
+    "coverlet": true,
+    "coverlet-output-format": "cobertura",
+    "coverlet-file-prefix": "Carter.Cache.Tests",
+    "coverlet-include": "[Carter.Cache*]*"
+  }
+}
