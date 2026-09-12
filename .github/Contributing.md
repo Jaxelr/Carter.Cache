@@ -11,3 +11,7 @@ These are the requirements which are pretty much global considerations for proje
 ## Styles
 
 Follow the .editorconfig guidelines.
+
+## Tests
+
+Start Redis and Memcached with `docker compose -f .docker/docker-compose.yml up -d`, then run `dotnet test`.

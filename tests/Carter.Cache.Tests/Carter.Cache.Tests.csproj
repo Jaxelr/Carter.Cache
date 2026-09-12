@@ -1,19 +1,17 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
-    <PackageReference Include="altcover" />
+    <PackageReference Include="coverlet.MTP" />
     <PackageReference Include="EnyimMemcachedCore" />
     <PackageReference Include="FakeItEasy" />
     <PackageReference Include="Microsoft.Extensions.Configuration" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" />
     <PackageReference Include="Microsoft.Extensions.Logging" />
-    <PackageReference Include="Microsoft.NET.Test.Sdk" />
     <PackageReference Include="StackExchange.Redis" />
-    <PackageReference Include="xunit.v3" />
-    <PackageReference Include="xunit.runner.visualstudio">
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-      <PrivateAssets>all</PrivateAssets>
-    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\testconfig.json" Link="testconfig.json" TargetPath="$(AssemblyName).testconfig.json" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
 
   <ItemGroup>
