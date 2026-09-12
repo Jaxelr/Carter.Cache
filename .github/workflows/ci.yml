@@ -13,9 +13,9 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Setup .NET
-      uses: actions/setup-dotnet@v3
+      uses: actions/setup-dotnet@v5
       with:
-        dotnet-version: 9.0.x
+        dotnet-version: 10.0.x
     - name: Run dependency images
       run: docker compose -f .docker/docker-compose.yml up -d
     - name: Install dependencies
@@ -28,7 +28,7 @@ jobs:
       uses: codecov/codecov-action@v1.2.1
       with:
         token: ${{ secrets.CODECOV_TOKEN }}
-        file: tests/Carter.Cache.Tests/coverage.net8.0.xml
+        file: tests/Carter.Cache.Tests/coverage.xml
     - name: Pack
       run: dotnet pack src/Carter.Cache/Carter.Cache.csproj -o $NUPKGS --include-symbols
     - name: Pack Memcached

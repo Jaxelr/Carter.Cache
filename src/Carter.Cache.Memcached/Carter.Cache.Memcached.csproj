@@ -3,12 +3,13 @@
   <PropertyGroup>
     <Description>A memcached plugin for the carter caching library</Description>
     <PackageTags>carter cache memcached</PackageTags>
-    <PackageReleaseNotes>Addition of target: dotnet 9</PackageReleaseNotes>
+    <PackageReleaseNotes>Addition of target: .NET 10</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="EnyimMemcachedCore" />
-    <PackageReference Include="Microsoft.SourceLink.GitHub" />
+    <PackageReference Include="MessagePack" />
+    <PackageReference Include="Microsoft.SourceLink.GitHub" PrivateAssets="All" />
   </ItemGroup>
 
   <ItemGroup>

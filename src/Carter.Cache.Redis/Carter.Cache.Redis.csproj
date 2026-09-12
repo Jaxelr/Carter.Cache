@@ -3,13 +3,13 @@
   <PropertyGroup>
     <Description>A redis plugin for the carter caching library</Description>
     <PackageTags>carter cache redis</PackageTags>
-    <PackageReleaseNotes>Addition of target: dotnet 9</PackageReleaseNotes>
+    <PackageReleaseNotes>Addition of target: .NET 10</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="System.Text.Json" />
     <PackageReference Include="StackExchange.Redis" />
-    <PackageReference Include="Microsoft.SourceLink.GitHub" />
+    <PackageReference Include="Microsoft.SourceLink.GitHub" PrivateAssets="All" />
   </ItemGroup>
 
   <ItemGroup>
