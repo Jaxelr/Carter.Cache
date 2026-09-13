@@ -1,7 +1,9 @@
+using System.Threading.Tasks;
 using Carter;
 using Carter.Cache;
 using Carter.OpenApi;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.OpenApi;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -9,6 +11,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi;
 using Sample.Carter.Cache.Application.Entities;
 using Sample.Carter.Cache.Application.Repository;
+using Scalar.AspNetCore;
 
 const string ServiceName = "Sample";
 const string Policy = "DefaultPolicy";
@@ -49,17 +52,9 @@ builder.Services.AddSingleton<IHelloRepository, HelloRepository>();
 //HealthChecks
 builder.Services.AddHealthChecks();
 
-//Swagger
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen(options =>
+builder.Services.AddOpenApi(settings.RouteDefinition.Version, options =>
 {
-    options.SwaggerDoc(settings.RouteDefinition.Version, new OpenApiInfo
-    {
-        Description = ServiceName,
-        Version = settings.RouteDefinition.Version,
-    });
-
-    options.DocInclusionPredicate((_, description) =>
+    options.ShouldInclude = description =>
     {
         foreach (object metaData in description.ActionDescriptor.EndpointMetadata)
         {
@@ -69,6 +64,18 @@ builder.Services.AddSwaggerGen(options =>
             }
         }
         return false;
+    };
+
+    options.AddDocumentTransformer((document, _, _) =>
+    {
+        document.Info = new OpenApiInfo
+        {
+            Description = ServiceName,
+            Title = ServiceName,
+            Version = settings.RouteDefinition.Version,
+        };
+
+        return Task.CompletedTask;
     });
 });
 
@@ -84,8 +91,10 @@ if (builder.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseRouting();
 
-app.UseSwagger();
-app.UseSwaggerUI((setup) => setup.SwaggerEndpoint($"/swagger/{settings.RouteDefinition.Version}/swagger.json", ServiceName));
+app.MapOpenApi();
+app.MapScalarApiReference(settings.RouteDefinition.RouteSuffix, options => options
+    .WithTitle(ServiceName)
+    .AddDocument(settings.RouteDefinition.Version, ServiceName));
 
 app.UseCarterCaching();
 app.MapCarter();
