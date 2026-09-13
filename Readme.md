@@ -174,6 +174,8 @@ builder.Services.AddCarter();
 
 For more information check the [samples](/samples) included.
 
+The sample applications expose their OpenAPI document at `/openapi/v1.json` and the Scalar API reference at `/scalar`.
+
 [carter-cache-img]: https://img.shields.io/nuget/v/Carter.Cache.svg
 [carter-cache]: https://www.nuget.org/packages/Carter.Cache
 [myget-carter-cache-img]: https://img.shields.io/myget/carter-cache/v/Carter.Cache.svg

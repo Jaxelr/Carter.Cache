@@ -1,7 +1,5 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <ItemGroup>
-    <PackageReference Include="EnyimMemcachedCore"/>
-    <PackageReference Include="Swashbuckle.AspNetCore"/>
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing"/>
     <ProjectReference Include="..\..\samples\Sample.Carter.Cache.Memcached.Application\Sample.Carter.Cache.Memcached.Application.csproj" />
   </ItemGroup>
