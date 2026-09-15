@@ -1,0 +1,22 @@
+<Solution>
+  <Folder Name="/samples/">
+    <File Path="samples/Directory.Build.props" />
+    <Project Path="samples/Sample.Carter.Cache.Application/Sample.Carter.Cache.Application.csproj" />
+    <Project Path="samples/Sample.Carter.Cache.Memcached.Application/Sample.Carter.Cache.Memcached.Application.csproj" />
+    <Project Path="samples/Sample.Carter.Cache.Redis.Application/Sample.Carter.Cache.Redis.Application.csproj" />
+  </Folder>
+  <Folder Name="/src/">
+    <File Path="src/Directory.Build.props" />
+    <Project Path="src/Carter.Cache.Memcached/Carter.Cache.Memcached.csproj" />
+    <Project Path="src/Carter.Cache.Redis/Carter.Cache.Redis.csproj" />
+    <Project Path="src/Carter.Cache/Carter.Cache.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <File Path="tests/Directory.Build.props" />
+    <File Path="tests/testconfig.json" />
+    <Project Path="tests/Carter.Cache.Sample.Memcached.Tests/Carter.Cache.Sample.Memcached.Tests.csproj" />
+    <Project Path="tests/Carter.Cache.Sample.Redis.Tests/Carter.Cache.Sample.Redis.Tests.csproj" />
+    <Project Path="tests/Carter.Cache.Sample.Tests/Carter.Cache.Sample.Tests.csproj" />
+    <Project Path="tests/Carter.Cache.Tests/Carter.Cache.Tests.csproj" />
+  </Folder>
+</Solution>
