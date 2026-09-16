@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Text.Json;
 using Carter.Cache.Stores;
 using StackExchange.Redis;
@@ -22,7 +22,11 @@ public class RedisStore : ICacheStore
         this.jsonSerializerOptions = jsonSerializerOptions;
     }
 
-    public void Dispose() => redis.Dispose();
+    public void Dispose()
+    {
+        redis.Dispose();
+        GC.SuppressFinalize(this);
+    }
 
     /// <summary>
     /// Remove the element with the key provided.

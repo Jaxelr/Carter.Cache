@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Net.Http.Headers;
@@ -29,9 +29,9 @@ public class DefaultKeyGenerator : ICacheKey
             }
         }
 
-        if (request.Headers.ContainsKey(HeaderNames.Accept))
+        if (request.Headers.TryGetValue(HeaderNames.Accept, out var value))
         {
-            parameters.Add(HeaderNames.Accept, request.Headers[HeaderNames.Accept]!);
+            parameters.Add(HeaderNames.Accept, value!);
         }
 
         var url = new Url

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Carter.Cache.Stores;
 using Enyim.Caching;
 using Enyim.Caching.Memcached;
@@ -11,7 +11,11 @@ public class MemcachedStore : ICacheStore
 
     public MemcachedStore(IMemcachedClient client) => this.client = client;
 
-    public void Dispose() => client.Dispose();
+    public void Dispose()
+    {
+        client.Dispose();
+        GC.SuppressFinalize(this);
+    }
 
     /// <summary>
     /// Remove the element with the key provided.

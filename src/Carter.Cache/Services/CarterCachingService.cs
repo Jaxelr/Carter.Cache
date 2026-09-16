@@ -14,7 +14,7 @@ public class CarterCachingService : ICarterCachingService
             return false;
         }
 
-        if (options.Store.TryGetValue(key, out CachedResponse cachedResponse))
+        if (options.Store.TryGetValue(key, out var cachedResponse))
         {
             await cachedResponse.MapToContext(ctx);
             return true;

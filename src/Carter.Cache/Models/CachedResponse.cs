@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
@@ -33,15 +33,15 @@ public class CachedResponse
 
         var response = ctx.Response;
 
-        Headers = new Dictionary<string, string>();
+        Headers = [];
         Body = body;
         ContentType = response.ContentType;
         StatusCode = response.StatusCode;
         Expiry = property.Expiration;
 
-        if (ctx.Response.Headers.ContainsKey(HeaderNames.ETag))
+        if (ctx.Response.Headers.TryGetValue(HeaderNames.ETag, out var value))
         {
-            Headers.Add(HeaderNames.ETag, ctx.Response.Headers[HeaderNames.ETag]!);
+            Headers.Add(HeaderNames.ETag, value!);
         }
 
         Headers.Add(property.CustomHeader, property.Expiration.ToString());
@@ -49,7 +49,7 @@ public class CachedResponse
 
     public async Task MapToContext(HttpContext ctx)
     {
-        foreach (string headerKey in Headers?.Keys!)
+        foreach (var headerKey in Headers?.Keys!)
         {
             if (!ctx.Response.Headers.ContainsKey(headerKey.ToLowerInvariant()))
             {
@@ -57,7 +57,7 @@ public class CachedResponse
             }
         }
 
-        ctx.Request.Headers.TryGetValue(HeaderNames.IfNoneMatch, out StringValues etag);
+        ctx.Request.Headers.TryGetValue(HeaderNames.IfNoneMatch, out var etag);
 
         if (!string.IsNullOrWhiteSpace(etag) && ctx.Response.Headers[HeaderNames.ETag] == etag)
         {

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Microsoft.Extensions.Caching.Memory;
 
 namespace Carter.Cache.Stores;
@@ -91,5 +91,9 @@ public class DefaultMemoryStore : ICacheStore
     /// <param name="state"></param>
     private void Eviction(object key, object value, EvictionReason reason, object state) => size--;
 
-    public void Dispose() => cache.Dispose();
+    public void Dispose()
+    {
+        cache.Dispose();
+        GC.SuppressFinalize(this);
+    }
 }

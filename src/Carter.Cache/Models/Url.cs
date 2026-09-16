@@ -179,7 +179,7 @@ public sealed class Url
 
     private static string GetHostName(string hostName)
     {
-        if (IPAddress.TryParse(hostName, out IPAddress? address))
+        if (IPAddress.TryParse(hostName, out var address))
         {
             string addressString = address.ToString();
 
