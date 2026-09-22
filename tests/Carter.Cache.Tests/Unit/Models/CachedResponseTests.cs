@@ -148,12 +148,13 @@ public class CachedResponseTests
         var context = A.Fake<HttpContext>();
         var response = A.Fake<HttpResponse>();
         var request = A.Fake<HttpRequest>();
+        var responseHeaders = new HeaderDictionary
+        {
+            [HeaderNames.ETag] = fakeEtag
+        };
 
-        A.CallTo(() => request.Headers.ContainsKey(HeaderNames.ETag)).Returns(true);
-        A.CallTo(() => request.Headers[HeaderNames.ETag]).Returns(fakeEtag);
-
-        A.CallTo(() => response.Headers.ContainsKey(HeaderNames.ETag)).Returns(true);
-        A.CallTo(() => response.Headers[HeaderNames.ETag]).Returns(fakeEtag);
+        A.CallTo(() => request.Headers).Returns(new HeaderDictionary());
+        A.CallTo(() => response.Headers).Returns(responseHeaders);
         A.CallTo(() => context.Request).Returns(request);
         A.CallTo(() => context.Response).Returns(response);
 
@@ -170,17 +171,22 @@ public class CachedResponseTests
     {
         //Arrange
         const string fakeEtag = "84de625db71b56d480d47bdc32377d23144b8c65";
-        var fakeIfNoneMatch = new Microsoft.Extensions.Primitives.StringValues(fakeEtag);
         var context = A.Fake<HttpContext>();
         var response = A.Fake<HttpResponse>();
         var request = A.Fake<HttpRequest>();
+        var requestHeaders = new HeaderDictionary
+        {
+            [HeaderNames.IfNoneMatch] = fakeEtag
+        };
+        var responseHeaders = new HeaderDictionary
+        {
+            [HeaderNames.ETag] = fakeEtag
+        };
 
-        A.CallTo(() => request.Headers.TryGetValue(HeaderNames.IfNoneMatch, out fakeIfNoneMatch))
-            .Returns(true);
+        A.CallTo(() => request.Headers).Returns(requestHeaders);
         A.CallTo(() => context.Request).Returns(request);
 
-        A.CallTo(() => response.Headers.ContainsKey(HeaderNames.ETag)).Returns(true);
-        A.CallTo(() => response.Headers[HeaderNames.ETag]).Returns(fakeEtag);
+        A.CallTo(() => response.Headers).Returns(responseHeaders);
         A.CallTo(() => context.Response).Returns(response);
 
         //Act
