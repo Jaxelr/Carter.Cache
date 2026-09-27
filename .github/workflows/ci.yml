@@ -11,9 +11,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v7
     - name: Setup .NET
-      uses: actions/setup-dotnet@v5
+      uses: actions/setup-dotnet@v6
       with:
         dotnet-version: 10.0.x
     - name: Run dependency images
@@ -25,7 +25,7 @@ jobs:
     - name: Test
       run: dotnet test --no-restore
     - name: Codecov
-      uses: codecov/codecov-action@v5
+      uses: codecov/codecov-action@v7
       with:
         token: ${{ secrets.CODECOV_TOKEN }}
         files: 'TestResults/Carter.Cache.Tests.coverage.cobertura.*.xml'
