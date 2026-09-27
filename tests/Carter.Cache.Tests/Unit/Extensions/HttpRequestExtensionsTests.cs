@@ -99,7 +99,7 @@ public class HttpRequestExtensionsTests
         //Arrange
         const int elapsedSeconds = 3;
         const string fakeHeader = "X-FakeHeader";
-        var fakeDate = DateTime.Now.AddSeconds(elapsedSeconds);
+        var fakeDate = DateTime.UtcNow.AddSeconds(elapsedSeconds);
 
         var req = A.Fake<HttpRequest>();
         var props = A.Fake<CachingProperty>();
@@ -107,12 +107,15 @@ public class HttpRequestExtensionsTests
         A.CallTo(() => req.HttpContext.Features.Get<CachingProperty>()).Returns(props);
 
         //Act
-        var fakeSpanCalculated = fakeDate - DateTime.UtcNow;
+        var expirationBefore = fakeDate - DateTime.UtcNow;
         req.AsCacheable(fakeDate, fakeHeader);
+        var expirationAfter = fakeDate - DateTime.UtcNow;
 
         //Assert
         Assert.NotNull(req);
-        Assert.True(fakeSpanCalculated.TotalSeconds - req.HttpContext.Features.Get<CachingProperty>()?.Expiration.TotalSeconds < 0.001); //Close Enough?
+        var actualExpiration = req.HttpContext.Features.Get<CachingProperty>()?.Expiration;
+        Assert.NotNull(actualExpiration);
+        Assert.InRange(actualExpiration.Value, expirationAfter, expirationBefore);
         Assert.Equal(fakeHeader, req.HttpContext.Features.Get<CachingProperty>()?.CustomHeader);
     }
 }
