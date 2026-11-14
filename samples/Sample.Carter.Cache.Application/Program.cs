@@ -54,6 +54,7 @@ builder.Services.AddHealthChecks();
 
 builder.Services.AddOpenApi(settings.RouteDefinition.Version, options =>
 {
+    options.OpenApiVersion = OpenApiSpecVersion.OpenApi3_1;
     options.ShouldInclude = description =>
     {
         foreach (object metaData in description.ActionDescriptor.EndpointMetadata)

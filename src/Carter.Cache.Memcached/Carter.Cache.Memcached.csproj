@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Description>A memcached plugin for the carter caching library</Description>
     <PackageTags>carter cache memcached</PackageTags>
-    <PackageReleaseNotes>Addition of target: .NET 10</PackageReleaseNotes>
+    <PackageReleaseNotes>Target .NET 10 and .NET 11.</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
